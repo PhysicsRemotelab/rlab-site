@@ -67,7 +67,10 @@
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
-            "browserTarget": "rlab-site:build"
+            "browserTarget": "rlab-site:build",
+            "sslKey": "ssl/server.key",
+            "sslCert": "ssl/cert.pem",
+            "ssl": true
           },
           "configurations": {
             "production": {

@@ -1,0 +1,11 @@
+<div class='spacer'>
+    <app-login-button *ngIf="(auth.isAuthenticated$ | async) === false">
+    </app-login-button>
+    <app-signup-button *ngIf="(auth.isAuthenticated$ | async) === false">
+    </app-signup-button>
+</div>
+
+<div class='logout'>
+    <app-logout-button *ngIf="auth.isAuthenticated$ | async">
+    </app-logout-button>
+</div>
