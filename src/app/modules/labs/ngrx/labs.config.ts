@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { serverUrl } from '../../../../../auth_config.json';
 
 @Injectable({
     providedIn: 'root',
@@ -6,7 +7,6 @@ import { Injectable } from '@angular/core';
 export class LabsConfig {
 
     getLabsEndpoint(): string {
-        return 'http://localhost:7000/labs';
+        return `${serverUrl}/labs`;
     }
-
 }

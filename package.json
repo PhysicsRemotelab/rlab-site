@@ -1,16 +1,19 @@
 {
   "name": "rlab-site",
-  "version": "0.0.0",
+  "version": "0.0.1",
+  "description": "",
+  "author": "Toomas Tahves",
+  "license": "GPLV3",
+  "private": true,
+  "engines": {
+    "node": "12.x"
+  },
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
     "build": "ng build",
     "lint": "ng lint"
   },
-  "engines": {
-    "node": "12.x"
-  },
-  "private": true,
   "dependencies": {
     "@angular/animations": "~10.1.2",
     "@angular/cdk": "^10.2.5",
@@ -23,8 +26,10 @@
     "@angular/platform-browser-dynamic": "~10.1.2",
     "@angular/router": "~10.1.2",
     "@auth0/auth0-angular": "^1.2.0",
+    "@auth0/auth0-spa-js": "^1.13.0",
     "@ngrx/effects": "^10.0.1",
     "@ngrx/store": "^10.0.1",
+    "angular-jwt": "^0.1.11",
     "rxjs": "~6.6.0",
     "tslib": "^2.0.0",
     "zone.js": "~0.10.2"
