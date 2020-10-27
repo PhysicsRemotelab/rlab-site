@@ -45,8 +45,10 @@ import { domain, clientId, audience, serverUrl } from '../../auth_config.json';
       clientId,
       audience,
       httpInterceptor: {
-        allowedList: [`${serverUrl}/labs`],
-      },
+        allowedList: [
+          `${serverUrl}/labs`
+        ],
+      }
     }),
     LayoutModule,
     MatToolbarModule,

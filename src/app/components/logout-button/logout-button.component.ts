@@ -19,6 +19,7 @@ export class LogoutButtonComponent implements OnInit {
   }
 
   logout(): void {
+    sessionStorage.clear();
     this.auth.logout({ returnTo: this.doc.location.origin });
   }
 
