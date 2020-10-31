@@ -12,3 +12,4 @@
 
 ### Auth0 setup
 * https://auth0.com/blog/complete-guide-to-angular-user-authentication/
+* https://auth0.com/docs/architecture-scenarios/spa-api/spa-implementation-angular2

@@ -6,6 +6,7 @@ const ROUTES = {
   home: '',
   labs: 'labs',
   measurements: 'measurements',
+  history: 'history',
   profile: 'profile'
 };
 
