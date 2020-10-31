@@ -23,6 +23,11 @@ import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AuthHttpInterceptor } from '@auth0/auth0-angular';
 import { domain, clientId, audience, serverUrl } from '../../auth_config.json';
 import { LayoutComponent } from './layout/layout.component';
+import { UsersModule } from './modules/users/module';
+import { EffectsModule } from '@ngrx/effects';
+import { UsersEffects } from './modules/users/state/users.effects';
+import { StoreModule } from '@ngrx/store';
+import { usersReducer } from './modules/users/state/users.reducers';
 
 @NgModule({
   declarations: [
@@ -49,7 +54,7 @@ import { LayoutComponent } from './layout/layout.component';
           `${serverUrl}/measurements`,
           `${serverUrl}/users`,
           `${serverUrl}/history`
-        ],
+        ]
       }
     }),
     LayoutModule,
