@@ -12,14 +12,29 @@ const ROUTES = {
 
 const routes: Routes = [
   {
+    path: ROUTES.home,
+    canActivate: [],
+    loadChildren: () => import('./modules/home/module').then(m => m.HomePageModule)
+  },
+  {
     path: ROUTES.labs,
     canActivate: [],
     loadChildren: () => import('./modules/labs/module').then(m => m.LabsPageModule)
   },
   {
+    path: ROUTES.history,
+    canActivate: [AuthGuard],
+    loadChildren: () => import('./modules/history/module').then(m => m.HistoryPageModule)
+  },
+  {
     path: ROUTES.profile,
     canActivate: [AuthGuard],
     loadChildren: () => import('./modules/profile/module').then(m => m.ProfilePageModule)
+  },
+  {
+    path: ROUTES.measurements,
+    canActivate: [AuthGuard],
+    loadChildren: () => import('./modules/measurements/module').then(m => m.MeasurementsPageModule)
   }
 ];
 
