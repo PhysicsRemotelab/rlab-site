@@ -13,6 +13,7 @@ const ROUTES = {
 const routes: Routes = [
   {
     path: ROUTES.labs,
+    canActivate: [],
     loadChildren: () => import('./modules/labs/module').then(m => m.LabsPageModule)
   },
   {

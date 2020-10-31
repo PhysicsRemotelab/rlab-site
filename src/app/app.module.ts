@@ -22,7 +22,7 @@ import { MatListModule } from '@angular/material/list';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AuthHttpInterceptor } from '@auth0/auth0-angular';
 import { domain, clientId, audience, serverUrl } from '../../auth_config.json';
-import { MainNavComponent } from './main-nav/main-nav.component';
+import { LayoutComponent } from './layout/layout.component';
 
 @NgModule({
   declarations: [
@@ -32,7 +32,7 @@ import { MainNavComponent } from './main-nav/main-nav.component';
     SignupButtonComponent,
     LogoutButtonComponent,
     AuthenticationButtonComponent,
-    MainNavComponent
+    LayoutComponent
   ],
   imports: [
     CommonModule,
@@ -46,7 +46,6 @@ import { MainNavComponent } from './main-nav/main-nav.component';
       audience,
       httpInterceptor: {
         allowedList: [
-          `${serverUrl}/labs`,
           `${serverUrl}/measurements`,
           `${serverUrl}/users`,
           `${serverUrl}/history`
