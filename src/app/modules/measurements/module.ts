@@ -6,6 +6,11 @@ import {MatCardModule} from '@angular/material/card';
 import {MatButtonModule} from '@angular/material/button';
 import { MeasurementsRoutingModule } from './routes';
 import { MeasurementsPageComponent } from './ui/measurements-page';
+import { EffectsModule } from '@ngrx/effects';
+import { StoreModule } from '@ngrx/store';
+import { MeasurementsEffects } from './state/measurements.effects';
+import { measurementsReducer } from './state/measurements.reducers';
+import {MatTableModule} from '@angular/material/table';
 
 @NgModule({
     declarations: [
@@ -17,7 +22,10 @@ import { MeasurementsPageComponent } from './ui/measurements-page';
         HttpClientModule,
         MeasurementsRoutingModule,
         MatCardModule,
-        MatButtonModule
+        MatButtonModule,
+        MatTableModule,
+        EffectsModule.forRoot([MeasurementsEffects]),
+        StoreModule.forRoot({ measurementsReducer }),
     ]
 })
 export class MeasurementsPageModule { }
