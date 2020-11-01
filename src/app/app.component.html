@@ -1,1 +1,3 @@
-<app-layout></app-layout>
+<div>
+    <app-layout *ngIf="(auth.isLoading$ | async) === false"></app-layout>
+</div>

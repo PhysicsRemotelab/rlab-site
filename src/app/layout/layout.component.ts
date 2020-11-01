@@ -14,7 +14,11 @@ export class LayoutComponent {
   constructor(
     private breakpointObserver: BreakpointObserver,
     public auth: AuthService
-  ) {}
+  ) {
+    this.auth.isAuthenticated$.subscribe(res => {
+      console.log(res);
+    });
+  }
 
   isHandset$: Observable<boolean> = this.breakpointObserver.observe(Breakpoints.Handset)
     .pipe(

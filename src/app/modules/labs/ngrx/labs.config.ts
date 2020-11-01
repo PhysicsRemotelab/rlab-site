@@ -7,6 +7,6 @@ import { serverUrl } from '../../../../../auth_config.json';
 export class LabsConfig {
 
     getLabsEndpoint(): string {
-        return `${serverUrl}/labs`;
+        return `/api/labs`;
     }
 }

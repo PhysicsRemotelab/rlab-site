@@ -9,7 +9,7 @@ export const environment = {
     domain,
     clientId,
     redirectUri: window.location.origin,
-    serverUrl
+    serverUrl: 'http://84.52.3.133:8080'
   }
 };
 

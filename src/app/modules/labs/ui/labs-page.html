@@ -8,8 +8,11 @@
     <mat-card-content>
       <p>{{ lab.description }}</p>
     </mat-card-content>
-    <mat-card-actions>
-      <button mat-raised-button>Start</button>
+    <mat-card-actions *ngIf="isAuthenticated">
+        <a mat-raised-button href="/lab{{ lab.id }}">Start</a>
     </mat-card-actions>
+    <mat-card-actions *ngIf="!isAuthenticated">
+      <a mat-raised-button [disabled]="true" href="/lab{{ lab.id }}">Login to start measurement</a>
+  </mat-card-actions>
   </mat-card>
 </div>

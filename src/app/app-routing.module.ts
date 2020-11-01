@@ -21,6 +21,21 @@ const routes: Routes = [
     loadChildren: () => import('./modules/home/module').then(m => m.HomePageModule)
   },
   {
+    path: ROUTES.lab1,
+    canActivate: [],
+    loadChildren: () => import('./modules/lab1/lab1.module').then(m => m.Lab1Module)
+  },
+  {
+    path: ROUTES.lab2,
+    canActivate: [],
+    loadChildren: () => import('./modules/lab2/lab2.module').then(m => m.Lab2Module)
+  },
+  {
+    path: ROUTES.lab3,
+    canActivate: [],
+    loadChildren: () => import('./modules/lab3/lab3.module').then(m => m.Lab3Module)
+  },
+  {
     path: ROUTES.labs,
     canActivate: [],
     loadChildren: () => import('./modules/labs/module').then(m => m.LabsPageModule)

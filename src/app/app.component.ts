@@ -2,6 +2,8 @@ import { HttpClient } from '@angular/common/http';
 import { Component } from '@angular/core';
 import { AuthService } from '@auth0/auth0-angular';
 import { Store } from '@ngrx/store';
+import { forkJoin } from 'rxjs';
+import { flatMap } from 'rxjs/operators';
 import { AppServices } from './app.services';
 import { User } from './modules/users/model';
 
@@ -13,9 +15,11 @@ import { User } from './modules/users/model';
 export class AppComponent {
 
   constructor(
-    private auth: AuthService,
+    public auth: AuthService,
     private appServices: AppServices
   ) {
+    console.log('appcomponent');
+
     this.auth.user$.subscribe(result => {
       console.log(result);
       sessionStorage.setItem('email', result.email);

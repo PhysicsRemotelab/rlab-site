@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { select, Store } from '@ngrx/store';
+import { Lab } from '../model';
 import { getLabs } from '../ngrx/labs.actions';
 import { LabsState } from '../ngrx/labs.reducers';
 import { LabsSelector } from '../ngrx/labs.selectors';
@@ -12,6 +13,8 @@ import { LabsSelector } from '../ngrx/labs.selectors';
 export class LabsPageComponent implements OnInit {
 
     labs = [];
+    isAuthenticated = false;
+    isUsingCurrentLab =  false;
 
     constructor(
       private store: Store<LabsState>,
@@ -25,8 +28,10 @@ export class LabsPageComponent implements OnInit {
 
       this.store.pipe(select(this.labsSelector.getLabs())).subscribe(labs => {
         this.labs = labs;
-        console.log(labs);
       });
+
+      const email = sessionStorage.getItem('email');
+      console.log(email);
     }
 
 }

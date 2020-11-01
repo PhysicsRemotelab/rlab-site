@@ -1,12 +1,11 @@
 <mat-sidenav-container class="sidenav-container">
   <mat-sidenav #drawer class="sidenav" fixedInViewport [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'"
     [mode]="(isHandset$ | async) ? 'over' : 'side'" [opened]="(isHandset$ | async) === false">
-    <mat-toolbar>Menu</mat-toolbar>
+    <mat-toolbar>Remote Lab</mat-toolbar>
     <mat-nav-list>
       <a mat-list-item href="/">Home</a>
       <a mat-list-item href="/labs">Labs</a>
       <a mat-list-item href="/measurements" *ngIf="auth.user$ | async as user">Measurements</a>
-      <a mat-list-item href="/history" *ngIf="auth.user$ | async as user">History</a>
       <a mat-list-item href="/profile" *ngIf="auth.user$ | async as user">Profile</a>
     </mat-nav-list>
   </mat-sidenav>
@@ -20,4 +19,3 @@
     <router-outlet></router-outlet>
   </mat-sidenav-content>
 </mat-sidenav-container>
-<app-footer></app-footer>

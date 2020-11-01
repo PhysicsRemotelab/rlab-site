@@ -1,6 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -8,7 +7,6 @@ import { HttpClientModule } from '@angular/common/http';
 import { CommonModule } from '@angular/common';
 import { FooterComponent } from './components/footer/footer.component';
 import { AuthModule } from '@auth0/auth0-angular';
-import { environment as env } from '../environments/environment';
 import { LoginButtonComponent } from './components/login-button/login-button.component';
 import { SignupButtonComponent } from './components/signup-button/signup-button.component';
 import { LogoutButtonComponent } from './components/logout-button/logout-button.component';
@@ -23,13 +21,13 @@ import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AuthHttpInterceptor } from '@auth0/auth0-angular';
 import { domain, clientId, audience, serverUrl } from '../../auth_config.json';
 import { LayoutComponent } from './layout/layout.component';
-import { UsersModule } from './modules/users/module';
 import { EffectsModule } from '@ngrx/effects';
 import { UsersEffects } from './modules/users/state/users.effects';
 import { StoreModule } from '@ngrx/store';
-import { usersReducer } from './modules/users/state/users.reducers';
-import { labsReducer } from './modules/labs/ngrx/labs.reducers';
-import { measurementsReducer } from './modules/measurements/state/measurements.reducers';
+import { FormsModule } from '@angular/forms';
+import { LabsEffects } from './modules/labs/ngrx/labs.effects';
+import { MeasurementsEffects } from './modules/measurements/state/measurements.effects';
+import { reducers, metaReducers } from './app.state';
 
 @NgModule({
   declarations: [
@@ -44,6 +42,7 @@ import { measurementsReducer } from './modules/measurements/state/measurements.r
   imports: [
     CommonModule,
     BrowserModule,
+    FormsModule,
     AppRoutingModule,
     HttpClientModule,
     BrowserAnimationsModule,
@@ -65,11 +64,12 @@ import { measurementsReducer } from './modules/measurements/state/measurements.r
     MatSidenavModule,
     MatIconModule,
     MatListModule,
-    StoreModule.forRoot({
-      usersReducer,
-      labsReducer,
-      measurementsReducer
-    })
+    StoreModule.forRoot(reducers, { metaReducers }),
+    EffectsModule.forRoot([
+      LabsEffects,
+      MeasurementsEffects,
+      UsersEffects
+    ])
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: AuthHttpInterceptor, multi: true }
