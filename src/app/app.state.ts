@@ -1,6 +1,6 @@
 import { ActionReducer, ActionReducerMap, MetaReducer } from '@ngrx/store';
 import { usersReducer, UsersState } from './modules/users/state/users.reducers';
-import { labsReducer, LabsState } from './modules/labs/ngrx/labs.reducers';
+import { labsReducer, LabsState } from './modules/labs/state/labs.reducers';
 import { measurementsReducer, MeasurementsState } from './modules/measurements/state/measurements.reducers';
 
 export interface AppState {

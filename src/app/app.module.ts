@@ -25,7 +25,7 @@ import { EffectsModule } from '@ngrx/effects';
 import { UsersEffects } from './modules/users/state/users.effects';
 import { StoreModule } from '@ngrx/store';
 import { FormsModule } from '@angular/forms';
-import { LabsEffects } from './modules/labs/ngrx/labs.effects';
+import { LabsEffects } from './modules/labs/state/labs.effects';
 import { MeasurementsEffects } from './modules/measurements/state/measurements.effects';
 import { reducers, metaReducers } from './app.state';
 

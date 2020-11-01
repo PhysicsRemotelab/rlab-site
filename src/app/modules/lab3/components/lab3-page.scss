@@ -1,0 +1,21 @@
+.lab-page {
+    margin: 0 auto;
+    display: flex;
+    justify-content: center;
+    min-height: 100vh;
+    padding: 20px;
+}
+
+.lab-camera {
+    width: 40%;
+}
+
+.lab-control {
+    width: 60%;
+    display: flex;
+    flex-direction: column;
+}
+
+.lab-control-item {
+    margin: 5px;
+}

@@ -1,9 +1,9 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { select, Store } from '@ngrx/store';
-import { getLabs } from '../ngrx/labs.actions';
-import { LabsState } from '../ngrx/labs.reducers';
-import { LabsSelector } from '../ngrx/labs.selectors';
+import { getLabs } from '../state/labs.actions';
+import { LabsState } from '../state/labs.reducers';
+import { LabsSelector } from '../state/labs.selectors';
 
 @Component({
   selector: 'app-labs-page',
