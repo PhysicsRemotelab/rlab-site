@@ -39,6 +39,11 @@ const routes: Routes = [
     path: ROUTES.measurements,
     canActivate: [AuthGuard],
     loadChildren: () => import('./modules/measurements/module').then(m => m.MeasurementsPageModule)
+  },
+  {
+    path: '**',
+    redirectTo: '',
+    pathMatch: 'full'
   }
 ];
 

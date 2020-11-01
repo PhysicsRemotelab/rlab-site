@@ -24,8 +24,7 @@ import {MatTableModule} from '@angular/material/table';
         MatCardModule,
         MatButtonModule,
         MatTableModule,
-        EffectsModule.forRoot([MeasurementsEffects]),
-        StoreModule.forRoot({ measurementsReducer }),
+        EffectsModule.forRoot([MeasurementsEffects])
     ]
 })
 export class MeasurementsPageModule { }

@@ -23,7 +23,6 @@ import {MatButtonModule} from '@angular/material/button';
         MatCardModule,
         MatButtonModule,
         EffectsModule.forRoot([LabsEffects]),
-        StoreModule.forRoot({ labsReducer }),
     ]
 })
 export class LabsPageModule { }

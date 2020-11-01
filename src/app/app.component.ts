@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Component } from '@angular/core';
 import { AuthService } from '@auth0/auth0-angular';
+import { Store } from '@ngrx/store';
 import { AppServices } from './app.services';
 import { User } from './modules/users/model';
 
@@ -23,6 +24,7 @@ export class AppComponent {
       const user = {
         email: result.email,
         name: result.name,
+        roles: result['https://remotelab.ee/roles'].join(),
         nickname: result.nickname,
         picture: result.picture
       } as User;

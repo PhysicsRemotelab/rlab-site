@@ -28,6 +28,8 @@ import { EffectsModule } from '@ngrx/effects';
 import { UsersEffects } from './modules/users/state/users.effects';
 import { StoreModule } from '@ngrx/store';
 import { usersReducer } from './modules/users/state/users.reducers';
+import { labsReducer } from './modules/labs/ngrx/labs.reducers';
+import { measurementsReducer } from './modules/measurements/state/measurements.reducers';
 
 @NgModule({
   declarations: [
@@ -62,7 +64,12 @@ import { usersReducer } from './modules/users/state/users.reducers';
     MatButtonModule,
     MatSidenavModule,
     MatIconModule,
-    MatListModule
+    MatListModule,
+    StoreModule.forRoot({
+      usersReducer,
+      labsReducer,
+      measurementsReducer
+    })
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: AuthHttpInterceptor, multi: true }

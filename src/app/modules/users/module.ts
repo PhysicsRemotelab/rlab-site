@@ -18,8 +18,7 @@ import { usersReducer } from './state/users.reducers';
         HttpClientModule,
         MatCardModule,
         MatButtonModule,
-        EffectsModule.forRoot([UsersEffects]),
-        StoreModule.forRoot({ usersReducer }),
+        EffectsModule.forRoot([UsersEffects])
     ]
 })
 export class UsersModule { }
