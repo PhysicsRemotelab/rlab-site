@@ -22,7 +22,7 @@ export class AppComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.authUser$ = this.auth.user$.subscribe(result => {
-      console.log(result);
+      this.isEmailInStorage = true;
       sessionStorage.setItem('email', result.email);
       sessionStorage.setItem('role', result['https://remotelab.ee/roles']);
 
@@ -34,9 +34,8 @@ export class AppComponent implements OnInit, OnDestroy {
         picture: result.picture
       } as User;
 
-      this.appServices.postUser(user).subscribe((res): any => {
-        console.log('post');
-        console.log(res);
+      this.appServices.postUser(user).subscribe((res: User) => {
+        sessionStorage.setItem('user_id', res.id);
       });
     });
   }

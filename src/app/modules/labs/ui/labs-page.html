@@ -9,10 +9,12 @@
       <p>{{ lab.description }}</p>
     </mat-card-content>
     <mat-card-actions *ngIf="isAuthenticated">
-        <a mat-raised-button href="/lab{{ lab.id }}">Start</a>
+        <button class="continue-button" *ngIf="lab.userId == currentUserId" mat-raised-button (click)="continuelab(lab.id)">Continue</button>
+        <button class="busy-button" *ngIf="lab.userId && lab.userId != currentUserId" mat-raised-button [disabled]="true">Busy</button>
+        <button class="start-button" *ngIf="!lab.userId" mat-raised-button (click)="startlab(lab.id)">Start</button>
     </mat-card-actions>
     <mat-card-actions *ngIf="!isAuthenticated">
-      <a mat-raised-button [disabled]="true" href="/lab{{ lab.id }}">Login to start measurement</a>
-  </mat-card-actions>
+      <button mat-raised-button [disabled]="true" href="/lab{{ lab.id }}">Login to use lab</button>
+    </mat-card-actions>
   </mat-card>
 </div>

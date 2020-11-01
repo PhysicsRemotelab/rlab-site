@@ -14,8 +14,8 @@ export class AppServices {
     private usersConfig: UsersConfig
   ) { }
 
-  postUser(user: User): Observable<User[]> {
-    return this.http.post<User[]>(this.usersConfig.getUsersEndpoint(), user);
+  postUser(user: User): Observable<User> {
+    return this.http.post<User>(this.usersConfig.getUsersEndpoint(), user);
   }
 
 }

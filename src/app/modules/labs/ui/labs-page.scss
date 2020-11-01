@@ -28,7 +28,20 @@ mat-card {
     justify-content: space-between;
 }
 
-a {
+button {
+    width: 100%;
+    color: white;
+}
+
+.start-button {
     width: 100%;
     background-color: #00c853;
+}
+
+.continue-button {
+    background-color: #536dfe;
+}
+
+.busy-button {
+    background-color: #FF5252 !important;
 }

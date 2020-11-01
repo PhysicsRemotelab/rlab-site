@@ -1,5 +1,5 @@
 export interface User {
-    id?: number;
+    id?: string;
     email?: string;
     emailVerified?: boolean;
     roles?: Role[];

@@ -10,8 +10,8 @@
   },
   "scripts": {
     "ng": "ng ",
-    "start": "node --max-http-header-size=100000 ./node_modules/@angular/cli/bin/ng serve",
-    "start:prod": "ng serve --host=84.52.3.133 --port=80 --disable-host-check",
+    "start": "ng serve",
+    "start:prod": "ng serve --host=0.0.0.0 --port=80 --disable-host-check",
     "build": "ng build",
     "lint": "ng lint"
   },

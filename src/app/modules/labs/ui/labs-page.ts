@@ -1,7 +1,6 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { AuthService } from '@auth0/auth0-angular';
+import { Router } from '@angular/router';
 import { select, Store } from '@ngrx/store';
-import { Lab } from '../model';
 import { getLabs } from '../ngrx/labs.actions';
 import { LabsState } from '../ngrx/labs.reducers';
 import { LabsSelector } from '../ngrx/labs.selectors';
@@ -14,13 +13,15 @@ import { LabsSelector } from '../ngrx/labs.selectors';
 export class LabsPageComponent implements OnInit, OnDestroy {
 
     labs = [];
-    isAuthenticated = false;
+    isAuthenticated = !!sessionStorage.getItem('email');
+    currentUserId = sessionStorage.getItem('user_id');
+    userEmail = sessionStorage.getItem('email');
     isUsingCurrentLab =  false;
 
     constructor(
       private store: Store<LabsState>,
       private labsSelector: LabsSelector,
-      private auth: AuthService
+      private router: Router
     ) { }
 
     ngOnInit(): void {
@@ -32,13 +33,16 @@ export class LabsPageComponent implements OnInit, OnDestroy {
         this.labs = labs;
       });
 
-      this.auth.user$.subscribe(res => {
-        console.log('isAuthenticated$', res);
-        this.isAuthenticated = res;
-      });
+    }
 
-      const email = sessionStorage.getItem('email');
-      console.log(email);
+    startlab(id: number): void {
+      console.log('start', id);
+      this.router.navigateByUrl(`/lab${id}`);
+    }
+
+    continuelab(id: number): void {
+      console.log('continue', id);
+      this.router.navigateByUrl(`/lab${id}`);
     }
 
     ngOnDestroy(): void {
