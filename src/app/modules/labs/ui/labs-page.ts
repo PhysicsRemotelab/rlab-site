@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
+import { AuthService } from '@auth0/auth0-angular';
 import { select, Store } from '@ngrx/store';
 import { Lab } from '../model';
 import { getLabs } from '../ngrx/labs.actions';
@@ -10,7 +11,7 @@ import { LabsSelector } from '../ngrx/labs.selectors';
   templateUrl: './labs-page.html',
   styleUrls: ['./labs-page.scss']
 })
-export class LabsPageComponent implements OnInit {
+export class LabsPageComponent implements OnInit, OnDestroy {
 
     labs = [];
     isAuthenticated = false;
@@ -18,7 +19,8 @@ export class LabsPageComponent implements OnInit {
 
     constructor(
       private store: Store<LabsState>,
-      private labsSelector: LabsSelector
+      private labsSelector: LabsSelector,
+      private auth: AuthService
     ) { }
 
     ngOnInit(): void {
@@ -30,8 +32,17 @@ export class LabsPageComponent implements OnInit {
         this.labs = labs;
       });
 
+      this.auth.user$.subscribe(res => {
+        console.log('isAuthenticated$', res);
+        this.isAuthenticated = res;
+      });
+
       const email = sessionStorage.getItem('email');
       console.log(email);
+    }
+
+    ngOnDestroy(): void {
+      console.log('destroy');
     }
 
 }

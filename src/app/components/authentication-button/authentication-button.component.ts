@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { AuthService } from '@auth0/auth0-angular';
 
 @Component({
@@ -8,7 +8,11 @@ import { AuthService } from '@auth0/auth0-angular';
 })
 export class AuthenticationButtonComponent implements OnInit {
 
-  constructor(public auth: AuthService) {}
+  @Input() isEmailInStorage: boolean;
+
+  constructor(public auth: AuthService) {
+    console.log(this.isEmailInStorage);
+  }
 
   ngOnInit(): void {
   }
