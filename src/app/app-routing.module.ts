@@ -1,7 +1,6 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule, PreloadAllModules } from '@angular/router';
 import { AuthGuard } from '@auth0/auth0-angular';
-import { LabsRoutingModule } from './modules/labs/routes';
 
 const ROUTES = {
   home: '',

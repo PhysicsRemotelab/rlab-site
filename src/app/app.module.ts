@@ -29,6 +29,7 @@ import { LabsEffects } from './modules/labs/state/labs.effects';
 import { MeasurementsEffects } from './modules/measurements/state/measurements.effects';
 import { reducers, metaReducers } from './app.state';
 import { MatCardModule } from '@angular/material/card';
+import { StoreRouterConnectingModule } from '@ngrx/router-store';
 
 @NgModule({
   declarations: [
@@ -73,7 +74,8 @@ import { MatCardModule } from '@angular/material/card';
       LabsEffects,
       MeasurementsEffects,
       UsersEffects
-    ])
+    ]),
+    StoreRouterConnectingModule.forRoot()
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: AuthHttpInterceptor, multi: true }
