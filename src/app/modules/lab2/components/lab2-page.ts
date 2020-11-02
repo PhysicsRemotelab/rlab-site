@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { select, Store } from '@ngrx/store';
+import { ActivatedRoute, Router } from '@angular/router';
+import { LabsService } from '../../labs/state/labs.service';
 
 @Component({
   selector: 'app-lab2-page',
@@ -8,10 +9,26 @@ import { select, Store } from '@ngrx/store';
 })
 export class Lab2PageComponent implements OnInit {
 
-    constructor() { }
+  labId: number;
 
-    ngOnInit(): void {
-      console.log('Lab 2 page');
-    }
+  constructor(
+    private labService: LabsService,
+    private route: ActivatedRoute,
+    private router: Router
+  ) {
+    this.route.queryParams.subscribe(params => {
+      this.labId = +params.id;
+    });
+  }
 
+  ngOnInit(): void {
+    console.log('Lab 2 page');
+  }
+
+  freeLab(): void {
+    this.labService.freeLab(this.labId).subscribe(result => {
+      console.log(result);
+      this.router.navigate([`/labs`]);
+    });
+  }
 }

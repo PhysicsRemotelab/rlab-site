@@ -19,11 +19,11 @@ export class LabsService {
   }
 
   useLab(id: number): Observable<any> {
-    return this.http.put(this.labsConfig.getUseLabsEndpoint(), id);
+    return this.http.put(this.labsConfig.getUseLabsEndpoint(), { id });
   }
 
   freeLab(id: number): Observable<any> {
-    return this.http.put(this.labsConfig.getFreeLabEndpoint(), id);
+    return this.http.put(this.labsConfig.getFreeLabEndpoint(), { id });
   }
 
 }

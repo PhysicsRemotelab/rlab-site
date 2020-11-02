@@ -4,10 +4,11 @@ import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import { Lab } from '../model';
-import { getLabs, useLab } from '../state/labs.actions';
+import { getLabs } from '../state/labs.actions';
 import { LabsConfig } from '../state/labs.config';
 import { LabState } from '../state/labs.reducers';
 import { getAllLabs } from '../state/labs.selectors';
+import { LabsService } from '../state/labs.service';
 
 @Component({
   selector: 'app-labs-page',
@@ -27,8 +28,7 @@ export class LabsPageComponent implements OnInit, OnDestroy {
     constructor(
       private store: Store<LabState>,
       private router: Router,
-      private http: HttpClient,
-      private labsConfig: LabsConfig
+      private labsService: LabsService
     ) { }
 
     ngOnInit(): void {
@@ -42,16 +42,17 @@ export class LabsPageComponent implements OnInit, OnDestroy {
 
     startlab(id: number): void {
       console.log('start', id);
-      this.http.put(this.labsConfig.getUseLabsEndpoint(), {id}).subscribe(result => {
+      this.labsService.useLab(id).subscribe(result => {
         console.log(result);
+        if (result !== 0) {
+          this.router.navigate([`/lab${id}`], { queryParams: { id }});
+        }
       });
-
-      this.router.navigateByUrl(`/lab${id}`);
     }
 
     continuelab(id: number): void {
       console.log('continue', id);
-      this.router.navigateByUrl(`/lab${id}`);
+      this.router.navigate([`/lab${id}`], { queryParams: { id }});
     }
 
     ngOnDestroy(): void {
