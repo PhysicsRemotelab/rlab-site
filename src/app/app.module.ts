@@ -28,6 +28,7 @@ import { FormsModule } from '@angular/forms';
 import { LabsEffects } from './modules/labs/state/labs.effects';
 import { MeasurementsEffects } from './modules/measurements/state/measurements.effects';
 import { reducers, metaReducers } from './app.state';
+import { MatCardModule } from '@angular/material/card';
 
 @NgModule({
   declarations: [
@@ -52,6 +53,8 @@ import { reducers, metaReducers } from './app.state';
       audience,
       httpInterceptor: {
         allowedList: [
+          `${serverUrl}/labs/use`,
+          `${serverUrl}/labs/free`,
           `${serverUrl}/measurements`,
           `${serverUrl}/users`,
           `${serverUrl}/history`
@@ -64,6 +67,7 @@ import { reducers, metaReducers } from './app.state';
     MatSidenavModule,
     MatIconModule,
     MatListModule,
+    MatCardModule,
     StoreModule.forRoot(reducers, { metaReducers }),
     EffectsModule.forRoot([
       LabsEffects,
@@ -74,6 +78,7 @@ import { reducers, metaReducers } from './app.state';
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: AuthHttpInterceptor, multi: true }
   ],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+  exports: []
 })
 export class AppModule { }

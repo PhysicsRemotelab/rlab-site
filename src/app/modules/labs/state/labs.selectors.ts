@@ -1,13 +1,6 @@
-import { Lab } from '../model';
-import { Injectable } from '@angular/core';
-import { LabsState } from './labs.reducers';
+import { LabState } from './labs.reducers';
+import { createFeatureSelector, createSelector } from '@ngrx/store';
 
-@Injectable({
-    providedIn: 'root'
-})
-export class LabsSelector {
+export const labFeatureSelector = createFeatureSelector<LabState>('labReducer');
 
-    getLabs(): any {
-        return (state: LabsState): Lab[] => state.labsReducer.labs;
-    }
-}
+export const getAllLabs = createSelector(labFeatureSelector, state => state.labs);

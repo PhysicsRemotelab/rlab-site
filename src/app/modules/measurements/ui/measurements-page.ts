@@ -26,7 +26,6 @@ export class MeasurementsPageComponent implements OnInit {
 
       this.store.pipe(select(this.measurementsSelector.getMeasurements())).subscribe(measurements => {
         this.measurements = measurements;
-        console.log(measurements);
       });
     }
 

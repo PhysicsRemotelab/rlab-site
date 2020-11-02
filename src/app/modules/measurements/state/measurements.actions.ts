@@ -1,8 +1,8 @@
 import { createAction, props } from '@ngrx/store';
 import { Measurement } from '../model';
 
-export const GET_MEASUREMENTS = 'GET_MEASUREMENTS';
-export const GET_MEASUREMENTS_SUCCESS = 'GET_MEASUREMENTS_SUCCESS';
+export const GET_MEASUREMENTS = '[Measurements] Get';
+export const GET_MEASUREMENTS_SUCCESS = '[Measurements] Get Success';
 
 export const getMeasurements = createAction(
     GET_MEASUREMENTS

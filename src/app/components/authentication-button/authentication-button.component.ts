@@ -1,5 +1,4 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { AuthService } from '@auth0/auth0-angular';
 
 @Component({
   selector: 'app-authentication-button',
@@ -8,10 +7,9 @@ import { AuthService } from '@auth0/auth0-angular';
 })
 export class AuthenticationButtonComponent implements OnInit {
 
-  @Input() isEmailInStorage: boolean;
+  @Input() isAuthenticated: boolean;
 
-  constructor(public auth: AuthService) {
-    console.log(this.isEmailInStorage);
+  constructor() {
   }
 
   ngOnInit(): void {

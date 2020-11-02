@@ -11,8 +11,8 @@ import { User } from './modules/users/model';
 })
 export class AppComponent implements OnInit, OnDestroy {
 
-  authUser$: Subscription = null;
-  isEmailInStorage = !!sessionStorage.getItem('email');
+  authUser$$: Subscription;
+  isAuthenticated = !!sessionStorage.getItem('email');
 
   constructor(
     private auth: AuthService,
@@ -21,8 +21,9 @@ export class AppComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
-    this.authUser$ = this.auth.user$.subscribe(result => {
-      this.isEmailInStorage = true;
+    console.log('App Component');
+    this.authUser$$ = this.auth.user$.subscribe(result => {
+      this.isAuthenticated = true;
       sessionStorage.setItem('email', result.email);
       sessionStorage.setItem('role', result['https://remotelab.ee/roles']);
 
@@ -41,6 +42,6 @@ export class AppComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
-    this.authUser$.unsubscribe();
+    this.authUser$$.unsubscribe();
   }
 }

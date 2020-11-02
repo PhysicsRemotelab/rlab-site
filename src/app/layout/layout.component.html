@@ -3,10 +3,10 @@
     [mode]="(isHandset$ | async) ? 'over' : 'side'" [opened]="(isHandset$ | async) === false">
     <mat-toolbar>Remote Lab</mat-toolbar>
     <mat-nav-list>
-      <a mat-list-item href="/">Home</a>
-      <a mat-list-item href="/labs">Labs</a>
-      <a mat-list-item href="/measurements" *ngIf="isEmailInStorage">Measurements</a>
-      <a mat-list-item href="/profile" *ngIf="isEmailInStorage">Profile</a>
+      <a mat-list-item routerLink="/">Home</a>
+      <a mat-list-item routerLink="/labs">Labs</a>
+      <a mat-list-item routerLink="/measurements" *ngIf="isAuthenticated">Measurements</a>
+      <a mat-list-item routerLink="/profile" *ngIf="isAuthenticated">Profile</a>
     </mat-nav-list>
   </mat-sidenav>
   <mat-sidenav-content>
@@ -14,7 +14,7 @@
       <button type="button" aria-label="Toggle sidenav" mat-icon-button (click)="drawer.toggle()">
         <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
       </button>
-      <app-authentication-button [isEmailInStorage]="isEmailInStorage"></app-authentication-button>
+      <app-authentication-button [isAuthenticated]="isAuthenticated"></app-authentication-button>
     </mat-toolbar>
     <router-outlet></router-outlet>
   </mat-sidenav-content>

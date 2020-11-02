@@ -11,7 +11,7 @@ import { AuthService } from '@auth0/auth0-angular';
 })
 export class LayoutComponent {
 
-  @Input() isEmailInStorage: boolean;
+  @Input() isAuthenticated: boolean;
 
   constructor(
     private breakpointObserver: BreakpointObserver,
