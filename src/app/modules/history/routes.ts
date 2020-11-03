@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { HistoryPageComponent } from './ui/history-page';
+import { HistoryPageComponent } from './page/history-page';
 
 const HISTORY_ROUTE = '';
 

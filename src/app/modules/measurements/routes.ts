@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { MeasurementsPageComponent } from './ui/measurements-page';
+import { MeasurementsPageComponent } from './page/measurements-page';
 
 const MEASUREMENTS_ROUTE = '';
 

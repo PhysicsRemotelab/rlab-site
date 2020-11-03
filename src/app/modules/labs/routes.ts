@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { LabsPageComponent } from './ui/labs-page';
+import { LabsPageComponent } from './page/labs-page';
 
 const LABS_HOME_ROUTE = '';
 

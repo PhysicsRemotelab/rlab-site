@@ -1,11 +1,9 @@
-import { HttpClient } from '@angular/common/http';
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import { Lab } from '../model';
 import { getLabs } from '../state/labs.actions';
-import { LabsConfig } from '../state/labs.config';
 import { LabState } from '../state/labs.reducers';
 import { getAllLabs } from '../state/labs.selectors';
 import { LabsService } from '../state/labs.service';

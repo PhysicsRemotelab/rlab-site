@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { ProfilePageComponent } from './ui/profile-page';
+import { ProfilePageComponent } from './page/profile-page';
 
 const PROFILE_HOME_ROUTE = '';
 

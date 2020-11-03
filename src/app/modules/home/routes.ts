@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { HomePageComponent } from './ui/home-page';
+import { HomePageComponent } from './page/home-page';
 
 const HOME_ROUTE = '';
 
