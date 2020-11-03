@@ -3,13 +3,13 @@ import { getMeasurementsSuccess } from './measurements.actions';
 import { createReducer, on, Action } from '@ngrx/store';
 
 export interface MeasurementsState {
-    measurementsReducer?: {
+    measurementReducer?: {
         measurements: Measurement[];
     };
 }
 
 export const INITIAL_STATE: MeasurementsState = {
-    measurementsReducer: {
+    measurementReducer: {
         measurements: []
     }
 };

@@ -11,8 +11,8 @@
   </mat-sidenav>
   <mat-sidenav-content>
     <mat-toolbar>
-      <button type="button" aria-label="Toggle sidenav" mat-icon-button (click)="drawer.toggle()">
-        <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
+      <button type="button" mat-icon-button (click)="drawer.toggle()">
+        <mat-icon>menu</mat-icon>
       </button>
       <app-authentication-button [isAuthenticated]="isAuthenticated"></app-authentication-button>
     </mat-toolbar>

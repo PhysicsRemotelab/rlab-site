@@ -42,12 +42,6 @@ import { StoreRouterConnectingModule } from '@ngrx/router-store';
     LayoutComponent
   ],
   imports: [
-    CommonModule,
-    BrowserModule,
-    FormsModule,
-    AppRoutingModule,
-    HttpClientModule,
-    BrowserAnimationsModule,
     AuthModule.forRoot({
       domain,
       clientId,
@@ -57,11 +51,18 @@ import { StoreRouterConnectingModule } from '@ngrx/router-store';
           `${serverUrl}/labs/use`,
           `${serverUrl}/labs/free`,
           `${serverUrl}/measurements`,
+          `${serverUrl}/measurements/*`,
           `${serverUrl}/users`,
           `${serverUrl}/history`
         ]
       }
     }),
+    CommonModule,
+    BrowserModule,
+    FormsModule,
+    AppRoutingModule,
+    HttpClientModule,
+    BrowserAnimationsModule,
     LayoutModule,
     MatToolbarModule,
     MatButtonModule,

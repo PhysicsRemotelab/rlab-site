@@ -8,6 +8,6 @@ import { MeasurementsState } from './measurements.reducers';
 export class MeasurementsSelector {
 
     getMeasurements(): any {
-        return (state: MeasurementsState): Measurement[] => state.measurementsReducer.measurements;
+        return (state: MeasurementsState): Measurement[] => state.measurementReducer.measurements;
     }
 }

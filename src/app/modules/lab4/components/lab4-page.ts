@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Observable, Subscription } from 'rxjs';
+import { Subscription } from 'rxjs';
 import { interval } from 'rxjs';
 import { LabsService } from '../../labs/state/labs.service';
 import { MeasurementsService } from '../../measurements/state/measurements.services';
@@ -17,6 +17,7 @@ export class Lab4PageComponent implements OnInit {
     measurementSaved = false;
     measurementResult = [];
     measurementGenerator: Subscription;
+    isSaveButtonDisabled = true;
 
     constructor(
       private route: ActivatedRoute,
@@ -45,6 +46,7 @@ export class Lab4PageComponent implements OnInit {
 
     stopMeasuremenet(): void {
       this.measurementStarted = false;
+      this.isSaveButtonDisabled = false;
       this.measurementGenerator.unsubscribe();
     }
 
@@ -52,6 +54,7 @@ export class Lab4PageComponent implements OnInit {
       console.log('save');
       this.measurementsService.saveMeasurements(this.labId, this.measurementResult.toString()).subscribe(res => {
         console.log(res);
+        this.isSaveButtonDisabled = true;
       });
     }
 

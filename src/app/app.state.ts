@@ -3,12 +3,10 @@ import { ActionReducer, ActionReducerMap, MetaReducer } from '@ngrx/store';
 import { measurementsReducer, MeasurementsState } from './modules/measurements/state/measurements.reducers';
 
 export interface AppState {
-  measurementsReducer: MeasurementsState;
   routerReducer: RouterReducerState;
 }
 
 export const reducers: ActionReducerMap<AppState> = {
-  measurementsReducer,
   routerReducer
 };
 

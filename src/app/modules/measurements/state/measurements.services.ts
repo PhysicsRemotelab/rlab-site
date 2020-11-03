@@ -22,4 +22,8 @@ export class MeasurementsService {
     return this.http.post<Measurement>(this.measurementsConfig.getMeasurementsEndpoint(), { lab_id: labId, result });
   }
 
+  deleteMeasurement(id: number): Observable<number> {
+    return this.http.delete<number>(this.measurementsConfig.getMeasurementsEndpoint() + '/' + id);
+  }
+
 }

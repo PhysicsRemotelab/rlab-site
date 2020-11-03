@@ -7,6 +7,9 @@ import {MatButtonModule} from '@angular/material/button';
 import { MeasurementsRoutingModule } from './routes';
 import { MeasurementsPageComponent } from './page/measurements-page';
 import {MatTableModule} from '@angular/material/table';
+import { MatIconModule } from '@angular/material/icon';
+import { StoreModule } from '@ngrx/store';
+import { measurementsReducer } from './state/measurements.reducers';
 
 @NgModule({
     declarations: [
@@ -18,8 +21,10 @@ import {MatTableModule} from '@angular/material/table';
         HttpClientModule,
         MeasurementsRoutingModule,
         MatCardModule,
+        MatTableModule,
+        MatIconModule,
         MatButtonModule,
-        MatTableModule
+        StoreModule.forFeature('measurementReducer', measurementsReducer)
     ]
 })
 export class MeasurementsPageModule { }

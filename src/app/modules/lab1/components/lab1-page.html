@@ -51,7 +51,7 @@
                 </div>
                 <br>
                 <div>
-                    <button class="save-button" mat-raised-button  (click)="saveMeasurements()">
+                    <button class="save-button" mat-raised-button [disabled]="isSaveButtonDisabled" (click)="saveMeasurements()">
                         Save
                     </button>
                 </div>

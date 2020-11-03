@@ -17,6 +17,7 @@ export class Lab3PageComponent implements OnInit {
     measurementSaved = false;
     measurementResult = [];
     measurementGenerator: Subscription;
+    isSaveButtonDisabled = true;
 
     constructor(
       private route: ActivatedRoute,
@@ -45,6 +46,7 @@ export class Lab3PageComponent implements OnInit {
 
     stopMeasuremenet(): void {
       this.measurementStarted = false;
+      this.isSaveButtonDisabled = false;
       this.measurementGenerator.unsubscribe();
     }
 
@@ -52,6 +54,7 @@ export class Lab3PageComponent implements OnInit {
       console.log('save');
       this.measurementsService.saveMeasurements(this.labId, this.measurementResult.toString()).subscribe(res => {
         console.log(res);
+        this.isSaveButtonDisabled = true;
       });
     }
 
