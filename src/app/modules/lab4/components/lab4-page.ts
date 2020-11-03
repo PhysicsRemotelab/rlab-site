@@ -6,11 +6,11 @@ import { LabsService } from '../../labs/state/labs.service';
 import { MeasurementsService } from '../../measurements/state/measurements.services';
 
 @Component({
-  selector: 'app-lab2-page',
-  templateUrl: './lab2-page.html',
-  styleUrls: ['./lab2-page.scss']
+  selector: 'app-lab4-page',
+  templateUrl: './lab4-page.html',
+  styleUrls: ['./lab4-page.scss']
 })
-export class Lab2PageComponent implements OnInit {
+export class Lab4PageComponent implements OnInit {
 
     labId: number;
     measurementStarted = false;
@@ -30,7 +30,7 @@ export class Lab2PageComponent implements OnInit {
     }
 
     ngOnInit(): void {
-      console.log('Lab 1 page');
+      console.log('Lab 4 page');
     }
 
     startMeasuremenet(): void {

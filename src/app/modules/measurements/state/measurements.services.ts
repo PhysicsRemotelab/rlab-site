@@ -18,8 +18,8 @@ export class MeasurementsService {
     return this.http.get<Measurement[]>(this.measurementsConfig.getMeasurementsEndpoint());
   }
 
-  saveMeasurements(labId: number, result: string): Observable<any> {
-    return this.http.post(this.measurementsConfig.getMeasurementsEndpoint(), { lab_id: labId, result });
+  saveMeasurements(labId: number, result: string): Observable<Measurement> {
+    return this.http.post<Measurement>(this.measurementsConfig.getMeasurementsEndpoint(), { lab_id: labId, result });
   }
 
 }
