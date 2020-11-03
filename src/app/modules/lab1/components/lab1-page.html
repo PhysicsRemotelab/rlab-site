@@ -1,19 +1,14 @@
 <div class='lab-page'>
-    <mat-card class='lab-camera'>
-        <mat-card-header>
-            <mat-card-title>Camera</mat-card-title>
-        </mat-card-header>
-        <img mat-card-image src="https://material.angular.io/assets/img/examples/shiba2.jpg">
-    </mat-card>
+    <div class='lab-camera'>
+        <app-camera></app-camera>
+    </div>
     <mat-card class='lab-control'>
         <mat-card class='lab-control-item'>
             <mat-card-header>
                 <mat-card-title>1. Introduction</mat-card-title>
             </mat-card-header>
             <mat-card-content>
-                The Shiba Inu is the smallest of the six original and distinct spitz breeds of dog from Japan.
-                A small, agile dog that copes very well with mountainous terrain, the Shiba Inu was originally
-                bred for hunting.
+                Please start measurement, monitor result and stop measurements when finished.
             </mat-card-content>
         </mat-card>
         <mat-card class='lab-control-item'>
@@ -21,9 +16,14 @@
                 <mat-card-title>2. Start measurement</mat-card-title>
             </mat-card-header>
             <mat-card-content>
-                The Shiba Inu is the smallest of the six original and distinct spitz breeds of dog from Japan.
-                A small, agile dog that copes very well with mountainous terrain, the Shiba Inu was originally
-                bred for hunting.
+                <div>
+                    To start measurements, please press button.
+                </div>
+                <br>
+                <div>
+                    <button *ngIf="!measurementStarted" class="start-button" mat-raised-button  (click)="startMeasuremenet()">Start</button>
+                    <button *ngIf="measurementStarted" class="stop-button" mat-raised-button  (click)="stopMeasuremenet()">Stop</button>
+                </div>
             </mat-card-content>
         </mat-card>
         <mat-card class='lab-control-item'>
@@ -31,18 +31,43 @@
                 <mat-card-title>3. Monitor results</mat-card-title>
             </mat-card-header>
             <mat-card-content>
-                The Shiba Inu is the smallest of the six original and distinct spitz breeds of dog from Japan.
-                A small, agile dog that copes very well with mountainous terrain, the Shiba Inu was originally
-                bred for hunting.
+                <div>
+                    Here you can see results that have been measured.
+                </div>
+                <br>
+                <div>{{measurementResult.toString()}}</div>
             </mat-card-content>
         </mat-card>
         <mat-card class='lab-control-item'>
             <mat-card-header>
-                <mat-card-title>4. Stop measurement</mat-card-title>
+                <mat-card-title>4. Save results</mat-card-title>
             </mat-card-header>
             <mat-card-content>
-                When you have finished measurements, then please free lab by pressing 'Stop' button.
-                <div><button mat-raised-button class='stop-button' (click)="freeLab()">Stop</button></div>
+                <div>
+                    Here you can save results.
+                </div>
+                <br>
+                <div>
+                    <button class="save-button" mat-raised-button  (click)="saveMeasurements()">
+                        Save
+                    </button>
+                </div>
+            </mat-card-content>
+        </mat-card>
+        <mat-card class='lab-control-item'>
+            <mat-card-header>
+                <mat-card-title>5. Stop measurement</mat-card-title>
+            </mat-card-header>
+            <mat-card-content>
+                <div>
+                    When you have finished measurements, then please free lab by pressing 'Stop' button.
+                </div>
+                <br>
+                <div>
+                    <button class="stop-button" mat-raised-button  (click)="freeLab()">
+                        Stop
+                    </button>
+                </div>
             </mat-card-content>
         </mat-card>
     </mat-card>

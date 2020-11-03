@@ -11,7 +11,7 @@ export class MeasurementsEffects {
 
     getMeasurements$: Observable<Action> = createEffect(() => this.actions$.pipe(
         ofType(GET_MEASUREMENTS),
-        mergeMap(() => this.measurementsService.geMeasurements().pipe(
+        mergeMap(() => this.measurementsService.getMeasurements().pipe(
             map(measurements => ({ type: GET_MEASUREMENTS_SUCCESS, measurements }))
         ))
     ));

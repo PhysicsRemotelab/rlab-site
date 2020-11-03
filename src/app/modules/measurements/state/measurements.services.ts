@@ -14,8 +14,12 @@ export class MeasurementsService {
     private measurementsConfig: MeasurementsConfig
   ) { }
 
-  geMeasurements(): Observable<Measurement[]> {
+  getMeasurements(): Observable<Measurement[]> {
     return this.http.get<Measurement[]>(this.measurementsConfig.getMeasurementsEndpoint());
+  }
+
+  saveMeasurements(labId: number, result: string): Observable<any> {
+    return this.http.post(this.measurementsConfig.getMeasurementsEndpoint(), { lab_id: labId, result });
   }
 
 }
