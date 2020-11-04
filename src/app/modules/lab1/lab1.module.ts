@@ -6,6 +6,7 @@ import {MatCardModule} from '@angular/material/card';
 import {MatButtonModule} from '@angular/material/button';
 import { Lab1PageComponent } from './components/lab1-page';
 import { Lab1RoutingModule } from './lab1.routes';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
 
 @NgModule({
     declarations: [
@@ -17,7 +18,8 @@ import { Lab1RoutingModule } from './lab1.routes';
         HttpClientModule,
         MatCardModule,
         MatButtonModule,
-        Lab1RoutingModule
+        Lab1RoutingModule,
+        MatSnackBarModule
     ]
 })
 export class Lab1Module { }

@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { interval } from 'rxjs';
@@ -23,7 +24,8 @@ export class Lab1PageComponent implements OnInit {
       private route: ActivatedRoute,
       private measurementsService: MeasurementsService,
       private labService: LabsService,
-      private router: Router
+      private router: Router,
+      private snackBarRef: MatSnackBar
     ) {
       this.route.queryParams.subscribe(params => {
         this.labId = +params.id;
@@ -54,11 +56,15 @@ export class Lab1PageComponent implements OnInit {
       this.measurementsService.saveMeasurements(this.labId, this.measurementResult.toString()).subscribe(res => {
         this.isSaveButtonDisabled = true;
       });
+      this.snackBarRef.open('Saved!', 'Hide', {
+        duration: 5000,
+        verticalPosition: 'top',
+        panelClass: ['snackbar']
+      });
     }
 
     freeLab(): void {
       this.labService.freeLab(this.labId).subscribe(result => {
-        console.log(result);
         this.router.navigate([`/labs`]);
       });
     }
