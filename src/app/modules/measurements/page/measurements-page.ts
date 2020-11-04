@@ -15,7 +15,7 @@ import { Measurement } from '../model';
 export class MeasurementsPageComponent implements OnInit {
 
   measurements = [];
-  displayedColumns: string[] = ['lab', 'result', 'created', 'actions'];
+  displayedColumns: string[] = ['id', 'lab', 'result', 'created', 'actions'];
 
     constructor(
       private store: Store<MeasurementsState>,
