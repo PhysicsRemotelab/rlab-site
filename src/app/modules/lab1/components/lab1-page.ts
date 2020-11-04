@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Observable, Subscription } from 'rxjs';
+import { Subscription } from 'rxjs';
 import { interval } from 'rxjs';
 import { LabsService } from '../../labs/state/labs.service';
 import { MeasurementsService } from '../../measurements/state/measurements.services';
@@ -51,9 +51,7 @@ export class Lab1PageComponent implements OnInit {
     }
 
     saveMeasurements(): void {
-      console.log('save');
       this.measurementsService.saveMeasurements(this.labId, this.measurementResult.toString()).subscribe(res => {
-        console.log(res);
         this.isSaveButtonDisabled = true;
       });
     }

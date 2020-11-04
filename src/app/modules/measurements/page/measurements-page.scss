@@ -6,3 +6,9 @@ table {
     width: 90%;
     margin: 10px auto;
 }
+
+td , th {
+    white-space: normal;
+    word-wrap: break-word;
+    max-width: 200px;
+}

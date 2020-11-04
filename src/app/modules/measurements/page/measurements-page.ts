@@ -4,6 +4,8 @@ import { getMeasurements } from '../state/measurements.actions';
 import { MeasurementsState } from '../state/measurements.reducers';
 import { MeasurementsSelector } from '../state/measurements.selectors';
 import { MeasurementsService } from '../state/measurements.services';
+import { ngxCsv } from 'ngx-csv/ngx-csv';
+import { Measurement } from '../model';
 
 @Component({
   selector: 'app-measurements-page',
@@ -13,7 +15,7 @@ import { MeasurementsService } from '../state/measurements.services';
 export class MeasurementsPageComponent implements OnInit {
 
   measurements = [];
-  displayedColumns: string[] = ['id', 'lab', 'result', 'created', 'actions'];
+  displayedColumns: string[] = ['lab', 'result', 'created', 'actions'];
 
     constructor(
       private store: Store<MeasurementsState>,
@@ -36,6 +38,26 @@ export class MeasurementsPageComponent implements OnInit {
         console.log(res);
         this.store.dispatch(getMeasurements());
       });
+    }
+
+    downloadCsv(): void {
+      const options = {
+        fieldSeparator: ',',
+        quoteStrings: '"',
+        title: 'Results',
+        headers: ['Measurement ID', 'Lab ID', 'Result', 'Created at'],
+        eol: '\n'
+      };
+      const output = this.measurements.map((obj: Measurement) => {
+        return {
+          id: obj.id,
+          labId: obj.labId,
+          result: obj.result,
+          createdAt: obj.createdAt
+        };
+      });
+      // tslint:disable-next-line: no-unused-expression
+      new ngxCsv(output, 'Measurements', options);
     }
 
 }
