@@ -13,3 +13,6 @@
 ### Auth0 setup
 * https://auth0.com/blog/complete-guide-to-angular-user-authentication/
 * https://auth0.com/docs/architecture-scenarios/spa-api/spa-implementation-angular2
+
+### NgRx CRUD
+* https://medium.com/better-programming/angular-building-a-crud-application-with-ngrx-40e5f1c0b50c
