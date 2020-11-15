@@ -16,3 +16,6 @@
 
 ### NgRx CRUD
 * https://medium.com/better-programming/angular-building-a-crud-application-with-ngrx-40e5f1c0b50c
+
+### Websocket Angular
+* https://rxjs-dev.firebaseapp.com/api/webSocket/webSocket

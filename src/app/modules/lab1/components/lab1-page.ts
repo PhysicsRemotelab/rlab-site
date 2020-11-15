@@ -1,10 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Subscription } from 'rxjs';
-import { interval } from 'rxjs';
 import { LabsService } from '../../labs/state/labs.service';
 import { MeasurementsService } from '../../measurements/state/measurements.services';
+import { webSocket } from 'rxjs/webSocket';
 
 @Component({
   selector: 'app-lab1-page',
@@ -17,8 +16,8 @@ export class Lab1PageComponent implements OnInit {
     measurementStarted = false;
     measurementSaved = false;
     measurementResult = [];
-    measurementGenerator: Subscription;
     isSaveButtonDisabled = true;
+    subject = webSocket('wss://localhost:2087/data');
 
     constructor(
       private route: ActivatedRoute,
@@ -37,19 +36,19 @@ export class Lab1PageComponent implements OnInit {
     }
 
     startMeasuremenet(): void {
+      this.subject = webSocket('wss://localhost:2087/data');
       this.measurementStarted = true;
       this.measurementResult = [];
-
-      this.measurementGenerator = interval(1000).subscribe(x => {
-        const nr = Math.floor((Math.random() * 100) + 1);
-        this.measurementResult.push(nr);
+      this.subject.subscribe((data: any)  => {
+        console.log(data);
+        this.measurementResult = data;
       });
     }
 
     stopMeasuremenet(): void {
       this.measurementStarted = false;
       this.isSaveButtonDisabled = false;
-      this.measurementGenerator.unsubscribe();
+      this.subject.unsubscribe();
     }
 
     saveMeasurements(): void {
@@ -67,5 +66,6 @@ export class Lab1PageComponent implements OnInit {
       this.labService.freeLab(this.labId).subscribe(result => {
         this.router.navigate([`/labs`]);
       });
+      this.subject.unsubscribe();
     }
 }
