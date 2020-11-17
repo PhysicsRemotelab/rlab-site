@@ -26,7 +26,14 @@ export class Lab1PageComponent implements OnInit {
       private router: Router,
       private snackBarRef: MatSnackBar
     ) {
-      this.lab = this.router.getCurrentNavigation().extras.state.lab;
+      if (this.router.getCurrentNavigation().extras.state) {
+        this.lab = this.router.getCurrentNavigation().extras.state.lab;
+      } else if (!this.lab) {
+        this.labService.getLab(1).subscribe(lab => {
+          console.log(lab);
+          this.lab = lab;
+        });
+      }
     }
 
     ngOnInit(): void {

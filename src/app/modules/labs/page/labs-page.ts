@@ -16,7 +16,6 @@ import { LabsService } from '../state/labs.service';
 export class LabsPageComponent implements OnInit, OnDestroy {
 
     labs$: Observable<Lab[]>;
-
     isAuthenticated = !!sessionStorage.getItem('email');
     currentUserId = sessionStorage.getItem('user_id');
     userEmail = sessionStorage.getItem('email');

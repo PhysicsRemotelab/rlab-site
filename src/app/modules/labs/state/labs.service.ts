@@ -26,4 +26,8 @@ export class LabsService {
     return this.http.put(this.labsConfig.getFreeLabEndpoint(), { id });
   }
 
+  getLab(id: number): Observable<Lab> {
+    return this.http.get<Lab>(this.labsConfig.getLabEndpoint(id));
+  }
+
 }
