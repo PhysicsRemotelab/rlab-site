@@ -4,6 +4,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { LabsService } from '../../labs/state/labs.service';
 import { MeasurementsService } from '../../measurements/state/measurements.services';
 import { webSocket } from 'rxjs/webSocket';
+import { Lab } from '../../labs/model';
 
 @Component({
   selector: 'app-lab1-page',
@@ -12,7 +13,7 @@ import { webSocket } from 'rxjs/webSocket';
 })
 export class Lab1PageComponent implements OnInit {
 
-    labId: number;
+    lab: Lab;
     measurementStarted = false;
     measurementSaved = false;
     measurementResult = [];
@@ -20,15 +21,12 @@ export class Lab1PageComponent implements OnInit {
     subject = webSocket('wss://localhost:2087/data');
 
     constructor(
-      private route: ActivatedRoute,
       private measurementsService: MeasurementsService,
       private labService: LabsService,
       private router: Router,
       private snackBarRef: MatSnackBar
     ) {
-      this.route.queryParams.subscribe(params => {
-        this.labId = +params.id;
-      });
+      this.lab = this.router.getCurrentNavigation().extras.state.lab;
     }
 
     ngOnInit(): void {
@@ -52,7 +50,7 @@ export class Lab1PageComponent implements OnInit {
     }
 
     saveMeasurements(): void {
-      this.measurementsService.saveMeasurements(this.labId, this.measurementResult.toString()).subscribe(res => {
+      this.measurementsService.saveMeasurements(this.lab.id, this.measurementResult.toString()).subscribe(res => {
         this.isSaveButtonDisabled = true;
       });
       this.snackBarRef.open('Saved!', 'Hide', {
@@ -63,7 +61,8 @@ export class Lab1PageComponent implements OnInit {
     }
 
     freeLab(): void {
-      this.labService.freeLab(this.labId).subscribe(result => {
+      console.log(this.lab.id);
+      this.labService.freeLab(this.lab.id).subscribe(result => {
         this.router.navigate([`/labs`]);
       });
       this.subject.unsubscribe();

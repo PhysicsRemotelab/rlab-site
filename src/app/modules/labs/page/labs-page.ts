@@ -15,7 +15,6 @@ import { LabsService } from '../state/labs.service';
 })
 export class LabsPageComponent implements OnInit, OnDestroy {
 
-    labs = [];
     labs$: Observable<Lab[]>;
 
     isAuthenticated = !!sessionStorage.getItem('email');
@@ -31,26 +30,21 @@ export class LabsPageComponent implements OnInit, OnDestroy {
 
     ngOnInit(): void {
       console.log('Labs page');
-
       this.store.dispatch(getLabs());
-
       this.labs$ = this.store.select(getAllLabs);
-
     }
 
-    startlab(id: number): void {
-      console.log('start', id);
-      this.labsService.useLab(id).subscribe(result => {
+    startlab(lab: Lab): void {
+      console.log(lab);
+      this.labsService.useLab(lab.id).subscribe(result => {
         console.log(result);
-        if (result !== 0) {
-          this.router.navigate([`/lab${id}`], { queryParams: { id }});
-        }
+        this.router.navigate([`/lab${lab.id}`], { state: { lab } });
       });
     }
 
-    continuelab(id: number): void {
-      console.log('continue', id);
-      this.router.navigate([`/lab${id}`], { queryParams: { id }});
+    continuelab(lab: Lab): void {
+      console.log(lab);
+      this.router.navigate([`/lab${lab.id}`], { state: { lab } });
     }
 
     ngOnDestroy(): void {

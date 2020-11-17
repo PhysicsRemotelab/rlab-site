@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
-import { Observable, Subscription } from 'rxjs';
+import { Router } from '@angular/router';
+import { Subscription } from 'rxjs';
 import { interval } from 'rxjs';
+import { Lab } from '../../labs/model';
 import { LabsService } from '../../labs/state/labs.service';
 import { MeasurementsService } from '../../measurements/state/measurements.services';
 
@@ -12,7 +13,7 @@ import { MeasurementsService } from '../../measurements/state/measurements.servi
 })
 export class Lab3PageComponent implements OnInit {
 
-    labId: number;
+    lab: Lab;
     measurementStarted = false;
     measurementSaved = false;
     measurementResult = [];
@@ -20,14 +21,11 @@ export class Lab3PageComponent implements OnInit {
     isSaveButtonDisabled = true;
 
     constructor(
-      private route: ActivatedRoute,
       private measurementsService: MeasurementsService,
       private labService: LabsService,
       private router: Router
     ) {
-      this.route.queryParams.subscribe(params => {
-        this.labId = +params.id;
-      });
+      this.lab = this.router.getCurrentNavigation().extras.state.lab;
     }
 
     ngOnInit(): void {
@@ -52,14 +50,14 @@ export class Lab3PageComponent implements OnInit {
 
     saveMeasurements(): void {
       console.log('save');
-      this.measurementsService.saveMeasurements(this.labId, this.measurementResult.toString()).subscribe(res => {
+      this.measurementsService.saveMeasurements(this.lab.id, this.measurementResult.toString()).subscribe(res => {
         console.log(res);
         this.isSaveButtonDisabled = true;
       });
     }
 
     freeLab(): void {
-      this.labService.freeLab(this.labId).subscribe(result => {
+      this.labService.freeLab(this.lab.id).subscribe(result => {
         console.log(result);
         this.router.navigate([`/labs`]);
       });
