@@ -4,9 +4,7 @@
             <mat-card-title>Camera</mat-card-title>
         </mat-card-header>
         <mat-card-content>
-            <div class="embed-responsive">
-                <iframe src="https://localhost:2083/" frameborder="0"></iframe>
-            </div>
+            <app-camera [cameraUrl]="cameraUrl"></app-camera>
             <app-countdown *ngIf="lab" [endTime]="lab.takenUntil"></app-countdown>
         </mat-card-content>
     </mat-card>

@@ -19,6 +19,7 @@ export class Lab1PageComponent implements OnInit {
     measurementResult = [];
     isSaveButtonDisabled = true;
     subject = webSocket('wss://localhost:2087/data');
+    cameraUrl = 'https://localhost:2083/';
     minutesLeft = null;
 
     constructor(

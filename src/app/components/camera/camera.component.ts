@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
+import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-camera',
@@ -7,10 +8,17 @@ import { Component, OnInit } from '@angular/core';
 })
 export class CameraComponent implements OnInit {
 
-  constructor() {
-  }
+  @Input()
+  cameraUrl: string;
+
+  safeCameraUrl: SafeResourceUrl;
+
+  constructor(
+    private sanitizer: DomSanitizer
+  ) { }
 
   ngOnInit(): void {
+    this.safeCameraUrl = this.sanitizer.bypassSecurityTrustResourceUrl(this.cameraUrl);
   }
 
 }

@@ -8,11 +8,13 @@ import { Lab1PageComponent } from './components/lab1-page';
 import { Lab1RoutingModule } from './lab1.routes';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { CountdownComponent } from 'src/app/components/countdown/countdown.component';
+import { CameraComponent } from 'src/app/components/camera/camera.component';
 
 @NgModule({
     declarations: [
         Lab1PageComponent,
-        CountdownComponent
+        CountdownComponent,
+        CameraComponent
     ],
     imports: [
         CommonModule,
