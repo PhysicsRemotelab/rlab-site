@@ -35,9 +35,8 @@ export class LabsPageComponent implements OnInit, OnDestroy {
 
     startlab(lab: Lab): void {
       console.log(lab);
-      this.labsService.useLab(lab.id).subscribe(result => {
-        console.log(result);
-        this.router.navigate([`/lab${lab.id}`], { state: { lab } });
+      this.labsService.useLab(lab.id).subscribe(updatedLab => {
+        this.router.navigate([`/lab${lab.id}`], { state: { lab: updatedLab } });
       });
     }
 
@@ -47,6 +46,22 @@ export class LabsPageComponent implements OnInit, OnDestroy {
     }
 
     ngOnDestroy(): void {
+    }
+
+    isContinueButtonActive(lab: Lab): boolean {
+      const overTime = new Date(lab.takenUntil) > new Date();
+      return overTime && lab.userId === Number(this.currentUserId);
+    }
+
+    isBusyButtonActive(lab: Lab): boolean {
+      const overTime = new Date(lab.takenUntil) > new Date();
+      const notCurrentUser = lab.userId && lab.userId !== Number(this.currentUserId);
+      return overTime && notCurrentUser;
+    }
+
+    isFreeButtonActive(lab: Lab): boolean {
+      const overTime = new Date(lab.takenUntil) < new Date();
+      return overTime || !lab.userId;
     }
 
 }

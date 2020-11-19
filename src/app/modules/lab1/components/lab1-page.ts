@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { ActivatedRoute, Router } from '@angular/router';
+import { Router } from '@angular/router';
 import { LabsService } from '../../labs/state/labs.service';
 import { MeasurementsService } from '../../measurements/state/measurements.services';
 import { webSocket } from 'rxjs/webSocket';
@@ -19,6 +19,7 @@ export class Lab1PageComponent implements OnInit {
     measurementResult = [];
     isSaveButtonDisabled = true;
     subject = webSocket('wss://localhost:2087/data');
+    minutesLeft = null;
 
     constructor(
       private measurementsService: MeasurementsService,
@@ -44,7 +45,7 @@ export class Lab1PageComponent implements OnInit {
       this.subject = webSocket('wss://localhost:2087/data');
       this.measurementStarted = true;
       this.measurementResult = [];
-      this.subject.subscribe((data: any)  => {
+      this.subject.subscribe((data: any) => {
         console.log(data);
         this.measurementResult = data;
       });
@@ -74,4 +75,5 @@ export class Lab1PageComponent implements OnInit {
       });
       this.subject.unsubscribe();
     }
+
 }

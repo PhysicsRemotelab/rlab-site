@@ -4,6 +4,7 @@ export interface Lab {
     description: string;
     image: string;
     userId: number;
-    udatedAt: Date;
+    updatedAt: Date;
     createdAt: Date;
+    takenUntil: Date;
 }

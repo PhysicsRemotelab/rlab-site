@@ -7,10 +7,12 @@ import {MatButtonModule} from '@angular/material/button';
 import { Lab1PageComponent } from './components/lab1-page';
 import { Lab1RoutingModule } from './lab1.routes';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { CountdownComponent } from 'src/app/components/countdown/countdown.component';
 
 @NgModule({
     declarations: [
-        Lab1PageComponent
+        Lab1PageComponent,
+        CountdownComponent
     ],
     imports: [
         CommonModule,

@@ -7,6 +7,7 @@
             <div class="embed-responsive">
                 <iframe src="https://localhost:2083/" frameborder="0"></iframe>
             </div>
+            <app-countdown *ngIf="lab" [endTime]="lab.takenUntil"></app-countdown>
         </mat-card-content>
     </mat-card>
     <mat-card class='lab-control'>
