@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, OnDestroy, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 import { LabsService } from '../../labs/state/labs.service';
@@ -10,7 +10,7 @@ import { Lab } from '../../labs/model';
   templateUrl: './lab1-page.html',
   styleUrls: ['./lab1-page.scss']
 })
-export class Lab1PageComponent implements OnInit, OnDestroy, AfterViewInit {
+export class Lab1PageComponent {
 
     lab: Lab;
     measurementStarted = false;
@@ -35,12 +35,6 @@ export class Lab1PageComponent implements OnInit, OnDestroy, AfterViewInit {
           this.lab = lab;
         });
       }
-    }
-
-    ngOnInit(): void {
-    }
-
-    ngAfterViewInit(): void {
     }
 
     startMeasuremenet(): void {
@@ -70,6 +64,4 @@ export class Lab1PageComponent implements OnInit, OnDestroy, AfterViewInit {
         this.router.navigate([`/labs`]);
       });
     }
-
-    ngOnDestroy(): void { }
 }

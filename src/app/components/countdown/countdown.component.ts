@@ -29,10 +29,10 @@ export class CountdownComponent implements OnInit, OnDestroy {
     const difference = new Date(dateEntered).getTime() - new Date().getTime();
 
     if (difference > 0) {
-      this.seconds = Math.floor(difference / 1000);
-      this.minutes = Math.floor(this.seconds / 60);
-      this.minutes %= 60;
-      this.seconds %= 60;
+      this.seconds = Math.floor(difference / 1000) % 60;
+      this.minutes = Math.floor(this.seconds / 60) % 60;
+      this.minutes = ('00' + this.minutes).slice(-2);
+      this.seconds = ('00' + this.seconds).slice(-2);
     } else {
       console.log('the end');
       this.timer$$.unsubscribe();
