@@ -64,4 +64,8 @@ export class Lab1PageComponent {
         this.router.navigate([`/labs`]);
       });
     }
+
+    getData($event: any): void {
+      this.measurementResult = $event;
+    }
 }

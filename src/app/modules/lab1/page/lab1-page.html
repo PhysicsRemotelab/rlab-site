@@ -43,7 +43,7 @@
                     Here you can see results that have been measured.
                 </div>
                 <br>
-               <app-scatter-plot [sensorUrl]="sensorUrl" [isSensorActive]="measurementStarted"></app-scatter-plot>
+               <app-scatter-plot [sensorUrl]="sensorUrl" [isSensorActive]="measurementStarted" (measurementDataEvent)="getData($event)"></app-scatter-plot>
             </mat-card-content>
         </mat-card>
         <mat-card class='lab-save-results'>

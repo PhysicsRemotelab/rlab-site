@@ -21,6 +21,9 @@ export class ScatterPlotComponent implements OnInit, OnDestroy, AfterViewInit, O
     @Input()
     private isSensorActive: string;
 
+    @Output()
+    measurementDataEvent = new EventEmitter<ChartPoint[]>();
+
     private chart: Chart;
     private data: ChartPoint[] = [];
     private dataSourceSubscription: Subscription = new Subscription();
@@ -59,6 +62,7 @@ export class ScatterPlotComponent implements OnInit, OnDestroy, AfterViewInit, O
 
         this.dataSourceSubscription = this.subject.pipe(throttleTime(100)).subscribe((points: ChartPoint[]) => {
           this.transformData(points);
+          this.measurementDataEvent.emit(points);
           this.chart.clear();
           this.chart.update();
         });
@@ -80,6 +84,10 @@ export class ScatterPlotComponent implements OnInit, OnDestroy, AfterViewInit, O
       }
 
       return dataArray;
+    }
+
+    returnMeasurementData(value: ChartPoint[]): void {
+      this.measurementDataEvent.emit(value);
     }
 
     ngOnDestroy(): void {
