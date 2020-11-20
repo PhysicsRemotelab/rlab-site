@@ -1,9 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { AfterViewInit, Component, OnDestroy, OnInit } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 import { LabsService } from '../../labs/state/labs.service';
 import { MeasurementsService } from '../../measurements/state/measurements.services';
-import { webSocket } from 'rxjs/webSocket';
 import { Lab } from '../../labs/model';
 
 @Component({
@@ -11,15 +10,15 @@ import { Lab } from '../../labs/model';
   templateUrl: './lab1-page.html',
   styleUrls: ['./lab1-page.scss']
 })
-export class Lab1PageComponent implements OnInit {
+export class Lab1PageComponent implements OnInit, OnDestroy, AfterViewInit {
 
     lab: Lab;
     measurementStarted = false;
     measurementSaved = false;
     measurementResult = [];
     isSaveButtonDisabled = true;
-    subject = webSocket('wss://localhost:2087/data');
     cameraUrl = 'https://localhost:2083/';
+    sensorUrl = 'wss://localhost:2087/data';
     minutesLeft = null;
 
     constructor(
@@ -39,23 +38,19 @@ export class Lab1PageComponent implements OnInit {
     }
 
     ngOnInit(): void {
-      console.log('Lab 1 page');
+    }
+
+    ngAfterViewInit(): void {
     }
 
     startMeasuremenet(): void {
-      this.subject = webSocket('wss://localhost:2087/data');
       this.measurementStarted = true;
       this.measurementResult = [];
-      this.subject.subscribe((data: any) => {
-        console.log(data);
-        this.measurementResult = data;
-      });
     }
 
     stopMeasuremenet(): void {
       this.measurementStarted = false;
       this.isSaveButtonDisabled = false;
-      this.subject.unsubscribe();
     }
 
     saveMeasurements(): void {
@@ -74,7 +69,7 @@ export class Lab1PageComponent implements OnInit {
       this.labService.freeLab(this.lab.id).subscribe(result => {
         this.router.navigate([`/labs`]);
       });
-      this.subject.unsubscribe();
     }
 
+    ngOnDestroy(): void { }
 }

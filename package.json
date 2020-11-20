@@ -34,6 +34,8 @@
     "@ngrx/store": "^10.0.1",
     "@ngrx/store-devtools": "^10.0.1",
     "angular-jwt": "^0.1.11",
+    "chart.js": "^2.9.4",
+    "ng2-charts": "^2.4.2",
     "ngx-csv": "^0.3.2",
     "rxjs": "~6.6.0",
     "tslib": "^2.0.0",

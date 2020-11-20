@@ -41,6 +41,7 @@
                     Here you can see results that have been measured.
                 </div>
                 <br>
+               <app-scatter-plot [sensorUrl]="sensorUrl" [isSensorActive]="measurementStarted"></app-scatter-plot>
                 <div class="result-box">{{measurementResult.toString()}}</div>
             </mat-card-content>
         </mat-card>

@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { Lab1PageComponent } from './components/lab1-page';
+import { Lab1PageComponent } from './page/lab1-page';
 
 const LAB1_HOME_ROUTE = '';
 
