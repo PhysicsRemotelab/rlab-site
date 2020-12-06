@@ -7,16 +7,13 @@ import {MatButtonModule} from '@angular/material/button';
 import { Lab1PageComponent } from './page/lab1-page';
 import { Lab1RoutingModule } from './lab1.routes';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
-import { CountdownComponent } from 'src/app/components/countdown/countdown.component';
-import { CameraComponent } from 'src/app/components/camera/camera.component';
 import { ChartsModule } from 'ng2-charts';
 import { ScatterPlotComponent } from 'src/app/components/scatter-plot/scatter-plot.component';
+import { SharedModule } from '../shared/shared.module';
 
 @NgModule({
     declarations: [
         Lab1PageComponent,
-        CountdownComponent,
-        CameraComponent,
         ScatterPlotComponent
     ],
     imports: [
@@ -27,7 +24,8 @@ import { ScatterPlotComponent } from 'src/app/components/scatter-plot/scatter-pl
         MatButtonModule,
         Lab1RoutingModule,
         MatSnackBarModule,
-        ChartsModule
+        ChartsModule,
+        SharedModule
     ]
 })
 export class Lab1Module { }

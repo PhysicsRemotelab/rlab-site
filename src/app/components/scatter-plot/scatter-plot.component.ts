@@ -19,7 +19,7 @@ export class ScatterPlotComponent implements OnInit, OnDestroy, AfterViewInit, O
     private sensorUrl: string;
 
     @Input()
-    private isSensorActive: string;
+    private measurementStarted: string;
 
     @Output()
     measurementDataEvent = new EventEmitter<ChartPoint[]>();
@@ -57,7 +57,7 @@ export class ScatterPlotComponent implements OnInit, OnDestroy, AfterViewInit, O
     }
 
     ngOnChanges(): void {
-      if (this.isSensorActive) {
+      if (this.measurementStarted) {
         this.subject = webSocket(this.sensorUrl);
 
         this.dataSourceSubscription = this.subject.pipe(throttleTime(100)).subscribe((points: ChartPoint[]) => {

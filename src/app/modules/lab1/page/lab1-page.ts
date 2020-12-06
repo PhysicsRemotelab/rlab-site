@@ -17,7 +17,7 @@ export class Lab1PageComponent {
     measurementSaved = false;
     measurementResult = [];
     isSaveButtonDisabled = true;
-    cameraUrl = 'https://localhost:2083/';
+    cameraUrl = 'https://localhost:2083/camera/0';
     sensorUrl = 'wss://localhost:2087/data';
     minutesLeft = null;
 
