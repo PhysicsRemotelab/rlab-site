@@ -1,5 +1,9 @@
-## Run production
+## Run development production
 * npm run start:prod
+
+## Production build, need lite-server, runs on port 3001
+* npm run build
+* lite-server --baseDir="dist/rlab-site"
 
 ## Debugging
 * Debugging requires `Debugger for Chrome` Visual Studio Code extension
