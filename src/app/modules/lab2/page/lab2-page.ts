@@ -6,6 +6,8 @@ import { interval } from 'rxjs';
 import { Lab } from '../../labs/model';
 import { LabsService } from '../../labs/state/labs.service';
 import { MeasurementsService } from '../../measurements/state/measurements.services';
+import { serverUrl } from '../../../../../env.json';
+import { sensorUrl } from '../../../../../env.json';
 
 @Component({
   selector: 'app-lab2-page',
@@ -19,8 +21,8 @@ export class Lab2PageComponent {
     measurementSaved = false;
     measurementResult = [];
     isSaveButtonDisabled = true;
-    cameraUrl = 'https://localhost:2083/camera/1';
-    sensorUrl = 'wss://localhost:2087/data';
+    cameraUrl =  `${serverUrl}/camera/1`;
+    sensorUrl = `${sensorUrl}/gamma`;
     minutesLeft = null;
 
     constructor(

@@ -4,6 +4,8 @@ import { Router } from '@angular/router';
 import { LabsService } from '../../labs/state/labs.service';
 import { MeasurementsService } from '../../measurements/state/measurements.services';
 import { Lab } from '../../labs/model';
+import { serverUrl } from '../../../../../env.json';
+import { sensorUrl } from '../../../../../env.json';
 
 @Component({
   selector: 'app-lab1-page',
@@ -17,8 +19,8 @@ export class Lab1PageComponent {
     measurementSaved = false;
     measurementResult = [];
     isSaveButtonDisabled = true;
-    cameraUrl = 'https://localhost:2083/camera/0';
-    sensorUrl = 'wss://localhost:2087/spectrometer';
+    cameraUrl =  `${serverUrl}/camera/0`;
+    sensorUrl = `${sensorUrl}/spectrometer`;
     minutesLeft = null;
 
     constructor(

@@ -19,7 +19,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatListModule } from '@angular/material/list';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AuthHttpInterceptor } from '@auth0/auth0-angular';
-import { domain, clientId, audience, serverUrl } from '../../auth_config.json';
+import { domain, clientId, audience, serverUrl } from '../../env.json';
 import { LayoutComponent } from './layout/layout.component';
 import { EffectsModule } from '@ngrx/effects';
 import { UsersEffects } from './modules/users/state/users.effects';
@@ -48,12 +48,12 @@ import { StoreRouterConnectingModule } from '@ngrx/router-store';
       audience,
       httpInterceptor: {
         allowedList: [
-          `${serverUrl}/labs/use`,
-          `${serverUrl}/labs/free`,
-          `${serverUrl}/measurements`,
-          `${serverUrl}/measurements/*`,
-          `${serverUrl}/users`,
-          `${serverUrl}/history`
+          `${serverUrl}/api/labs/use`,
+          `${serverUrl}/api/labs/free`,
+          `${serverUrl}/api/measurements`,
+          `${serverUrl}/api/measurements/*`,
+          `${serverUrl}/api/users`,
+          `${serverUrl}/api/history`
         ]
       }
     }),

@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { serverUrl } from '../../../../../auth_config.json';
+import { serverUrl } from '../../../../../env.json';
 
 @Injectable({
     providedIn: 'root',
@@ -7,6 +7,6 @@ import { serverUrl } from '../../../../../auth_config.json';
 export class MeasurementsConfig {
 
     getMeasurementsEndpoint(): string {
-        return `${serverUrl}/measurements`;
+        return `${serverUrl}/api/measurements`;
     }
 }

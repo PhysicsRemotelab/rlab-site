@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { serverUrl } from '../../../../../auth_config.json';
+import { serverUrl } from '../../../../../env.json';
 
 @Injectable({
     providedIn: 'root',
@@ -7,18 +7,18 @@ import { serverUrl } from '../../../../../auth_config.json';
 export class LabsConfig {
 
     getLabEndpoint(id: number): string {
-        return `${serverUrl}/labs/${id}`;
+        return `${serverUrl}/api/labs/${id}`;
     }
 
     getLabsEndpoint(): string {
-        return `${serverUrl}/labs`;
+        return `${serverUrl}/api/labs`;
     }
 
     getUseLabsEndpoint(): string {
-        return `${serverUrl}/labs/use`;
+        return `${serverUrl}/api/labs/use`;
     }
 
     getFreeLabEndpoint(): string {
-        return `${serverUrl}/labs/free`;
+        return `${serverUrl}/api/labs/free`;
     }
 }
