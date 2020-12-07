@@ -8,13 +8,13 @@ import { Lab1PageComponent } from './page/lab1-page';
 import { Lab1RoutingModule } from './lab1.routes';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { ChartsModule } from 'ng2-charts';
-import { ScatterPlotComponent } from 'src/app/components/scatter-plot/scatter-plot.component';
+import { SpectrometerPlotComponent } from 'src/app/components/spectrometer-plot/spectrometer-plot.component';
 import { SharedModule } from '../shared/shared.module';
 
 @NgModule({
     declarations: [
         Lab1PageComponent,
-        ScatterPlotComponent
+        SpectrometerPlotComponent
     ],
     imports: [
         CommonModule,

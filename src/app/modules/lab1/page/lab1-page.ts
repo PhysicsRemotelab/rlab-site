@@ -18,7 +18,7 @@ export class Lab1PageComponent {
     measurementResult = [];
     isSaveButtonDisabled = true;
     cameraUrl = 'https://localhost:2083/camera/0';
-    sensorUrl = 'wss://localhost:2087/data';
+    sensorUrl = 'wss://localhost:2087/spectrometer';
     minutesLeft = null;
 
     constructor(

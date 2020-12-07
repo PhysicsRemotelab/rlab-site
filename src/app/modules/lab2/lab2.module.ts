@@ -9,10 +9,12 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { ChartsModule } from 'ng2-charts';
 import { Lab2PageComponent } from './page/lab2-page';
 import { SharedModule } from '../shared/shared.module';
+import { GammaPlotComponent } from 'src/app/components/gamma-plot/gamma-plot.component';
 
 @NgModule({
     declarations: [
-        Lab2PageComponent
+        Lab2PageComponent,
+        GammaPlotComponent
     ],
     imports: [
         CommonModule,

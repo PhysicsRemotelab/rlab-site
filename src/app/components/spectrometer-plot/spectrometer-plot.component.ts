@@ -6,11 +6,11 @@ import { throttleTime } from 'rxjs/operators';
 import { Input } from '@angular/core';
 
 @Component({
-  selector: 'app-scatter-plot',
-  templateUrl: './scatter-plot.component.html',
-  styleUrls: ['./scatter-plot.component.scss']
+  selector: 'app-spectrometer-plot',
+  templateUrl: './spectrometer-plot.component.html',
+  styleUrls: ['./spectrometer-plot.component.scss']
 })
-export class ScatterPlotComponent implements OnInit, OnDestroy, AfterViewInit, OnChanges {
+export class SpectrometerPlotComponent implements OnInit, OnDestroy, AfterViewInit, OnChanges {
 
     @ViewChild('chart')
     private chartRef: ElementRef;

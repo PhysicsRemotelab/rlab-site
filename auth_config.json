@@ -2,5 +2,5 @@
     "domain": "remotelab.eu.auth0.com",
     "clientId": "5MROr4sw5rIlD73DXcb6051wQZqi4M53",
     "audience": "https://remotelab.ee/",
-    "serverUrl": "https://localhost:2053"
+    "serverUrl": "https://localhost:2083/api"
 }
