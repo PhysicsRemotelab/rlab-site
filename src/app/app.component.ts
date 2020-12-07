@@ -22,22 +22,26 @@ export class AppComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     console.log('App Component');
+  
     this.authUser$$ = this.auth.user$.subscribe(result => {
-      this.isAuthenticated = true;
-      sessionStorage.setItem('email', result.email);
-      sessionStorage.setItem('role', result['https://remotelab.ee/roles']);
-
-      const user = {
-        email: result.email,
-        name: result.name,
-        roles: result['https://remotelab.ee/roles'].join(),
-        nickname: result.nickname,
-        picture: result.picture
-      } as User;
-
-      this.appServices.postUser(user).subscribe((res: User) => {
-        sessionStorage.setItem('user_id', res.id);
-      });
+      if(result) {
+        console.log(result);
+        this.isAuthenticated = true;
+        sessionStorage.setItem('email', result.email);
+        sessionStorage.setItem('role', result['https://remotelab.ee/roles']);
+  
+        const user = {
+          email: result.email,
+          name: result.name,
+          roles: result['https://remotelab.ee/roles'].join(),
+          nickname: result.nickname,
+          picture: result.picture
+        } as User;
+  
+        this.appServices.postUser(user).subscribe((res: User) => {
+          sessionStorage.setItem('user_id', res.id);
+        });
+      }
     });
   }
 

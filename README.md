@@ -1,5 +1,5 @@
-## Commands
-* ng serve --host 0.0.0.0
+## Run production
+* npm run start:prod
 
 ## Debugging
 * Debugging requires `Debugger for Chrome` Visual Studio Code extension

@@ -7,7 +7,8 @@ import { Component, Input, OnInit } from '@angular/core';
 })
 export class AuthenticationButtonComponent implements OnInit {
 
-  @Input() isAuthenticated: boolean;
+  @Input()
+  isAuthenticated: boolean = false;
 
   constructor() {
   }
