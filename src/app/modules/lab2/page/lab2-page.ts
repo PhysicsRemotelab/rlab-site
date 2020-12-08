@@ -1,13 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
-import { Subscription } from 'rxjs';
-import { interval } from 'rxjs';
 import { Lab } from '../../labs/model';
 import { LabsService } from '../../labs/state/labs.service';
 import { MeasurementsService } from '../../measurements/state/measurements.services';
-import { serverUrl } from '../../../../../env.json';
-import { sensorUrl } from '../../../../../env.json';
+import { sensorUrl, serverUrl } from 'src/environments/environment';
 
 @Component({
   selector: 'app-lab2-page',

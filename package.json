@@ -11,8 +11,7 @@
   "scripts": {
     "ng": "ng ",
     "start": "ng serve",
-    "start:prod": "ng serve --host=0.0.0.0 --port=80 --disable-host-check",
-    "build": "ng build",
+    "start:prod": "ng serve --prod=true --no-live-reload",
     "lint": "ng lint"
   },
   "dependencies": {

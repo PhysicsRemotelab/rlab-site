@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { serverUrl } from '../../../../../env.json';
+import { serverUrl } from 'src/environments/environment';
 
 @Injectable({
     providedIn: 'root',

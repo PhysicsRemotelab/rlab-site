@@ -4,8 +4,7 @@ import { Router } from '@angular/router';
 import { LabsService } from '../../labs/state/labs.service';
 import { MeasurementsService } from '../../measurements/state/measurements.services';
 import { Lab } from '../../labs/model';
-import { serverUrl } from '../../../../../env.json';
-import { sensorUrl } from '../../../../../env.json';
+import { sensorUrl, serverUrl } from 'src/environments/environment';
 
 @Component({
   selector: 'app-lab1-page',
