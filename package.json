@@ -11,7 +11,7 @@
   "scripts": {
     "ng": "ng ",
     "start": "ng serve",
-    "start:prod": "ng serve --prod=true --no-live-reload",
+    "start:prod": "ng serve --host=0.0.0.0 --prod=true --no-live-reload",
     "lint": "ng lint"
   },
   "dependencies": {
