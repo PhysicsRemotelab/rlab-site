@@ -23,7 +23,6 @@ export class Lab2PageComponent {
     isSaveButtonDisabled = true;
     cameraUrl =  `${serverUrl}/camera/1`;
     sensorUrl = `${sensorUrl}/gamma`;
-    minutesLeft = null;
 
     constructor(
       private measurementsService: MeasurementsService,
@@ -34,7 +33,7 @@ export class Lab2PageComponent {
       if (this.router.getCurrentNavigation().extras.state) {
         this.lab = this.router.getCurrentNavigation().extras.state.lab;
       } else if (!this.lab) {
-        this.labService.getLab(1).subscribe(lab => {
+        this.labService.getLab(2).subscribe(lab => {
           console.log(lab);
           this.lab = lab;
         });

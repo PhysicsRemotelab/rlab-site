@@ -25,14 +25,13 @@ export class SpectrometerPlotComponent implements OnInit, OnDestroy, AfterViewIn
     measurementDataEvent = new EventEmitter<ChartPoint[]>();
 
     private chart: Chart;
-    private data: ChartPoint[] = [];
+    private points: ChartPoint[] = [];
     private dataSourceSubscription: Subscription = new Subscription();
     private subject = webSocket('');
 
     constructor() { }
 
     ngOnInit(): void {
-      console.log('Lab 1 page');
     }
 
     ngAfterViewInit(): void {
@@ -40,17 +39,17 @@ export class SpectrometerPlotComponent implements OnInit, OnDestroy, AfterViewIn
         type: 'scatter',
         data: {
           datasets: [{
-            data: this.data,
+            data: this.points,
             fill: true,
-            pointRadius: 2
+            pointRadius: 1
           }]
         },
         options: {
           responsive: true,
           legend: { display: false },
           scales: {
-            xAxes: [{ ticks: { suggestedMin: 0, suggestedMax: 300 }}],
-            yAxes: [{ ticks: { suggestedMin: 0, suggestedMax: 1000 }}]
+            xAxes: [{ ticks: { min: 0, max: 287 }}],
+            yAxes: [{ ticks: { min: 0, max: 1000 }}]
           }
         }
       });
@@ -71,19 +70,19 @@ export class SpectrometerPlotComponent implements OnInit, OnDestroy, AfterViewIn
       }
     }
 
-    private transformData(data: any): ChartPoint[] {
+    private transformData(data: any) {
       let dataArray: ChartPoint[] = data.split(',');
+    
       dataArray = dataArray.map((val, i) => {
         const nr = { x: i, y: Number(val) };
-        this.data.push(nr);
+        if(i !== 288)
+          this.points.push(nr);
         return nr;
       });
 
-      if (this.data.length > 288) {
-        this.data.splice(0, this.data.length - 288);
+      if (this.points.length > 287) {
+        this.points.splice(0, this.points.length - 287);
       }
-
-      return dataArray;
     }
 
     returnMeasurementData(value: ChartPoint[]): void {

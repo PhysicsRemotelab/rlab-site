@@ -43,7 +43,7 @@
                     Here you can see results that have been measured.
                 </div>
                 <br>
-               <app-gamma-plot></app-gamma-plot>
+               <app-gamma-plot [sensorUrl]="sensorUrl" [measurementStarted]="measurementStarted" (measurementDataEvent)="getData($event)"></app-gamma-plot>
             </mat-card-content>
         </mat-card>
         <mat-card class='lab-save-results'>

@@ -21,7 +21,6 @@ export class Lab1PageComponent {
     isSaveButtonDisabled = true;
     cameraUrl =  `${serverUrl}/camera/0`;
     sensorUrl = `${sensorUrl}/spectrometer`;
-    minutesLeft = null;
 
     constructor(
       private measurementsService: MeasurementsService,
