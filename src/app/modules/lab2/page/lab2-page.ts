@@ -18,7 +18,7 @@ export class Lab2PageComponent {
     measurementSaved = false;
     measurementResult = [];
     isSaveButtonDisabled = true;
-    cameraUrl =  `${serverUrl}/camera/1`;
+    cameraUrl =  `${serverUrl}/cam/1`;
     sensorUrl = `${sensorUrl}/gamma`;
 
     constructor(

@@ -20,5 +20,4 @@ export class CameraComponent implements OnInit {
   ngOnInit(): void {
     this.safeCameraUrl = this.sanitizer.bypassSecurityTrustResourceUrl(this.cameraUrl);
   }
-
 }
