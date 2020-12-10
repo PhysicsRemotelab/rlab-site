@@ -16,6 +16,7 @@ export class CountdownComponent implements OnInit, OnDestroy {
   timer$$: Subscription;
   seconds = null;
   minutes = null;
+  hours = null;
 
   constructor(private router: Router) { }
 
@@ -29,8 +30,11 @@ export class CountdownComponent implements OnInit, OnDestroy {
     const difference = new Date(dateEntered).getTime() - new Date().getTime();
 
     if (difference > 0) {
-      this.seconds = Math.floor(difference / 1000) % 60;
-      this.minutes = Math.floor(Math.floor(difference / 1000) / 60) % 60;
+      this.hours = Math.floor((difference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+      this.minutes = Math.floor((difference % (1000 * 60 * 60)) / (1000 * 60));
+      this.seconds =  Math.floor((difference % (1000 * 60)) / 1000);
+
+      this.hours = ('00' + this.hours).slice(-2);
       this.minutes = ('00' + this.minutes).slice(-2);
       this.seconds = ('00' + this.seconds).slice(-2);
     } else {
