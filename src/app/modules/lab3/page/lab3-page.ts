@@ -1,65 +1,71 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
-import { Subscription } from 'rxjs';
-import { interval } from 'rxjs';
 import { Lab } from '../../labs/model';
 import { LabsService } from '../../labs/state/labs.service';
 import { MeasurementsService } from '../../measurements/state/measurements.services';
+import { sensorUrl, serverUrl } from 'src/environments/environment';
 
 @Component({
   selector: 'app-lab3-page',
   templateUrl: './lab3-page.html',
   styleUrls: ['./lab3-page.scss']
 })
-export class Lab3PageComponent implements OnInit {
+export class Lab3PageComponent {
 
     lab: Lab;
     measurementStarted = false;
     measurementSaved = false;
     measurementResult = [];
-    measurementGenerator: Subscription;
     isSaveButtonDisabled = true;
+    cameraUrl =  `${serverUrl}/cam/2`;
+    sensorUrl = `${sensorUrl}/resistance`;
 
     constructor(
       private measurementsService: MeasurementsService,
       private labService: LabsService,
-      private router: Router
+      private router: Router,
+      private snackBarRef: MatSnackBar
     ) {
-      this.lab = this.router.getCurrentNavigation().extras.state.lab;
-    }
-
-    ngOnInit(): void {
-      console.log('Lab 3 page');
+      if (this.router.getCurrentNavigation().extras.state) {
+        this.lab = this.router.getCurrentNavigation().extras.state.lab;
+      } else if (!this.lab) {
+        this.labService.getLab(3).subscribe(lab => {
+          console.log(lab);
+          this.lab = lab;
+        });
+      }
     }
 
     startMeasuremenet(): void {
       this.measurementStarted = true;
       this.measurementResult = [];
-
-      this.measurementGenerator = interval(1000).subscribe(x => {
-        const nr = Math.floor((Math.random() * 100) + 1);
-        this.measurementResult.push(nr);
-      });
     }
 
     stopMeasuremenet(): void {
       this.measurementStarted = false;
       this.isSaveButtonDisabled = false;
-      this.measurementGenerator.unsubscribe();
     }
 
     saveMeasurements(): void {
-      console.log('save');
       this.measurementsService.saveMeasurements(this.lab.id, this.measurementResult.toString()).subscribe(res => {
-        console.log(res);
         this.isSaveButtonDisabled = true;
+      });
+      this.snackBarRef.open('Saved!', 'Hide', {
+        duration: 5000,
+        verticalPosition: 'top',
+        panelClass: ['snackbar']
       });
     }
 
     freeLab(): void {
+      console.log(this.lab.id);
       this.labService.freeLab(this.lab.id).subscribe(result => {
-        console.log(result);
         this.router.navigate([`/labs`]);
       });
+    }
+
+    getData($event: any): void {
+      this.measurementResult = $event;
     }
 }
