@@ -10,6 +10,7 @@ import { ChartsModule } from 'ng2-charts';
 import { Lab3PageComponent } from './page/lab3-page';
 import { SharedModule } from '../shared/shared.module';
 import { ResistancePlotComponent } from 'src/app/components/resistance-plot/resistance-plot.component';
+import { MatSelectModule } from '@angular/material/select';
 
 @NgModule({
     declarations: [
@@ -25,7 +26,8 @@ import { ResistancePlotComponent } from 'src/app/components/resistance-plot/resi
         Lab3RoutingModule,
         MatSnackBarModule,
         ChartsModule,
-        SharedModule
+        SharedModule,
+        MatSelectModule
     ]
 })
 export class Lab3Module { }

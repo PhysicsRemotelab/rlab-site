@@ -28,6 +28,14 @@
                     To start measurements, please press button.
                 </div>
                 <br>
+                <mat-form-field appearance="fill">
+                    <mat-label>Select sensor to read</mat-label>
+                    <mat-select [(value)]="selectedSensor" [disabled]="measurementStarted">
+                      <mat-option *ngFor="let sensor of sensors" [value]="sensor.value">
+                        {{sensor.viewValue}}
+                      </mat-option>
+                    </mat-select>
+                </mat-form-field>
                 <div>
                     <button *ngIf="!measurementStarted" class="start-button" mat-raised-button  (click)="startMeasuremenet()">Start</button>
                     <button *ngIf="measurementStarted" class="stop-button" mat-raised-button  (click)="stopMeasuremenet()">Stop</button>
@@ -43,7 +51,12 @@
                     Here you can see results that have been measured.
                 </div>
                 <br>
-               <app-resistance-plot [sensorUrl]="sensorUrl" [measurementStarted]="measurementStarted" (measurementDataEvent)="getData($event)"></app-resistance-plot>
+               <app-resistance-plot 
+                    [selectedSensor]="selectedSensor"
+                    [sensorUrl]="sensorUrl"
+                    [measurementStarted]="measurementStarted"
+                    (measurementDataEvent)="getData($event)"
+                ></app-resistance-plot>
             </mat-card-content>
         </mat-card>
         <mat-card class='lab-save-results'>

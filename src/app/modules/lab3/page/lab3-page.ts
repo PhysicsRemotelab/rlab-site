@@ -13,6 +13,15 @@ import { sensorUrl, serverUrl } from 'src/environments/environment';
 })
 export class Lab3PageComponent {
 
+    selectedSensor = 'sensor1';
+    sensors = [
+      { value: 'sensor1', viewValue: 'Sensor 1'},
+      { value: 'sensor2', viewValue: 'Sensor 2'},
+      { value: 'sensor3', viewValue: 'Sensor 3'},
+      { value: 'sensor4', viewValue: 'Sensor 4'},
+      { value: 'sensor5', viewValue: 'Sensor 5'},
+      { value: 'sensor6', viewValue: 'Sensor 6'}
+    ];
     lab: Lab;
     measurementStarted = false;
     measurementSaved = false;
@@ -48,7 +57,10 @@ export class Lab3PageComponent {
     }
 
     saveMeasurements(): void {
-      this.measurementsService.saveMeasurements(this.lab.id, this.measurementResult.toString()).subscribe(res => {
+      const result = this.measurementResult.map(res => {
+        return [res.x, res.y];
+      });
+      this.measurementsService.saveMeasurements(this.lab.id, result.toString()).subscribe(res => {
         this.isSaveButtonDisabled = true;
       });
       this.snackBarRef.open('Saved!', 'Hide', {

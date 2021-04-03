@@ -16,6 +16,9 @@ export class ResistancePlotComponent implements OnInit, OnDestroy, AfterViewInit
     private chartRef: ElementRef;
 
     @Input()
+    private selectedSensor: string;
+
+    @Input()
     private sensorUrl: string;
 
     @Input()
@@ -35,11 +38,55 @@ export class ResistancePlotComponent implements OnInit, OnDestroy, AfterViewInit
     }
 
     ngAfterViewInit(): void {
+      this.chart = new Chart(this.chartRef.nativeElement, {
+        type: 'scatter',
+        data: {
+          datasets: [{
+            data: this.points,
+            fill: true,
+            pointRadius: 3
+          }]
+        },
+        options: {
+          responsive: true,
+          legend: { display: false },
+          scales: {
+            xAxes: [{ ticks: { min: 20, max: 80 }}]
+          }
+        }
+      });
     }
 
     ngOnChanges(): void {
+      if(this.measurementStarted) {
+        this.subject = webSocket(this.sensorUrl);
+        this.subject.next({ command: this.selectedSensor });
+        this.points = [];
+
+        this.dataSourceSubscription = this.subject.pipe(throttleTime(10)).subscribe((point: number) => {
+          console.log(point);
+          this.points.push({
+            x: point[0],
+            y: point[1]
+          });
+          this.measurementDataEvent.emit(this.points);
+          this.chart.data.datasets[0].data = null;
+          this.chart.data.datasets[0].data = this.points;
+          this.chart.clear();
+          this.chart.update();
+        });
+      } else {
+        this.subject.next({ command: 'stop' });
+        this.subject.complete();
+        this.dataSourceSubscription.unsubscribe();
+      }
+    }
+
+    returnMeasurementData(value: ChartPoint[]): void {
+      this.measurementDataEvent.emit(value);
     }
 
     ngOnDestroy(): void {
+      this.dataSourceSubscription.unsubscribe();
     }
 }
