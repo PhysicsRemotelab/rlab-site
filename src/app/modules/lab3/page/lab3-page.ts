@@ -46,16 +46,6 @@ export class Lab3PageComponent {
       }
     }
 
-    startMeasuremenet(): void {
-      this.measurementStarted = true;
-      this.measurementResult = [];
-    }
-
-    stopMeasuremenet(): void {
-      this.measurementStarted = false;
-      this.isSaveButtonDisabled = false;
-    }
-
     saveMeasurements(): void {
       const result = this.measurementResult.map(res => {
         return [res.x, res.y];
@@ -81,9 +71,15 @@ export class Lab3PageComponent {
       this.measurementResult = $event;
     }
 
-    stopMeasurementEvent($event: any): void {
-      console.log('stop');
+    stopEvent(): void {
       this.measurementStarted = false;
+      this.isSaveButtonDisabled = false;
+    }
+
+    startEvent(): void {
+      this.measurementStarted = true;
+      this.isSaveButtonDisabled = true;
+      this.measurementResult = [];
     }
 
 }

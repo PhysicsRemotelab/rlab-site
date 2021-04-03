@@ -28,7 +28,10 @@ export class ResistancePlotComponent implements OnInit, OnDestroy, AfterViewInit
     measurementDataEvent = new EventEmitter<ChartPoint[]>();
 
     @Output()
-    stopMeasurementEvent = new EventEmitter();
+    startEvent = new EventEmitter();
+
+    @Output()
+    stopEvent = new EventEmitter();
 
     private chart: Chart;
     private points: ChartPoint[] = [];
@@ -69,7 +72,7 @@ export class ResistancePlotComponent implements OnInit, OnDestroy, AfterViewInit
         this.dataSourceSubscription = this.subject.pipe(throttleTime(10)).subscribe((point: number) => {
           console.log(point);
           if (point[0] == 0 && point[1] == 0) {
-            this.stopMeasurementEvent.emit();
+            this.stopEvent.emit();
           } else {
             this.points.push({
               x: point[0],
@@ -84,7 +87,6 @@ export class ResistancePlotComponent implements OnInit, OnDestroy, AfterViewInit
         });
         return;
       }
-      this.subject.next({ command: 'stop' });
       this.subject.complete();
       this.dataSourceSubscription.unsubscribe();
     }

@@ -37,8 +37,8 @@
                     </mat-select>
                 </mat-form-field>
                 <div>
-                    <button *ngIf="!measurementStarted" class="start-button" mat-raised-button  (click)="startMeasuremenet()">Start</button>
-                    <button *ngIf="measurementStarted" class="stop-button" mat-raised-button  (click)="stopMeasuremenet()">Stop</button>
+                    <button *ngIf="!measurementStarted" class="start-button" mat-raised-button  (click)="startEvent()">Warm & Cool</button>
+                    <button *ngIf="measurementStarted" class="stop-button" mat-raised-button  (click)="stopEvent()">Stop</button>
                 </div>
             </mat-card-content>
         </mat-card>
@@ -56,7 +56,8 @@
                     [sensorUrl]="sensorUrl"
                     [measurementStarted]="measurementStarted"
                     (measurementDataEvent)="getData($event)"
-                    (stopMeasurementEvent)="stopMeasurementEvent($event)"
+                    (stopEvent)="stopEvent()"
+                    (startEvent)="startEvent()"
                 ></app-resistance-plot>
             </mat-card-content>
         </mat-card>
