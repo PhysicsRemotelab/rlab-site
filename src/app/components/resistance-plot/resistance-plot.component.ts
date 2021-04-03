@@ -27,6 +27,9 @@ export class ResistancePlotComponent implements OnInit, OnDestroy, AfterViewInit
     @Output()
     measurementDataEvent = new EventEmitter<ChartPoint[]>();
 
+    @Output()
+    stopMeasurementEvent = new EventEmitter();
+
     private chart: Chart;
     private points: ChartPoint[] = [];
     private dataSourceSubscription: Subscription = new Subscription();
@@ -65,21 +68,25 @@ export class ResistancePlotComponent implements OnInit, OnDestroy, AfterViewInit
 
         this.dataSourceSubscription = this.subject.pipe(throttleTime(10)).subscribe((point: number) => {
           console.log(point);
-          this.points.push({
-            x: point[0],
-            y: point[1]
-          });
-          this.measurementDataEvent.emit(this.points);
-          this.chart.data.datasets[0].data = null;
-          this.chart.data.datasets[0].data = this.points;
-          this.chart.clear();
-          this.chart.update();
+          if (point[0] == 0 && point[1] == 0) {
+            this.stopMeasurementEvent.emit();
+          } else {
+            this.points.push({
+              x: point[0],
+              y: point[1]
+            });
+            this.measurementDataEvent.emit(this.points);
+            this.chart.data.datasets[0].data = null;
+            this.chart.data.datasets[0].data = this.points;
+            this.chart.clear();
+            this.chart.update();
+          }
         });
-      } else {
-        this.subject.next({ command: 'stop' });
-        this.subject.complete();
-        this.dataSourceSubscription.unsubscribe();
+        return;
       }
+      this.subject.next({ command: 'stop' });
+      this.subject.complete();
+      this.dataSourceSubscription.unsubscribe();
     }
 
     returnMeasurementData(value: ChartPoint[]): void {

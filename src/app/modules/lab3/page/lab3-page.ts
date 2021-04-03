@@ -80,4 +80,10 @@ export class Lab3PageComponent {
     getData($event: any): void {
       this.measurementResult = $event;
     }
+
+    stopMeasurementEvent($event: any): void {
+      console.log('stop');
+      this.measurementStarted = false;
+    }
+
 }
