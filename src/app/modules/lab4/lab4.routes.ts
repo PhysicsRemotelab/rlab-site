@@ -1,12 +1,12 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { Lab4PageComponent } from './components/lab4-page';
+import { Lab4PageComponent } from './page/lab4-page';
 
-const LAB3_HOME_ROUTE = '';
+const LAB4_HOME_ROUTE = '';
 
 const routes: Routes = [
   {
-    path: LAB3_HOME_ROUTE,
+    path: LAB4_HOME_ROUTE,
     component: Lab4PageComponent,
   }
 ];

@@ -2,14 +2,20 @@ import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { HttpClientModule } from '@angular/common/http';
 import { CommonModule } from '@angular/common';
-import {MatCardModule} from '@angular/material/card';
-import {MatButtonModule} from '@angular/material/button';
-import { Lab4PageComponent } from './components/lab4-page';
+import { MatCardModule } from '@angular/material/card';
+import { MatButtonModule } from '@angular/material/button';
 import { Lab4RoutingModule } from './lab4.routes';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { ChartsModule } from 'ng2-charts';
+import { SharedModule } from '../shared/shared.module';
+import { MatSelectModule } from '@angular/material/select';
+import { Lab4PageComponent } from './page/lab4-page';
+import { TemperaturePlotComponent } from 'src/app/components/temperature-plot/temperature-plot.component';
 
 @NgModule({
     declarations: [
-        Lab4PageComponent
+        Lab4PageComponent,
+        TemperaturePlotComponent
     ],
     imports: [
         CommonModule,
@@ -17,7 +23,11 @@ import { Lab4RoutingModule } from './lab4.routes';
         HttpClientModule,
         MatCardModule,
         MatButtonModule,
-        Lab4RoutingModule
+        Lab4RoutingModule,
+        MatSnackBarModule,
+        ChartsModule,
+        SharedModule,
+        MatSelectModule
     ]
 })
 export class Lab4Module { }

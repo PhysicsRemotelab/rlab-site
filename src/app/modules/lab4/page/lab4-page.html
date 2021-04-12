@@ -1,11 +1,16 @@
 <div class='lab-page'>
+    <div>
+        <app-countdown *ngIf="lab" [endTime]="lab.takenUntil"></app-countdown>
+    </div>
     <mat-card class='lab-camera'>
         <mat-card-header>
             <mat-card-title>Camera</mat-card-title>
         </mat-card-header>
-        <img mat-card-image src="https://www.theluckycharm.com.au/img/placeholder_large.png">
+        <mat-card-content>
+            <app-camera [cameraUrl]="cameraUrl"></app-camera>
+        </mat-card-content>
     </mat-card>
-    <mat-card class='lab-control'>
+    <mat-card class='lab-introduction'>
         <mat-card class='lab-control-item'>
             <mat-card-header>
                 <mat-card-title>1. Introduction</mat-card-title>
@@ -14,7 +19,7 @@
                 Please start measurement, monitor result and stop measurements when finished.
             </mat-card-content>
         </mat-card>
-        <mat-card class='lab-control-item'>
+        <mat-card class='lab-start-measurement'>
             <mat-card-header>
                 <mat-card-title>2. Start measurement</mat-card-title>
             </mat-card-header>
@@ -23,13 +28,21 @@
                     To start measurements, please press button.
                 </div>
                 <br>
+                <mat-form-field appearance="fill">
+                    <mat-label>Select sensor to read</mat-label>
+                    <mat-select [(value)]="selectedSensor" [disabled]="measurementStarted">
+                      <mat-option *ngFor="let sensor of sensors" [value]="sensor.value">
+                        {{sensor.viewValue}}
+                      </mat-option>
+                    </mat-select>
+                </mat-form-field>
                 <div>
-                    <button *ngIf="!measurementStarted" class="start-button" mat-raised-button  (click)="startMeasuremenet()">Start</button>
-                    <button *ngIf="measurementStarted" class="stop-button" mat-raised-button  (click)="stopMeasuremenet()">Stop</button>
+                    <button *ngIf="!measurementStarted" class="start-button" mat-raised-button  (click)="startEvent()">Warm & Cool</button>
+                    <button *ngIf="measurementStarted" class="stop-button" mat-raised-button  (click)="stopEvent()">Stop</button>
                 </div>
             </mat-card-content>
         </mat-card>
-        <mat-card class='lab-control-item'>
+        <mat-card class='lab-monitor-results'>
             <mat-card-header>
                 <mat-card-title>3. Monitor results</mat-card-title>
             </mat-card-header>
@@ -38,10 +51,17 @@
                     Here you can see results that have been measured.
                 </div>
                 <br>
-                <div>{{measurementResult.toString()}}</div>
+               <app-temperature-plot
+                    [selectedSensor]="selectedSensor"
+                    [sensorUrl]="sensorUrl"
+                    [measurementStarted]="measurementStarted"
+                    (measurementDataEvent)="getData($event)"
+                    (stopEvent)="stopEvent()"
+                    (startEvent)="startEvent()"
+                ></app-temperature-plot>
             </mat-card-content>
         </mat-card>
-        <mat-card class='lab-control-item'>
+        <mat-card class='lab-save-results'>
             <mat-card-header>
                 <mat-card-title>4. Save results</mat-card-title>
             </mat-card-header>
@@ -57,7 +77,7 @@
                 </div>
             </mat-card-content>
         </mat-card>
-        <mat-card class='lab-control-item'>
+        <mat-card class='lab-stop-measurements'>
             <mat-card-header>
                 <mat-card-title>5. Stop measurement</mat-card-title>
             </mat-card-header>
