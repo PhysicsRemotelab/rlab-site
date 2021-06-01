@@ -7,4 +7,5 @@ export interface Lab {
     updatedAt: Date;
     createdAt: Date;
     takenUntil: Date;
+    users: any;
 }

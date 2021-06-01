@@ -42,26 +42,37 @@ export class LabsPageComponent implements OnInit, OnDestroy {
 
     continuelab(lab: Lab): void {
       console.log(lab);
-      this.router.navigate([`/lab${lab.id}`], { state: { lab } });
+      this.labsService.useLab(lab.id).subscribe(updatedLab => {
+        this.router.navigate([`/lab${lab.id}`], { state: { lab: updatedLab } });
+      });
     }
 
     ngOnDestroy(): void {
     }
 
     isContinueButtonActive(lab: Lab): boolean {
-      const overTime = new Date(lab.takenUntil) > new Date();
-      return overTime && lab.userId === Number(this.currentUserId);
+      if (lab.users.length === 0) {
+        return false;
+      }
+      const overTime = new Date(lab.users[0].LabUser.takenUntil) > new Date();
+      const currentUser = lab.users[0].LabUser.userId === Number(this.currentUserId);
+      return overTime && currentUser;
     }
 
     isBusyButtonActive(lab: Lab): boolean {
-      const overTime = new Date(lab.takenUntil) > new Date();
-      const notCurrentUser = lab.userId && lab.userId !== Number(this.currentUserId);
+      if (lab.users.length === 0) {
+        return false;
+      }
+      const overTime = new Date(lab.users[0].LabUser.takenUntil) > new Date();
+      const notCurrentUser = lab.users[0].LabUser.userId !== Number(this.currentUserId);
       return overTime && notCurrentUser;
     }
 
     isFreeButtonActive(lab: Lab): boolean {
-      const overTime = new Date(lab.takenUntil) < new Date();
-      return overTime || !lab.userId;
+      if (lab.users.length === 0) {
+        return true;
+      }
+      const overTime = new Date(lab.users[0].LabUser.takenUntil) < new Date();
+      return overTime;
     }
-
 }

@@ -23,6 +23,7 @@ export class Lab3PageComponent {
       { value: 'sensor6', viewValue: 'Sensor 6'}
     ];
     lab: Lab;
+    takenUntil = null;
     measurementStarted = false;
     measurementSaved = false;
     measurementResult = [];
@@ -38,10 +39,12 @@ export class Lab3PageComponent {
     ) {
       if (this.router.getCurrentNavigation().extras.state) {
         this.lab = this.router.getCurrentNavigation().extras.state.lab;
+        this.takenUntil = this.lab.users[0].LabUser.takenUntil;
       } else if (!this.lab) {
         this.labService.getLab(3).subscribe(lab => {
           console.log(lab);
           this.lab = lab;
+          this.takenUntil = this.lab.users[0].LabUser.takenUntil;
         });
       }
     }

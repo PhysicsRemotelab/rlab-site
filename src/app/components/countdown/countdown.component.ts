@@ -1,7 +1,6 @@
 import { Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { Subscription } from 'rxjs';
-import { timer } from 'rxjs';
+import { Subscription, timer } from 'rxjs';
 
 @Component({
   selector: 'app-countdown',
@@ -21,7 +20,9 @@ export class CountdownComponent implements OnInit, OnDestroy {
   constructor(private router: Router) { }
 
   ngOnInit(): void {
+    console.log(' init');
     this.timer$$ = timer(1000, 1000).subscribe(x => {
+      console.log(this.endTime);
       this.timeBetweenDates(this.endTime);
     });
   }
@@ -40,7 +41,7 @@ export class CountdownComponent implements OnInit, OnDestroy {
     } else {
       console.log('the end');
       this.timer$$.unsubscribe();
-      this.router.navigate([`/labs`]);
+      // this.router.navigate([`/labs`]);
     }
   }
 

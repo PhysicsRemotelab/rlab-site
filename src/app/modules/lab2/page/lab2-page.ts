@@ -14,6 +14,7 @@ import { sensorUrl, serverUrl } from 'src/environments/environment';
 export class Lab2PageComponent {
 
     lab: Lab;
+    takenUntil = null;
     measurementStarted = false;
     measurementSaved = false;
     measurementResult = [];
@@ -29,10 +30,12 @@ export class Lab2PageComponent {
     ) {
       if (this.router.getCurrentNavigation().extras.state) {
         this.lab = this.router.getCurrentNavigation().extras.state.lab;
+        this.takenUntil = this.lab.users[0].LabUser.takenUntil;
       } else if (!this.lab) {
         this.labService.getLab(2).subscribe(lab => {
           console.log(lab);
           this.lab = lab;
+          this.takenUntil = this.lab.users[0].LabUser.takenUntil;
         });
       }
     }
