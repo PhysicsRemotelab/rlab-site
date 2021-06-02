@@ -56,7 +56,7 @@ export class LabsPageComponent implements OnInit, OnDestroy {
       }
       const overTime = new Date(lab.users[0].LabUser.takenUntil) > new Date();
       const currentUser = lab.users[0].LabUser.userId === Number(this.currentUserId);
-      return overTime && currentUser;
+      return overTime && currentUser && !lab.isDisabled;
     }
 
     isBusyButtonActive(lab: Lab): boolean {
@@ -65,7 +65,7 @@ export class LabsPageComponent implements OnInit, OnDestroy {
       }
       const overTime = new Date(lab.users[0].LabUser.takenUntil) > new Date();
       const notCurrentUser = lab.users[0].LabUser.userId !== Number(this.currentUserId);
-      return overTime && notCurrentUser;
+      return overTime && notCurrentUser && !lab.isDisabled;
     }
 
     isFreeButtonActive(lab: Lab): boolean {
@@ -73,6 +73,10 @@ export class LabsPageComponent implements OnInit, OnDestroy {
         return true;
       }
       const overTime = new Date(lab.users[0].LabUser.takenUntil) < new Date();
-      return overTime;
+      return overTime && !lab.isDisabled;
+    }
+
+    isLabAvailable(lab: Lab): boolean {
+      return lab.isDisabled;
     }
 }

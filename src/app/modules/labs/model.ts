@@ -8,4 +8,5 @@ export interface Lab {
     createdAt: Date;
     takenUntil: Date;
     users: any;
+    isDisabled: boolean;
 }
