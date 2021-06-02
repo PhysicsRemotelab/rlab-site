@@ -22,7 +22,6 @@ export class CountdownComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     console.log(' init');
     this.timer$$ = timer(1000, 1000).subscribe(x => {
-      console.log(this.endTime);
       this.timeBetweenDates(this.endTime);
     });
   }
