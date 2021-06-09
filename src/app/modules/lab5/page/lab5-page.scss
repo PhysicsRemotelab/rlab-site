@@ -1,0 +1,24 @@
+.lab-page {
+    max-width: 1080px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    min-height: 100vh;
+    padding: 20px;
+}
+
+.start-button {
+    background-color: #00c853;
+    color: white;
+}
+
+.save-button {
+    background-color: #536dfe;
+    color: white;
+}
+
+.stop-button {
+    background-color: #FF5252;
+    color: white;
+}

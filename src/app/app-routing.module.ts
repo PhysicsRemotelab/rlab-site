@@ -11,7 +11,8 @@ const ROUTES = {
   lab1: 'lab1',
   lab2: 'lab2',
   lab3: 'lab3',
-  lab4: 'lab4'
+  lab4: 'lab4',
+  lab5: 'lab5'
 };
 
 const routes: Routes = [
@@ -44,6 +45,11 @@ const routes: Routes = [
     path: ROUTES.lab4,
     canActivate: [AuthGuard],
     loadChildren: () => import('./modules/lab4/lab4.module').then(m => m.Lab4Module)
+  },
+  {
+    path: ROUTES.lab5,
+    canActivate: [AuthGuard],
+    loadChildren: () => import('./modules/lab5/lab5.module').then(m => m.Lab5Module)
   },
   {
     path: ROUTES.history,
