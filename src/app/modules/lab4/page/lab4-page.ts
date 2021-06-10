@@ -18,7 +18,6 @@ export class Lab4PageComponent {
     lab: Lab;
     takenUntil = null;
     measurementStarted = false;
-    measurementSaved = false;
     measurementResult = [];
     cameraUrl =  `${serverUrl}/cam/0`;
     cameraUrlForPixels =  `${serverUrl}/camera/0`;
@@ -52,5 +51,9 @@ export class Lab4PageComponent {
     startEvent(): void {
       this.measurementStarted = true;
       this.measurementResult = [];
+    }
+
+    getMeasurementStarted($event: boolean): void {
+      this.measurementStarted = $event;
     }
 }

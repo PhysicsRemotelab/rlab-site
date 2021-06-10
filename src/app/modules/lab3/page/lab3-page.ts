@@ -58,4 +58,7 @@ export class Lab3PageComponent {
       this.measurementResult = [];
     }
 
+    getMeasurementStarted($event: boolean): void {
+      this.measurementStarted = $event;
+    }
 }

@@ -14,7 +14,6 @@ export class Lab5PageComponent {
     lab: Lab;
     takenUntil = null;
     measurementStarted = false;
-    measurementSaved = false;
     measurementResult = [];
     cameraUrl =  `${serverUrl}/cam/0`;
     sensorUrl = `${sensorUrl}/spectrometer`;
@@ -35,16 +34,11 @@ export class Lab5PageComponent {
       }
     }
 
-    startMeasuremenet(): void {
-      this.measurementStarted = true;
-      this.measurementResult = [];
-    }
-
-    stopMeasuremenet(): void {
-      this.measurementStarted = false;
-    }
-
     getData($event: any): void {
       this.measurementResult = $event;
+    }
+
+    getMeasurementStarted($event: boolean): void {
+      this.measurementStarted = $event;
     }
 }

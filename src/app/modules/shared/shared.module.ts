@@ -9,6 +9,7 @@ import { MatButtonModule } from '@angular/material/button';
 import {MatInputModule} from '@angular/material/input';
 import { ReactiveFormsModule } from '@angular/forms';
 import { FreeLabButtonComponent } from 'src/app/components/free-lab-button/free-lab-button.component';
+import { StartStopMeasurementButtonComponent } from 'src/app/components/start-stop-measurement-button/start-stop-measurement-button.component';
 
 @NgModule({
     imports: [
@@ -23,7 +24,8 @@ import { FreeLabButtonComponent } from 'src/app/components/free-lab-button/free-
         SpectrometerPlotComponent,
         GammaPlotComponent,
         SaveMeasurementComponent,
-        FreeLabButtonComponent
+        FreeLabButtonComponent,
+        StartStopMeasurementButtonComponent
     ],
     exports: [
         CountdownComponent,
@@ -31,7 +33,8 @@ import { FreeLabButtonComponent } from 'src/app/components/free-lab-button/free-
         SpectrometerPlotComponent,
         GammaPlotComponent,
         SaveMeasurementComponent,
-        FreeLabButtonComponent
+        FreeLabButtonComponent,
+        StartStopMeasurementButtonComponent
     ]
 })
 export class SharedModule { }

@@ -14,7 +14,6 @@ export class Lab2PageComponent {
     lab: Lab;
     takenUntil = null;
     measurementStarted = false;
-    measurementSaved = false;
     measurementResult = [];
     cameraUrl =  `${serverUrl}/cam/1`;
     sensorUrl = `${sensorUrl}/gamma`;
@@ -36,16 +35,11 @@ export class Lab2PageComponent {
       }
     }
 
-    startMeasuremenet(): void {
-      this.measurementStarted = true;
-      this.measurementResult = [];
-    }
-
-    stopMeasuremenet(): void {
-      this.measurementStarted = false;
-    }
-
     getData($event: any): void {
       this.measurementResult = $event;
+    }
+
+    getMeasurementStarted($event: boolean): void {
+      this.measurementStarted = $event;
     }
 }
