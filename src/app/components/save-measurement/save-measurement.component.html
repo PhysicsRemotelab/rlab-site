@@ -1,0 +1,20 @@
+<div>
+    Here you can save results.
+</div>
+<br>
+<div>
+    <form class='save-form'>
+        <mat-form-field>
+            <mat-error *ngIf="nameFormControl.hasError('name') && !nameFormControl.hasError('required')">
+                Please enter a valid measurement name
+              </mat-error>
+              <mat-error *ngIf="nameFormControl.hasError('required')">
+                Required field
+              </mat-error>
+            <input matInput placeholder="Measurement name" [formControl]="nameFormControl">
+        </mat-form-field>
+        <button class="save-button" type='button' mat-raised-button (click)="saveMeasurements()">
+            Save
+        </button>
+    </form>
+</div>

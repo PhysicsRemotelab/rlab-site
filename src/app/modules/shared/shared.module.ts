@@ -4,22 +4,31 @@ import { CameraComponent } from 'src/app/components/camera/camera.component';
 import { CountdownComponent } from 'src/app/components/countdown/countdown.component';
 import { SpectrometerPlotComponent } from 'src/app/components/spectrometer-plot/spectrometer-plot.component';
 import { GammaPlotComponent } from 'src/app/components/gamma-plot/gamma-plot.component';
+import { SaveMeasurementComponent } from 'src/app/components/save-measurement/save-measurement.component';
+import { MatButtonModule } from '@angular/material/button';
+import {MatInputModule} from '@angular/material/input';
+import { ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
     imports: [
-        CommonModule
+        CommonModule,
+        ReactiveFormsModule,
+        MatButtonModule,
+        MatInputModule
     ],
     declarations: [
         CountdownComponent,
         CameraComponent,
         SpectrometerPlotComponent,
-        GammaPlotComponent
+        GammaPlotComponent,
+        SaveMeasurementComponent
     ],
     exports: [
         CountdownComponent,
         CameraComponent,
         SpectrometerPlotComponent,
-        GammaPlotComponent
+        GammaPlotComponent,
+        SaveMeasurementComponent
     ]
 })
 export class SharedModule { }

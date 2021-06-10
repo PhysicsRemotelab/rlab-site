@@ -1,8 +1,6 @@
 import { Component } from '@angular/core';
-import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 import { LabsService } from '../../labs/state/labs.service';
-import { MeasurementsService } from '../../measurements/state/measurements.services';
 import { Lab } from '../../labs/model';
 import { sensorUrl, serverUrl } from 'src/environments/environment';
 
@@ -18,15 +16,12 @@ export class Lab5PageComponent {
     measurementStarted = false;
     measurementSaved = false;
     measurementResult = [];
-    isSaveButtonDisabled = true;
     cameraUrl =  `${serverUrl}/cam/0`;
     sensorUrl = `${sensorUrl}/spectrometer2`;
 
     constructor(
-      private measurementsService: MeasurementsService,
       private labService: LabsService,
-      private router: Router,
-      private snackBarRef: MatSnackBar
+      private router: Router
     ) {
       if (this.router.getCurrentNavigation().extras.state) {
         this.lab = this.router.getCurrentNavigation().extras.state.lab;
@@ -46,18 +41,6 @@ export class Lab5PageComponent {
 
     stopMeasuremenet(): void {
       this.measurementStarted = false;
-      this.isSaveButtonDisabled = false;
-    }
-
-    saveMeasurements(): void {
-      this.measurementsService.saveMeasurements(this.lab.id, this.measurementResult.toString()).subscribe(res => {
-        this.isSaveButtonDisabled = true;
-      });
-      this.snackBarRef.open('Saved!', 'Hide', {
-        duration: 5000,
-        verticalPosition: 'top',
-        panelClass: ['snackbar']
-      });
     }
 
     freeLab(): void {

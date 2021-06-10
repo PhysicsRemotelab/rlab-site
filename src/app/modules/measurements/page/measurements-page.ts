@@ -15,7 +15,7 @@ import { Measurement } from '../model';
 export class MeasurementsPageComponent implements OnInit {
 
   measurements = [];
-  displayedColumns: string[] = ['id', 'lab', 'result', 'created', 'actions'];
+  displayedColumns: string[] = ['id', 'lab', 'name', 'created', 'actions'];
 
     constructor(
       private store: Store<MeasurementsState>,
@@ -29,6 +29,7 @@ export class MeasurementsPageComponent implements OnInit {
       this.store.dispatch(getMeasurements());
 
       this.store.pipe(select(this.measurementsSelector.getMeasurements())).subscribe(measurements => {
+        console.log(measurements);
         this.measurements = measurements;
       });
     }
@@ -45,13 +46,14 @@ export class MeasurementsPageComponent implements OnInit {
         fieldSeparator: ',',
         quoteStrings: '"',
         title: 'Results',
-        headers: ['Measurement ID', 'Lab ID', 'Result', 'Created at'],
+        headers: ['Measurement ID', 'Lab ID', 'Name', 'Result', 'Created at'],
         eol: '\n'
       };
       const output = this.measurements.map((obj: Measurement) => {
         return {
           id: obj.id,
           labId: obj.labId,
+          name: obj.name,
           result: obj.result,
           createdAt: obj.createdAt
         };

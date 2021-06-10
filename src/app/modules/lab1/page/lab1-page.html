@@ -51,15 +51,10 @@
                 <mat-card-title>4. Save results</mat-card-title>
             </mat-card-header>
             <mat-card-content>
-                <div>
-                    Here you can save results.
-                </div>
-                <br>
-                <div>
-                    <button class="save-button" mat-raised-button [disabled]="isSaveButtonDisabled" (click)="saveMeasurements()">
-                        Save
-                    </button>
-                </div>
+                <app-save-measurement
+                    [labId]="lab?.id"
+                    [measurementResult]="measurementResult">
+                </app-save-measurement>
             </mat-card-content>
         </mat-card>
         <mat-card class='lab-stop-measurements'>

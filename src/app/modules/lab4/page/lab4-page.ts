@@ -1,9 +1,7 @@
 import { Component } from '@angular/core';
-import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 import { Lab } from '../../labs/model';
 import { LabsService } from '../../labs/state/labs.service';
-import { MeasurementsService } from '../../measurements/state/measurements.services';
 import { sensorUrl, serverUrl } from 'src/environments/environment';
 
 @Component({
@@ -22,16 +20,13 @@ export class Lab4PageComponent {
     measurementStarted = false;
     measurementSaved = false;
     measurementResult = [];
-    isSaveButtonDisabled = true;
     cameraUrl =  `${serverUrl}/cam/0`;
     cameraUrlForPixels =  `${serverUrl}/camera/0`;
     sensorUrl = `${sensorUrl}/temperature`;
 
     constructor(
-      private measurementsService: MeasurementsService,
       private labService: LabsService,
-      private router: Router,
-      private snackBarRef: MatSnackBar
+      private router: Router
     ) {
       if (this.router.getCurrentNavigation().extras.state) {
         this.lab = this.router.getCurrentNavigation().extras.state.lab;
@@ -43,20 +38,6 @@ export class Lab4PageComponent {
           this.takenUntil = this.lab.users[0].LabUser.takenUntil;
         });
       }
-    }
-
-    saveMeasurements(): void {
-      const result = this.measurementResult.map(res => {
-        return [res.x, res.y];
-      });
-      this.measurementsService.saveMeasurements(this.lab.id, result.toString()).subscribe(res => {
-        this.isSaveButtonDisabled = true;
-      });
-      this.snackBarRef.open('Saved!', 'Hide', {
-        duration: 5000,
-        verticalPosition: 'top',
-        panelClass: ['snackbar']
-      });
     }
 
     freeLab(): void {
@@ -72,12 +53,10 @@ export class Lab4PageComponent {
 
     stopEvent(): void {
       this.measurementStarted = false;
-      this.isSaveButtonDisabled = false;
     }
 
     startEvent(): void {
       this.measurementStarted = true;
-      this.isSaveButtonDisabled = true;
       this.measurementResult = [];
     }
 }
