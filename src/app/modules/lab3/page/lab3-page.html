@@ -81,11 +81,7 @@
                     When you have finished measurements, then please free lab by pressing 'Stop' button.
                 </div>
                 <br>
-                <div>
-                    <button class="stop-button" mat-raised-button  (click)="freeLab()">
-                        Leave
-                    </button>
-                </div>
+                <app-free-lab-button [labId]="lab?.id"></app-free-lab-button>
             </mat-card-content>
         </mat-card>
     </mat-card>

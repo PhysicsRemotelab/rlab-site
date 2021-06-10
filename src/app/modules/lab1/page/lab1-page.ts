@@ -42,13 +42,6 @@ export class Lab1PageComponent {
       this.measurementStarted = false;
     }
 
-    freeLab(): void {
-      console.log(this.lab);
-      this.labService.freeLab(this.lab.id).subscribe(result => {
-        this.router.navigate([`/labs`]);
-      });
-    }
-
     getData($event: any): void {
       this.measurementResult = $event;
     }

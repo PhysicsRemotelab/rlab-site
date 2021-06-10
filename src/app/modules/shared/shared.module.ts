@@ -8,6 +8,7 @@ import { SaveMeasurementComponent } from 'src/app/components/save-measurement/sa
 import { MatButtonModule } from '@angular/material/button';
 import {MatInputModule} from '@angular/material/input';
 import { ReactiveFormsModule } from '@angular/forms';
+import { FreeLabButtonComponent } from 'src/app/components/free-lab-button/free-lab-button.component';
 
 @NgModule({
     imports: [
@@ -21,14 +22,16 @@ import { ReactiveFormsModule } from '@angular/forms';
         CameraComponent,
         SpectrometerPlotComponent,
         GammaPlotComponent,
-        SaveMeasurementComponent
+        SaveMeasurementComponent,
+        FreeLabButtonComponent
     ],
     exports: [
         CountdownComponent,
         CameraComponent,
         SpectrometerPlotComponent,
         GammaPlotComponent,
-        SaveMeasurementComponent
+        SaveMeasurementComponent,
+        FreeLabButtonComponent
     ]
 })
 export class SharedModule { }
