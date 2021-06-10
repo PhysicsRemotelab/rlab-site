@@ -17,7 +17,8 @@ export class Lab5PageComponent {
     measurementSaved = false;
     measurementResult = [];
     cameraUrl =  `${serverUrl}/cam/0`;
-    sensorUrl = `${sensorUrl}/spectrometer2`;
+    sensorUrl = `${sensorUrl}/spectrometer`;
+    labId = 5;
 
     constructor(
       private labService: LabsService,
@@ -27,7 +28,7 @@ export class Lab5PageComponent {
         this.lab = this.router.getCurrentNavigation().extras.state.lab;
         this.takenUntil = this.lab.users[0].LabUser.takenUntil;
       } else if (!this.lab) {
-        this.labService.getLab(1).subscribe(lab => {
+        this.labService.getLab(this.labId).subscribe(lab => {
           this.lab = lab;
           this.takenUntil = this.lab.users[0].LabUser.takenUntil;
         });
