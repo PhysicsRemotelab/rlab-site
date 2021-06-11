@@ -52,8 +52,7 @@ import { StoreRouterConnectingModule } from '@ngrx/router-store';
           `${serverUrl}/api/labs/free`,
           `${serverUrl}/api/measurements`,
           `${serverUrl}/api/measurements/*`,
-          `${serverUrl}/api/users`,
-          `${serverUrl}/api/history`
+          `${serverUrl}/api/users`
         ]
       }
     }),

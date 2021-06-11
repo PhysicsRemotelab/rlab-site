@@ -6,7 +6,6 @@ const ROUTES = {
   home: '',
   labs: 'labs',
   measurements: 'measurements',
-  history: 'history',
   profile: 'profile',
   lab1: 'lab1',
   lab2: 'lab2',
@@ -56,11 +55,6 @@ const routes: Routes = [
     path: ROUTES.lab6,
     canActivate: [AuthGuard],
     loadChildren: () => import('./modules/lab6/lab6.module').then(m => m.Lab6Module)
-  },
-  {
-    path: ROUTES.history,
-    canActivate: [AuthGuard],
-    loadChildren: () => import('./modules/history/module').then(m => m.HistoryPageModule)
   },
   {
     path: ROUTES.profile,
