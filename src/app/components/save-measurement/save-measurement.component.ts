@@ -26,6 +26,7 @@ export class SaveMeasurementComponent {
   ) { }
 
   saveMeasurements(): void {
+    console.log('Save');
     let name = this.nameFormControl.value;
     if (this.measurementResult.length === 0) {
       return;
@@ -33,8 +34,15 @@ export class SaveMeasurementComponent {
     if (this.nameFormControl.invalid) {
       return;
     }
+    console.log(this.measurementResult);
 
-    this.measurementsService.saveMeasurements(this.labId, this.measurementResult, name).subscribe(res => { });
+    this.measurementsService.saveMeasurements(
+      this.labId,
+      this.measurementResult.toString(),
+      name
+    ).subscribe(res => {
+      console.log(res);
+    });
 
     this.snackBarRef.open('Saved!', 'Hide', {
       duration: 5000,

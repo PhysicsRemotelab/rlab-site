@@ -28,7 +28,6 @@ export class Lab2PageComponent {
         this.takenUntil = this.lab.users[0].LabUser.takenUntil;
       } else if (!this.lab) {
         this.labService.getLab(this.labId).subscribe(lab => {
-          console.log(lab);
           this.lab = lab;
           this.takenUntil = this.lab.users[0].LabUser.takenUntil;
         });

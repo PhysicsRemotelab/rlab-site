@@ -136,10 +136,6 @@ export class TemperaturePlotComponent implements OnInit, OnDestroy, AfterViewIni
       this.dataSourceSubscription.unsubscribe();
     }
 
-    returnMeasurementData(value: any): void {
-      this.measurementDataEvent.emit(value);
-    }
-
     async getPixelValues(callback) {
       var img = new Image();
       img.crossOrigin = "Anonymous";

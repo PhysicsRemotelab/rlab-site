@@ -91,10 +91,6 @@ export class ResistancePlotComponent implements OnInit, OnDestroy, AfterViewInit
       this.dataSourceSubscription.unsubscribe();
     }
 
-    returnMeasurementData(value: ChartPoint[]): void {
-      this.measurementDataEvent.emit(value);
-    }
-
     ngOnDestroy(): void {
       this.dataSourceSubscription.unsubscribe();
     }

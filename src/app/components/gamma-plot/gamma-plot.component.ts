@@ -2,7 +2,6 @@ import { AfterViewInit, Component, ElementRef, EventEmitter, Input, OnChanges, O
 import * as Chart from 'chart.js';
 import { ChartPoint } from 'chart.js';
 import { Subscription } from 'rxjs';
-import { throttleTime } from 'rxjs/operators';
 import { webSocket } from 'rxjs/webSocket';
 
 @Component({
@@ -12,7 +11,7 @@ import { webSocket } from 'rxjs/webSocket';
 })
 export class GammaPlotComponent implements OnInit, OnDestroy, AfterViewInit, OnChanges {
 
-    @ViewChild('chart2')
+    @ViewChild('chart')
     private chartRef: ElementRef;
 
     @Input()
@@ -22,18 +21,18 @@ export class GammaPlotComponent implements OnInit, OnDestroy, AfterViewInit, OnC
     private measurementStarted: string;
 
     @Output()
-    measurementDataEvent = new EventEmitter<ChartPoint[]>();
+    measurementDataEvent = new EventEmitter<number[]>();
 
     private chart: Chart;
-    private counts = Array(4095).fill(0);
-    private points: ChartPoint[] = [];
+    private result = Array(4095).fill(0);
+    private chartPoints: ChartPoint[] = [];
     private dataSourceSubscription: Subscription = new Subscription();
     private subject = webSocket('');
     
     constructor() { }
 
     ngOnInit(): void {
-      this.points = this.counts.map((val, i) => {
+      this.chartPoints = this.result.map((val, i) => {
         const nr = { x: i, y: val };
         return nr;
       });
@@ -44,7 +43,7 @@ export class GammaPlotComponent implements OnInit, OnDestroy, AfterViewInit, OnC
         type: 'scatter',
         data: {
           datasets: [{
-            data: this.points,
+            data: this.chartPoints,
             fill: true,
             pointRadius: 2
           }]
@@ -64,12 +63,11 @@ export class GammaPlotComponent implements OnInit, OnDestroy, AfterViewInit, OnC
       if (this.measurementStarted) {
         this.subject = webSocket(this.sensorUrl);
 
-        this.dataSourceSubscription = this.subject.pipe(throttleTime(10)).subscribe((point: number) => {
-          this.counts[point]++;
-          this.transformData();
-          this.measurementDataEvent.emit(this.counts);
+        this.dataSourceSubscription = this.subject.pipe().subscribe((data: number[]) => {
+          this.transformData(data);
+          this.measurementDataEvent.emit(this.result);
           this.chart.data.datasets[0].data = null;
-          this.chart.data.datasets[0].data = this.points;
+          this.chart.data.datasets[0].data = this.chartPoints;
           this.chart.clear();
           this.chart.update();
         });
@@ -78,19 +76,17 @@ export class GammaPlotComponent implements OnInit, OnDestroy, AfterViewInit, OnC
       }
     }
 
-    private transformData(): void {
-      this.points = this.counts.map((val, i) => {
+    private transformData(data: number[]): void {
+      // Receive new measurement result and add to existing array
+      let updatedResult = data.map((p, index) => p + this.result[index]);
+      this.result = updatedResult;
+      this.chartPoints = this.result.map((val, i) => {
         const nr = { x: i, y: val };
         return nr;
       });
     }
 
-    returnMeasurementData(value: ChartPoint[]): void {
-      this.measurementDataEvent.emit(value);
-    }
-
     ngOnDestroy(): void {
       this.dataSourceSubscription.unsubscribe();
     }
-
 }

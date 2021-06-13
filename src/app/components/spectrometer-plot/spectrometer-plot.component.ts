@@ -22,10 +22,10 @@ export class SpectrometerPlotComponent implements OnInit, OnDestroy, AfterViewIn
     private measurementStarted: string;
 
     @Output()
-    measurementDataEvent = new EventEmitter<ChartPoint[]>();
+    measurementDataEvent = new EventEmitter<string>();
 
     private chart: Chart;
-    private points: ChartPoint[] = [];
+    private chartPoints: ChartPoint[] = [];
     private dataSourceSubscription: Subscription = new Subscription();
     private subject = webSocket('');
 
@@ -39,7 +39,7 @@ export class SpectrometerPlotComponent implements OnInit, OnDestroy, AfterViewIn
         type: 'scatter',
         data: {
           datasets: [{
-            data: this.points,
+            data: this.chartPoints,
             fill: true,
             pointRadius: 1
           }]
@@ -59,9 +59,11 @@ export class SpectrometerPlotComponent implements OnInit, OnDestroy, AfterViewIn
       if (this.measurementStarted) {
         this.subject = webSocket(this.sensorUrl);
 
-        this.dataSourceSubscription = this.subject.pipe(throttleTime(100)).subscribe((points: ChartPoint[]) => {
-          this.transformData(points);
-          this.measurementDataEvent.emit(points);
+        this.dataSourceSubscription = this.subject.pipe(throttleTime(100)).subscribe((data: string) => {
+          this.transformData(data);
+          this.measurementDataEvent.emit(data);
+          this.chart.data.datasets[0].data = null;
+          this.chart.data.datasets[0].data = this.chartPoints;
           this.chart.clear();
           this.chart.update();
         });
@@ -70,23 +72,12 @@ export class SpectrometerPlotComponent implements OnInit, OnDestroy, AfterViewIn
       }
     }
 
-    private transformData(data: any) {
-      let dataArray: ChartPoint[] = data.split(',');
-    
-      dataArray = dataArray.map((val, i) => {
+    private transformData(data: string) {
+      let numbers = data.split(',');
+      this.chartPoints = numbers.map((val, i) => {
         const nr = { x: i, y: Number(val) };
-        if(i !== 288)
-          this.points.push(nr);
         return nr;
       });
-
-      if (this.points.length > 287) {
-        this.points.splice(0, this.points.length - 287);
-      }
-    }
-
-    returnMeasurementData(value: ChartPoint[]): void {
-      this.measurementDataEvent.emit(value);
     }
 
     ngOnDestroy(): void {

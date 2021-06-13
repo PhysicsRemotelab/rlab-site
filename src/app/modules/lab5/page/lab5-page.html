@@ -38,7 +38,11 @@
                     Here you can see results that have been measured.
                 </div>
                 <br>
-               <app-spectrometer-plot [sensorUrl]="sensorUrl" [measurementStarted]="measurementStarted" (measurementDataEvent)="getData($event)"></app-spectrometer-plot>
+               <app-spectrometer-plot
+                    [sensorUrl]="sensorUrl"
+                    [measurementStarted]="measurementStarted"
+                    (measurementDataEvent)="getData($event)">
+                </app-spectrometer-plot>
             </mat-card-content>
         </mat-card>
         <mat-card class='lab-save-results'>

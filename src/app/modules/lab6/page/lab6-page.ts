@@ -11,30 +11,28 @@ import { sensorUrl, serverUrl } from 'src/environments/environment';
 })
 export class Lab6PageComponent {
 
-    lab: Lab;
-    takenUntil = null;
-    measurementStarted = false;
-    measurementSaved = false;
-    measurementResult = [];
-    cameraUrl =  `${serverUrl}/cam/1`;
-    sensorUrl = `${sensorUrl}/gamma`;
-    labId = 6;
+  lab: Lab;
+  takenUntil = null;
+  measurementStarted = false;
+  measurementResult = [];
+  cameraUrl =  `${serverUrl}/cam/1`;
+  sensorUrl = `${sensorUrl}/gamma`;
+  labId = 6;
 
-    constructor(
-      private labService: LabsService,
-      private router: Router
-    ) {
-      if (this.router.getCurrentNavigation().extras.state) {
-        this.lab = this.router.getCurrentNavigation().extras.state.lab;
+  constructor(
+    private labService: LabsService,
+    private router: Router
+  ) {
+    if (this.router.getCurrentNavigation().extras.state) {
+      this.lab = this.router.getCurrentNavigation().extras.state.lab;
+      this.takenUntil = this.lab.users[0].LabUser.takenUntil;
+    } else if (!this.lab) {
+      this.labService.getLab(this.labId).subscribe(lab => {
+        this.lab = lab;
         this.takenUntil = this.lab.users[0].LabUser.takenUntil;
-      } else if (!this.lab) {
-        this.labService.getLab(this.labId).subscribe(lab => {
-          console.log(lab);
-          this.lab = lab;
-          this.takenUntil = this.lab.users[0].LabUser.takenUntil;
-        });
-      }
+      });
     }
+  }
 
     getData($event: any): void {
       this.measurementResult = $event;
