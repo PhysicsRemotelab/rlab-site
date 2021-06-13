@@ -25,7 +25,7 @@ export class ResistancePlotComponent implements OnInit, OnDestroy, AfterViewInit
     private measurementStarted: string;
 
     @Output()
-    measurementDataEvent = new EventEmitter<ChartPoint[]>();
+    measurementDataEvent = new EventEmitter<any>();
 
     @Output()
     startEvent = new EventEmitter();
@@ -69,16 +69,16 @@ export class ResistancePlotComponent implements OnInit, OnDestroy, AfterViewInit
         this.subject.next({ command: this.selectedSensor });
         this.points = [];
 
-        this.dataSourceSubscription = this.subject.pipe(throttleTime(10)).subscribe((point: number) => {
+        this.dataSourceSubscription = this.subject.pipe(throttleTime(10)).subscribe((point: number[]) => {
           console.log(point);
           if (point[0] == 0 && point[1] == 0) {
             this.stopEvent.emit();
           } else {
-            this.points.push({
-              x: point[0],
-              y: point[1]
-            });
-            this.measurementDataEvent.emit(this.points);
+            this.points.push({ x: point[0], y: point[1] });
+
+            const result = this.points.map((p: ChartPoint) => [ p.x, p.y ]);
+            this.measurementDataEvent.emit(result);
+
             this.chart.data.datasets[0].data = null;
             this.chart.data.datasets[0].data = this.points;
             this.chart.clear();
