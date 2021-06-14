@@ -3,6 +3,7 @@ import { AuthService } from '@auth0/auth0-angular';
 import { Subscription } from 'rxjs';
 import { AppServices } from './app.services';
 import { User } from './modules/users/model';
+import { roles } from '../../src/environments/environment';
 
 @Component({
   selector: 'app-root',
@@ -28,12 +29,12 @@ export class AppComponent implements OnInit, OnDestroy {
         console.log(result);
         this.isAuthenticated = true;
         sessionStorage.setItem('email', result.email);
-        sessionStorage.setItem('role', result['https://remotelab.ee/roles']);
+        sessionStorage.setItem('role', result[roles]);
   
         const user = {
           email: result.email,
           name: result.name,
-          roles: result['https://remotelab.ee/roles'].join(),
+          roles: result[roles].join(),
           nickname: result.nickname,
           picture: result.picture
         } as User;

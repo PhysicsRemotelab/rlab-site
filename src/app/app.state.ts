@@ -1,6 +1,5 @@
 import { routerReducer, RouterReducerState } from '@ngrx/router-store';
 import { ActionReducer, ActionReducerMap, MetaReducer } from '@ngrx/store';
-import { measurementsReducer, MeasurementsState } from './modules/measurements/state/measurements.reducers';
 
 export interface AppState {
   routerReducer: RouterReducerState;

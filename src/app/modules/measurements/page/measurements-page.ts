@@ -6,6 +6,7 @@ import { MeasurementsSelector } from '../state/measurements.selectors';
 import { MeasurementsService } from '../state/measurements.services';
 import { ngxCsv } from 'ngx-csv/ngx-csv';
 import { Measurement } from '../model';
+import { isNgTemplate } from '@angular/compiler';
 
 @Component({
   selector: 'app-measurements-page',
@@ -41,7 +42,7 @@ export class MeasurementsPageComponent implements OnInit {
       });
     }
 
-    downloadCsv(): void {
+    downloadCsv(id: number): void {
       const options = {
         fieldSeparator: ',',
         quoteStrings: '"',
@@ -49,16 +50,25 @@ export class MeasurementsPageComponent implements OnInit {
         headers: ['Measurement ID', 'Lab ID', 'Name', 'Result', 'Created at'],
         eol: '\n'
       };
-      const output = this.measurements.map((obj: Measurement) => {
+
+      let output = this.measurements;
+
+      if (id !== -1) {
+        output = this.measurements.filter((item: Measurement) => {
+          return [id].indexOf(item.id) !== -1;
+        }); 
+      }
+
+      output = output.map((item: Measurement) => {
         return {
-          id: obj.id,
-          labId: obj.labId,
-          name: obj.name,
-          result: obj.result,
-          createdAt: obj.createdAt
+          id: item.id,
+          labId: item.labId,
+          name: item.name,
+          result: item.result,
+          createdAt: item.createdAt
         };
       });
-      // tslint:disable-next-line: no-unused-expression
+
       new ngxCsv(output, 'Measurements', options);
     }
 
