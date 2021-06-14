@@ -21,5 +21,4 @@ export class UsersService {
   postUser(user: User): Observable<User> {
     return this.http.post<User>(this.usersConfig.getUsersEndpoint(), user);
   }
-
 }

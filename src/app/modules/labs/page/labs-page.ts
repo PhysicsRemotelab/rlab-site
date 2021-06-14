@@ -1,11 +1,7 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import { Lab } from '../model';
-import { getLabs } from '../state/labs.actions';
-import { LabState } from '../state/labs.reducers';
-import { getAllLabs } from '../state/labs.selectors';
 import { LabsService } from '../state/labs.service';
 
 @Component({
@@ -22,15 +18,13 @@ export class LabsPageComponent implements OnInit, OnDestroy {
     isUsingCurrentLab =  false;
 
     constructor(
-      private store: Store<LabState>,
       private router: Router,
       private labsService: LabsService
     ) { }
 
     ngOnInit(): void {
       console.log('Labs page');
-      this.store.dispatch(getLabs());
-      this.labs$ = this.store.select(getAllLabs);
+      this.labs$ = this.labsService.getLabs();
     }
 
     startlab(lab: Lab): void {

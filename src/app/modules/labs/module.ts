@@ -6,8 +6,6 @@ import { LabsPageComponent } from './page/labs-page';
 import { LabsRoutingModule } from './routes';
 import {MatCardModule} from '@angular/material/card';
 import {MatButtonModule} from '@angular/material/button';
-import { StoreModule } from '@ngrx/store';
-import { labReducer } from './state/labs.reducers';
 
 @NgModule({
     declarations: [
@@ -19,8 +17,7 @@ import { labReducer } from './state/labs.reducers';
         HttpClientModule,
         LabsRoutingModule,
         MatCardModule,
-        MatButtonModule,
-        StoreModule.forFeature('labReducer', labReducer)
+        MatButtonModule
     ]
 })
 export class LabsPageModule { }

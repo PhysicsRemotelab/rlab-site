@@ -8,8 +8,6 @@ import { MeasurementsRoutingModule } from './routes';
 import { MeasurementsPageComponent } from './page/measurements-page';
 import {MatTableModule} from '@angular/material/table';
 import { MatIconModule } from '@angular/material/icon';
-import { StoreModule } from '@ngrx/store';
-import { measurementsReducer } from './state/measurements.reducers';
 
 @NgModule({
     declarations: [
@@ -23,8 +21,7 @@ import { measurementsReducer } from './state/measurements.reducers';
         MatCardModule,
         MatTableModule,
         MatIconModule,
-        MatButtonModule,
-        StoreModule.forFeature('measurementReducer', measurementsReducer)
+        MatButtonModule
     ]
 })
 export class MeasurementsPageModule { }

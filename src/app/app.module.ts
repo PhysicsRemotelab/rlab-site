@@ -21,12 +21,8 @@ import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AuthHttpInterceptor } from '@auth0/auth0-angular';
 import { domain, clientId, audience, serverUrl } from '../../src/environments/environment';
 import { LayoutComponent } from './layout/layout.component';
-import { EffectsModule } from '@ngrx/effects';
-import { UsersEffects } from './modules/users/state/users.effects';
 import { StoreModule } from '@ngrx/store';
 import { FormsModule } from '@angular/forms';
-import { LabsEffects } from './modules/labs/state/labs.effects';
-import { MeasurementsEffects } from './modules/measurements/state/measurements.effects';
 import { reducers, metaReducers } from './app.state';
 import { MatCardModule } from '@angular/material/card';
 import { StoreRouterConnectingModule } from '@ngrx/router-store';
@@ -70,11 +66,6 @@ import { StoreRouterConnectingModule } from '@ngrx/router-store';
     MatListModule,
     MatCardModule,
     StoreModule.forRoot(reducers, { metaReducers }),
-    EffectsModule.forRoot([
-      LabsEffects,
-      MeasurementsEffects,
-      UsersEffects
-    ]),
     StoreRouterConnectingModule.forRoot()
   ],
   providers: [

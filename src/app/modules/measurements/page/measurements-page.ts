@@ -1,12 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { select, Store } from '@ngrx/store';
-import { getMeasurements } from '../state/measurements.actions';
-import { MeasurementsState } from '../state/measurements.reducers';
-import { MeasurementsSelector } from '../state/measurements.selectors';
 import { MeasurementsService } from '../state/measurements.services';
 import { ngxCsv } from 'ngx-csv/ngx-csv';
 import { Measurement } from '../model';
-import { isNgTemplate } from '@angular/compiler';
 
 @Component({
   selector: 'app-measurements-page',
@@ -19,26 +14,22 @@ export class MeasurementsPageComponent implements OnInit {
   displayedColumns: string[] = ['id', 'lab', 'name', 'created', 'actions'];
 
     constructor(
-      private store: Store<MeasurementsState>,
-      private measurementsService: MeasurementsService,
-      private measurementsSelector: MeasurementsSelector
+      private measurementsService: MeasurementsService
     ) { }
 
     ngOnInit(): void {
       console.log('Measurements page');
-
-      this.store.dispatch(getMeasurements());
-
-      this.store.pipe(select(this.measurementsSelector.getMeasurements())).subscribe(measurements => {
-        console.log(measurements);
-        this.measurements = measurements;
+      this.measurementsService.getMeasurements().subscribe(result => {
+        this.measurements = result;
       });
     }
 
     deleteMeasurement(id: number): void {
       this.measurementsService.deleteMeasurement(id).subscribe(res => {
         console.log(res);
-        this.store.dispatch(getMeasurements());
+        this.measurementsService.getMeasurements().subscribe(result => {
+          this.measurements = result;
+        });
       });
     }
 

@@ -29,5 +29,4 @@ export class LabsService {
   getLab(id: number): Observable<Lab> {
     return this.http.get<Lab>(this.labsConfig.getLabEndpoint(id));
   }
-
 }

@@ -25,5 +25,4 @@ export class MeasurementsService {
   deleteMeasurement(id: number): Observable<number> {
     return this.http.delete<number>(this.measurementsConfig.getMeasurementsEndpoint() + '/' + id);
   }
-
 }

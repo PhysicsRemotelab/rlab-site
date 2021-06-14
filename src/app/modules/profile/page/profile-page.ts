@@ -19,7 +19,5 @@ export class ProfilePageComponent implements OnInit {
         this.profileJson = JSON.stringify(profile, null, 2);
         console.log(this.profileJson);
       });
-
     }
-
 }
