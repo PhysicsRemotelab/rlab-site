@@ -7,13 +7,7 @@ const PROFILE_HOME_ROUTE = '';
 const routes: Routes = [
   {
     path: PROFILE_HOME_ROUTE,
-    component: ProfilePageComponent,
-    children: [
-      {
-        path: PROFILE_HOME_ROUTE,
-        component: ProfilePageComponent
-      }
-    ]
+    component: ProfilePageComponent
   }
 ];
 

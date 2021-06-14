@@ -7,13 +7,7 @@ const MEASUREMENTS_ROUTE = '';
 const routes: Routes = [
   {
     path: MEASUREMENTS_ROUTE,
-    component: MeasurementsPageComponent,
-    children: [
-      {
-        path: MEASUREMENTS_ROUTE,
-        component: MeasurementsPageComponent
-      }
-    ]
+    component: MeasurementsPageComponent
   }
 ];
 

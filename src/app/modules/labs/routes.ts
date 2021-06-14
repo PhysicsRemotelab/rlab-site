@@ -7,13 +7,7 @@ const LABS_HOME_ROUTE = '';
 const routes: Routes = [
   {
     path: LABS_HOME_ROUTE,
-    component: LabsPageComponent,
-    children: [
-      {
-        path: LABS_HOME_ROUTE,
-        component: LabsPageComponent
-      }
-    ]
+    component: LabsPageComponent
   }
 ];
 
