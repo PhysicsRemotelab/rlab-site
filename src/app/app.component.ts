@@ -34,6 +34,7 @@ export class AppComponent implements OnInit, OnDestroy {
         const user = {
           email: result.email,
           name: result.name,
+          sub: result.sub,
           roles: result[roles].join(),
           nickname: result.nickname,
           picture: result.picture
