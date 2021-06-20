@@ -15,7 +15,7 @@ export class Lab6PageComponent {
   takenUntil = null;
   measurementStarted = false;
   measurementResult = [];
-  cameraUrl =  `${serverUrl}/cam/1`;
+  cameraUrl =  `${serverUrl}/cam/0`;
   sensorUrl = `${sensorUrl}/gamma`;
   labId = 6;
 

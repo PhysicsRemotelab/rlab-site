@@ -25,7 +25,7 @@ export class Lab3PageComponent {
     measurementStarted = false;
     measurementSaved = false;
     measurementResult = [];
-    cameraUrl =  `${serverUrl}/cam/2`;
+    cameraUrl =  `${serverUrl}/cam/0`;
     sensorUrl = `${sensorUrl}/resistance`;
     labId = 3;
 
