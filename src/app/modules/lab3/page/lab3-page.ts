@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { Lab } from '../../labs/model';
 import { LabsService } from '../../labs/state/labs.service';
-import { sensorUrl, serverUrl } from 'src/environments/environment';
+import { lab3Camera, lab3Sensor } from 'src/environments/environment';
 
 @Component({
   selector: 'app-lab3-page',
@@ -25,8 +25,8 @@ export class Lab3PageComponent {
     measurementStarted = false;
     measurementSaved = false;
     measurementResult = [];
-    cameraUrl =  `${serverUrl}/cam/0`;
-    sensorUrl = `${sensorUrl}/resistance`;
+    cameraUrl = lab3Camera;
+    sensorUrl = lab3Sensor;
     labId = 3;
 
     constructor(
