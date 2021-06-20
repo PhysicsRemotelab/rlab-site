@@ -1,3 +1,5 @@
+import { User } from "../users/model";
+
 export interface Lab {
     id: number;
     name: string;
@@ -6,7 +8,6 @@ export interface Lab {
     userId: number;
     updatedAt: Date;
     createdAt: Date;
-    takenUntil: Date;
-    users: any;
+    users: User[];
     isDisabled: boolean;
 }
