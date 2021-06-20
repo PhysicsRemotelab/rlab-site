@@ -25,7 +25,7 @@ export class AppComponent implements OnInit, OnDestroy {
     console.log('App Component');
   
     this.authUser$$ = this.auth.user$.subscribe(result => {
-      if(result) {
+      if(result && !this.isAuthenticated) {
         console.log(result);
         this.isAuthenticated = true;
         sessionStorage.setItem('email', result.email);
