@@ -28,6 +28,22 @@ http://localhost:4200/
 ## Debugging
 * Debugging requires `Debugger for Chrome` Visual Studio Code extension
 
+# Upgrade all versions
+Check outdated dependencies
+```
+npm outdated
+```
+
+Install tool for upgrading all dependencies
+```
+npm install -g npm-check-updates
+```
+
+Use command to upgrade all dependencies
+```
+ncu -u
+```
+
 ## Additional reading
 * https://stackoverflow.com/questions/10175812/how-to-create-a-self-signed-certificate-with-openssl
 * https://stackoverflow.com/questions/39210467/get-angular-cli-to-ng-serve-over-https

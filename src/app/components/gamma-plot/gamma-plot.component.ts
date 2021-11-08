@@ -1,6 +1,5 @@
 import { AfterViewInit, Component, ElementRef, EventEmitter, Input, OnChanges, OnDestroy, OnInit, Output, ViewChild } from '@angular/core';
-import * as Chart from 'chart.js';
-import { ChartPoint } from 'chart.js';
+import { Chart } from 'chart.js';
 import { Subscription } from 'rxjs';
 import { webSocket } from 'rxjs/webSocket';
 
@@ -25,7 +24,7 @@ export class GammaPlotComponent implements OnInit, OnDestroy, AfterViewInit, OnC
 
     private chart: Chart;
     private result = Array(4095).fill(0);
-    private chartPoints: ChartPoint[] = [];
+    private chartPoints = [];
     private dataSourceSubscription: Subscription = new Subscription();
     private subject = webSocket('');
     
@@ -49,12 +48,7 @@ export class GammaPlotComponent implements OnInit, OnDestroy, AfterViewInit, OnC
           }]
         },
         options: {
-          responsive: true,
-          legend: { display: false },
-          scales: {
-            xAxes: [{ ticks: { min: 0, max: 4095, stepSize: 1000 }}],
-            yAxes: [{ ticks: { min: 0, suggestedMax: 10 }}]
-          }
+          responsive: true
         }
       });
     }

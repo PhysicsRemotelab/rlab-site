@@ -1,6 +1,6 @@
 import { AfterViewInit, Component, ElementRef, EventEmitter, OnChanges, OnDestroy, OnInit, Output, ViewChild } from '@angular/core';
 import { webSocket } from 'rxjs/webSocket';
-import { ChartPoint, Chart } from 'chart.js';
+import { Chart } from 'chart.js';
 import { Subscription } from 'rxjs';
 import { throttleTime } from 'rxjs/operators';
 import { Input } from '@angular/core';
@@ -25,7 +25,7 @@ export class SpectrometerPlotComponent implements OnInit, OnDestroy, AfterViewIn
     measurementDataEvent = new EventEmitter<string>();
 
     private chart: Chart;
-    private chartPoints: ChartPoint[] = [];
+    private chartPoints = [];
     private dataSourceSubscription: Subscription = new Subscription();
     private subject = webSocket('');
 
@@ -45,12 +45,7 @@ export class SpectrometerPlotComponent implements OnInit, OnDestroy, AfterViewIn
           }]
         },
         options: {
-          responsive: true,
-          legend: { display: false },
-          scales: {
-            xAxes: [{ ticks: { min: 0, max: 287 }}],
-            yAxes: [{ ticks: { min: 0, max: 1000 }}]
-          }
+          responsive: true
         }
       });
     }

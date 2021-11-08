@@ -1,6 +1,6 @@
 import { AfterViewInit, Component, ElementRef, EventEmitter, OnChanges, OnDestroy, OnInit, Output, ViewChild } from '@angular/core';
 import { webSocket } from 'rxjs/webSocket';
-import { ChartPoint, Chart } from 'chart.js';
+import { Chart } from 'chart.js';
 import { Subscription } from 'rxjs';
 import { throttleTime } from 'rxjs/operators';
 import { Input } from '@angular/core';
@@ -34,7 +34,7 @@ export class ResistancePlotComponent implements OnInit, OnDestroy, AfterViewInit
     stopEvent = new EventEmitter();
 
     private chart: Chart;
-    private points: ChartPoint[] = [];
+    private points = [];
     private dataSourceSubscription: Subscription = new Subscription();
     private subject = webSocket('');
 
@@ -54,11 +54,7 @@ export class ResistancePlotComponent implements OnInit, OnDestroy, AfterViewInit
           }]
         },
         options: {
-          responsive: true,
-          legend: { display: false },
-          scales: {
-            xAxes: [{ ticks: { min: 20, max: 80 }}]
-          }
+          responsive: true
         }
       });
     }
@@ -76,7 +72,7 @@ export class ResistancePlotComponent implements OnInit, OnDestroy, AfterViewInit
           } else {
             this.points.push({ x: point[0], y: point[1] });
 
-            const result = this.points.map((p: ChartPoint) => [ p.x, p.y ]);
+            const result = this.points.map((p: any) => [ p.x, p.y ]);
             this.measurementDataEvent.emit(result);
 
             this.chart.data.datasets[0].data = null;

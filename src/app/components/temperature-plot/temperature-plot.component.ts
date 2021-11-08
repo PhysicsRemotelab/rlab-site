@@ -1,6 +1,6 @@
 import { AfterViewInit, Component, ElementRef, EventEmitter, OnChanges, OnDestroy, OnInit, Output, ViewChild } from '@angular/core';
 import { webSocket } from 'rxjs/webSocket';
-import { ChartPoint, Chart } from 'chart.js';
+import { Chart } from 'chart.js';
 import { Subscription } from 'rxjs';
 import { throttleTime } from 'rxjs/operators';
 import { Input } from '@angular/core';
@@ -35,9 +35,9 @@ export class TemperaturePlotComponent implements OnInit, OnDestroy, AfterViewIni
     stopEvent = new EventEmitter();
 
     private chart: Chart;
-    private points: ChartPoint[] = [];
-    private greenPoints: ChartPoint[] = [];
-    private redPoints: ChartPoint[] = [];
+    private points = [];
+    private greenPoints = [];
+    private redPoints = [];
     private dataSourceSubscription: Subscription = new Subscription();
     private subject = webSocket('');
     cameraUrlForPixels =  `${serverUrl}/camera/0`;
