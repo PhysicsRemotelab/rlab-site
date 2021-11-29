@@ -6,7 +6,7 @@ import { MatCardModule } from '@angular/material/card';
 import { MatButtonModule } from '@angular/material/button';
 import { Lab2RoutingModule } from './lab2.routes';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
-import { ChartsModule } from 'ng2-charts';
+import { NgChartsModule } from 'ng2-charts';
 import { Lab2PageComponent } from './page/lab2-page';
 import { SharedModule } from '../shared/shared.module';
 
@@ -22,7 +22,7 @@ import { SharedModule } from '../shared/shared.module';
         MatButtonModule,
         Lab2RoutingModule,
         MatSnackBarModule,
-        ChartsModule,
+        NgChartsModule,
         SharedModule
     ]
 })

@@ -6,7 +6,7 @@ import { MatCardModule } from '@angular/material/card';
 import { MatButtonModule } from '@angular/material/button';
 import { Lab4RoutingModule } from './lab4.routes';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
-import { ChartsModule } from 'ng2-charts';
+import { NgChartsModule } from 'ng2-charts';
 import { SharedModule } from '../shared/shared.module';
 import { MatSelectModule } from '@angular/material/select';
 import { Lab4PageComponent } from './page/lab4-page';
@@ -25,7 +25,7 @@ import { TemperaturePlotComponent } from 'src/app/components/temperature-plot/te
         MatButtonModule,
         Lab4RoutingModule,
         MatSnackBarModule,
-        ChartsModule,
+        NgChartsModule,
         SharedModule,
         MatSelectModule
     ]

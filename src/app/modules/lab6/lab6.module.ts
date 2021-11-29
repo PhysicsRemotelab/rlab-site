@@ -6,9 +6,9 @@ import { MatCardModule } from '@angular/material/card';
 import { MatButtonModule } from '@angular/material/button';
 import { Lab6RoutingModule } from './lab6.routes';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
-import { ChartsModule } from 'ng2-charts';
 import { Lab6PageComponent } from './page/lab6-page';
 import { SharedModule } from '../shared/shared.module';
+import { NgChartsModule } from 'ng2-charts';
 
 @NgModule({
     declarations: [
@@ -22,7 +22,7 @@ import { SharedModule } from '../shared/shared.module';
         MatButtonModule,
         Lab6RoutingModule,
         MatSnackBarModule,
-        ChartsModule,
+        NgChartsModule,
         SharedModule
     ]
 })

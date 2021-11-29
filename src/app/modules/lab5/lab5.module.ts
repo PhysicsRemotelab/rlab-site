@@ -7,7 +7,7 @@ import {MatButtonModule} from '@angular/material/button';
 import { Lab5PageComponent } from './page/lab5-page';
 import { Lab5RoutingModule } from './lab5.routes';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
-import { ChartsModule } from 'ng2-charts';
+import { NgChartsModule } from 'ng2-charts';
 import { SharedModule } from '../shared/shared.module';
 
 @NgModule({
@@ -22,7 +22,7 @@ import { SharedModule } from '../shared/shared.module';
         MatButtonModule,
         Lab5RoutingModule,
         MatSnackBarModule,
-        ChartsModule,
+        NgChartsModule,
         SharedModule
     ]
 })
