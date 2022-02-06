@@ -44,11 +44,11 @@ import { StoreRouterConnectingModule } from '@ngrx/router-store';
       audience,
       httpInterceptor: {
         allowedList: [
-          `${serverUrl}/api/labs/use`,
-          `${serverUrl}/api/labs/free`,
-          `${serverUrl}/api/measurements`,
-          `${serverUrl}/api/measurements/*`,
-          `${serverUrl}/api/users`
+          `${serverUrl}/labs/use`,
+          `${serverUrl}/labs/free`,
+          `${serverUrl}/measurements`,
+          `${serverUrl}/measurements/*`,
+          `${serverUrl}/users`
         ]
       }
     }),

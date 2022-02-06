@@ -45,7 +45,7 @@
     "@angular/cli": "^13.2.2",
     "@angular/compiler-cli": "^13.2.1",
     "@ngrx/schematics": "^13.0.2",
-    "@types/node": "^17.0.14",
+    "@types/node": "^17.0.15",
     "codelyzer": "^6.0.2",
     "ts-node": "^10.4.0",
     "tslint": "^6.1.3",

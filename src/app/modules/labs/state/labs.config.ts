@@ -7,18 +7,18 @@ import { serverUrl } from 'src/environments/environment';
 export class LabsConfig {
 
     getLabEndpoint(id: number): string {
-        return `${serverUrl}/api/labs/${id}`;
+        return `${serverUrl}/labs/${id}`;
     }
 
     getLabsEndpoint(): string {
-        return `${serverUrl}/api/labs`;
+        return `${serverUrl}/labs`;
     }
 
     getUseLabsEndpoint(): string {
-        return `${serverUrl}/api/labs/use`;
+        return `${serverUrl}/labs/use`;
     }
 
     getFreeLabEndpoint(): string {
-        return `${serverUrl}/api/labs/free`;
+        return `${serverUrl}/labs/free`;
     }
 }

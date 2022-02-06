@@ -7,6 +7,6 @@ import { serverUrl } from 'src/environments/environment';
 export class UsersConfig {
 
     getUsersEndpoint(): string {
-        return `${serverUrl}/api/users`;
+        return `${serverUrl}/users`;
     }
 }

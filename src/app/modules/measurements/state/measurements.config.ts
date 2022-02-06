@@ -7,6 +7,6 @@ import { serverUrl } from 'src/environments/environment';
 export class MeasurementsConfig {
 
     getMeasurementsEndpoint(): string {
-        return `${serverUrl}/api/measurements`;
+        return `${serverUrl}/measurements`;
     }
 }
