@@ -1,5 +1,5 @@
 <div class="lab-component">
-  <mat-card class="lab-card" *ngFor="let lab of labs$ | async">
+  <mat-card class="lab-card" *ngFor="let lab of labs">
     <mat-card-header>
       <div mat-card-avatar class="example-header-image"></div>
       <mat-card-title>{{ lab.name }}</mat-card-title>
@@ -11,7 +11,7 @@
     <mat-card-actions *ngIf="isAuthenticated">
       <button class="continue-button" *ngIf="isContinueButtonActive(lab)" mat-raised-button (click)="continuelab(lab)">Continue</button>
       <button class="busy-button" *ngIf="isBusyButtonActive(lab)" mat-raised-button [disabled]="true">Busy</button>
-      <button class="start-button" *ngIf="isFreeButtonActive(lab)" mat-raised-button (click)="startlab(lab)">Start</button>
+      <button class="start-button" *ngIf="isStartButtonActive(lab)" mat-raised-button (click)="startlab(lab)">Start</button>
       <button class="gray-button" *ngIf="isLabAvailable(lab)" mat-raised-button [disabled]="true">Unavailable</button>
     </mat-card-actions>
     <mat-card-actions *ngIf="!isAuthenticated">

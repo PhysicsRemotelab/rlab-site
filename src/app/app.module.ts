@@ -46,6 +46,7 @@ import { StoreRouterConnectingModule } from '@ngrx/router-store';
         allowedList: [
           `${serverUrl}/labs/use`,
           `${serverUrl}/labs/free`,
+          `${serverUrl}/booking`,
           `${serverUrl}/measurements`,
           `${serverUrl}/measurements/*`,
           `${serverUrl}/users`

@@ -10,4 +10,5 @@ export interface Lab {
     createdAt: Date;
     users: User[];
     isDisabled: boolean;
+    status: string;
 }

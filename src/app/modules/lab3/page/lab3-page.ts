@@ -35,12 +35,12 @@ export class Lab3PageComponent {
     ) {
       if (this.router.getCurrentNavigation().extras.state) {
         this.lab = this.router.getCurrentNavigation().extras.state.lab;
-        this.takenUntil = this.lab.users[0].LabUser.takenUntil;
+        //this.takenUntil = this.lab.users[0].LabUser.takenUntil;
       } else if (!this.lab) {
         this.labService.getLab(this.labId).subscribe(lab => {
           console.log(lab);
           this.lab = lab;
-          this.takenUntil = this.lab.users[0].LabUser.takenUntil;
+         // this.takenUntil = this.lab.users[0].LabUser.takenUntil;
         });
       }
     }

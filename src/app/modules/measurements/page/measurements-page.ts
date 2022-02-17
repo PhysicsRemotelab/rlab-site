@@ -50,7 +50,7 @@ export class MeasurementsPageComponent implements OnInit {
     output = output.map((item: Measurement) => {
       return {
         id: item.id,
-        lab: item.lab.name,
+        lab: item.labId,
         name: item.name,
         result: item.result,
         createdAt: this.datepipe.transform(item.createdAt, 'dd.MM.yyyy HH:mm:ss')

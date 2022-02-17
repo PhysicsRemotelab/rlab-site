@@ -11,7 +11,7 @@ import { LabsService } from '../state/labs.service';
 })
 export class LabsPageComponent implements OnInit, OnDestroy {
 
-    labs$: Observable<Lab[]>;
+    labs: Lab[];
     isAuthenticated = !!sessionStorage.getItem('email');
     currentUserId = sessionStorage.getItem('user_id');
     userEmail = sessionStorage.getItem('email');
@@ -24,7 +24,28 @@ export class LabsPageComponent implements OnInit, OnDestroy {
 
     ngOnInit(): void {
       console.log('Labs page');
-      this.labs$ = this.labsService.getLabs();
+      this.labsService.getLabs().subscribe(labs => {
+        console.log(labs);
+        this.labs = labs;
+        for (let i = 0; i < labs.length; i++) {
+          this.labsService.checklabBooking(labs[i].id).subscribe(booking => {
+            if (!booking) {
+              this.labs[i].status = 'Start';
+            }
+
+            if (booking) {
+              if (booking.user_id == this.currentUserId)
+                this.labs[i].status = 'Continue';
+            }
+
+            if (booking) {
+              if (booking.user_id != this.currentUserId)
+                this.labs[i].status = 'Busy';
+            }
+
+          });
+        }
+      });
     }
 
     startlab(lab: Lab): void {
@@ -45,29 +66,15 @@ export class LabsPageComponent implements OnInit, OnDestroy {
     }
 
     isContinueButtonActive(lab: Lab): boolean {
-      if (lab.users.length === 0) {
-        return false;
-      }
-      const overTime = new Date(lab.users[0].LabUser.takenUntil) > new Date();
-      const currentUser = lab.users[0].LabUser.userId === Number(this.currentUserId);
-      return overTime && currentUser && !lab.isDisabled;
+      return lab.status === 'Continue';
     }
 
     isBusyButtonActive(lab: Lab): boolean {
-      if (lab.users.length === 0) {
-        return false;
-      }
-      const overTime = new Date(lab.users[0].LabUser.takenUntil) > new Date();
-      const notCurrentUser = lab.users[0].LabUser.userId !== Number(this.currentUserId);
-      return overTime && notCurrentUser && !lab.isDisabled;
+      return lab.status === 'Busy';
     }
 
-    isFreeButtonActive(lab: Lab): boolean {
-      if (lab.users.length === 0) {
-        return true;
-      }
-      const overTime = new Date(lab.users[0].LabUser.takenUntil) < new Date();
-      return overTime && !lab.isDisabled;
+    isStartButtonActive(lab: Lab): boolean {
+      return lab.status === 'Start';
     }
 
     isLabAvailable(lab: Lab): boolean {

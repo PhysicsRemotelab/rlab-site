@@ -28,9 +28,7 @@ export class SaveMeasurementComponent {
   saveMeasurements(): void {
     console.log('Save');
     let name = this.nameFormControl.value;
-    if (this.measurementResult.length === 0) {
-      return;
-    }
+
     if (this.nameFormControl.invalid) {
       return;
     }

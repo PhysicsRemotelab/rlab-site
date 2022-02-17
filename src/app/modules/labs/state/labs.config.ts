@@ -14,8 +14,12 @@ export class LabsConfig {
         return `${serverUrl}/labs`;
     }
 
+    checkLabBookingEndpoint(labId: number): any {
+        return `${serverUrl}/booking/${labId}`;
+    }
+
     getUseLabsEndpoint(): string {
-        return `${serverUrl}/labs/use`;
+        return `${serverUrl}/booking`;
     }
 
     getFreeLabEndpoint(): string {
