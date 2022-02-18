@@ -22,7 +22,7 @@ export class LabsConfig {
         return `${serverUrl}/booking`;
     }
 
-    getFreeLabEndpoint(): string {
-        return `${serverUrl}/labs/free`;
+    getFreeLabEndpoint(labId: number): string {
+        return `${serverUrl}/booking/cancel/${labId}`;
     }
 }

@@ -44,9 +44,9 @@ import { StoreRouterConnectingModule } from '@ngrx/router-store';
       audience,
       httpInterceptor: {
         allowedList: [
-          `${serverUrl}/labs/use`,
-          `${serverUrl}/labs/free`,
           `${serverUrl}/booking`,
+          `${serverUrl}/booking/*`,
+          `${serverUrl}/booking/*/*`,
           `${serverUrl}/measurements`,
           `${serverUrl}/measurements/*`,
           `${serverUrl}/users`
