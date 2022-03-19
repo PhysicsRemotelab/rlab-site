@@ -6,15 +6,15 @@ import { serverUrl } from 'src/environments/environment';
 })
 export class LabsConfig {
 
-    getLabEndpoint(id: number): string {
-        return `${serverUrl}/labs/${id}`;
+    getLabEndpoint(code: string): string {
+        return `${serverUrl}/labs/${code}`;
     }
 
     getLabsEndpoint(): string {
         return `${serverUrl}/labs`;
     }
 
-    checkLabBookingEndpoint(labId: number): any {
+    getLabBookingEndpoint(labId: number): any {
         return `${serverUrl}/booking/${labId}`;
     }
 

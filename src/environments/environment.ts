@@ -14,9 +14,6 @@ export const lab4Camera = `${serverUrl}/cam/0`;
 export const lab5Camera = `${serverUrl}/cam/0`;
 export const lab6Camera = `${serverUrl}/cam/0`;
 
-export const lab1Sensor = `${sensorUrl}/spectrometer`;
-export const lab2Sensor = `${sensorUrl}/gamma`;
-export const lab3Sensor = `${sensorUrl}/resistance`;
-export const lab4Sensor = `${sensorUrl}/temperature`;
-export const lab5Sensor = `${sensorUrl}/spectrometer`;
-export const lab6Sensor = `${sensorUrl}/gamma`;
+export const lab2Sensor = `${sensorUrl}/spectrometer`;
+export const lab3Sensor = `${sensorUrl}/gamma`;
+export const lab5Sensor = `${sensorUrl}/resistance`;

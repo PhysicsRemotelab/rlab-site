@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
-import { Lab } from '../../labs/model';
 import { LabsService } from '../../labs/state/labs.service';
+import { Lab } from '../../labs/model';
 import { lab2Camera, lab2Sensor } from 'src/environments/environment';
 
 @Component({
@@ -11,25 +11,29 @@ import { lab2Camera, lab2Sensor } from 'src/environments/environment';
 })
 export class Lab2PageComponent {
 
+    labCode = 'light_spectroscopy_1';
     lab: Lab;
+    booking: any;
     takenUntil = null;
     measurementStarted = false;
     measurementResult = [];
-    cameraUrl = lab2Camera;
+    cameraUrl =  lab2Camera;
     sensorUrl = lab2Sensor;
-    labId = 2;
 
     constructor(
       private labService: LabsService,
       private router: Router
     ) {
       if (this.router.getCurrentNavigation().extras.state) {
-        this.lab = this.router.getCurrentNavigation().extras.state.lab;
-        //this.takenUntil = this.lab.users[0].LabUser.takenUntil;
+        this.booking = this.router.getCurrentNavigation().extras.state.booking;
+        this.lab = this.booking.lab;
+        this.takenUntil = this.booking.takenUntil;
       } else if (!this.lab) {
-        this.labService.getLab(this.labId).subscribe(lab => {
-          this.lab = lab;
-          //this.takenUntil = this.lab.users[0].LabUser.takenUntil;
+        this.labService.getlabBooking(2).subscribe(booking => {
+          console.log(booking);
+          this.booking = booking;
+          this.lab = this.booking.lab;
+          this.takenUntil = this.booking.takenUntil;
         });
       }
     }

@@ -7,12 +7,12 @@ const ROUTES = {
   labs: 'labs',
   measurements: 'measurements',
   profile: 'profile',
-  lab1: 'lab1',
-  lab2: 'lab2',
-  lab3: 'lab3',
-  lab4: 'lab4',
-  lab5: 'lab5',
-  lab6: 'lab6'
+  lab1: 'diode_efficiency_1',
+  lab2: 'light_spectroscopy_1',
+  lab3: 'gamma_spectroscopy_1',
+  lab4: 'fluorescence_spectroscopy_1',
+  lab5: 'temperature_resistance_1',
+  lab6: 'light_diffraction_1'
 };
 
 const routes: Routes = [
@@ -27,11 +27,6 @@ const routes: Routes = [
     loadChildren: () => import('./modules/labs/module').then(m => m.LabsPageModule)
   },
   {
-    path: ROUTES.lab1,
-    canActivate: [AuthGuard],
-    loadChildren: () => import('./modules/lab1/lab1.module').then(m => m.Lab1Module)
-  },
-  {
     path: ROUTES.lab2,
     canActivate: [AuthGuard],
     loadChildren: () => import('./modules/lab2/lab2.module').then(m => m.Lab2Module)
@@ -42,19 +37,9 @@ const routes: Routes = [
     loadChildren: () => import('./modules/lab3/lab3.module').then(m => m.Lab3Module)
   },
   {
-    path: ROUTES.lab4,
-    canActivate: [AuthGuard],
-    loadChildren: () => import('./modules/lab4/lab4.module').then(m => m.Lab4Module)
-  },
-  {
     path: ROUTES.lab5,
     canActivate: [AuthGuard],
     loadChildren: () => import('./modules/lab5/lab5.module').then(m => m.Lab5Module)
-  },
-  {
-    path: ROUTES.lab6,
-    canActivate: [AuthGuard],
-    loadChildren: () => import('./modules/lab6/lab6.module').then(m => m.Lab6Module)
   },
   {
     path: ROUTES.profile,

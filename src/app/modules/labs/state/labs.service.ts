@@ -18,8 +18,8 @@ export class LabsService {
     return this.http.get<Lab[]>(this.labsConfig.getLabsEndpoint());
   }
 
-  checklabBooking(labId: number): Observable<any> {
-    return this.http.get<any>(this.labsConfig.checkLabBookingEndpoint(labId));
+  getlabBooking(labId: number): Observable<any> {
+    return this.http.get<any>(this.labsConfig.getLabBookingEndpoint(labId));
   }
 
   useLab(id: number): Observable<any> {
@@ -30,7 +30,7 @@ export class LabsService {
     return this.http.get(this.labsConfig.getFreeLabEndpoint(labId));
   }
 
-  getLab(id: number): Observable<Lab> {
-    return this.http.get<Lab>(this.labsConfig.getLabEndpoint(id));
+  getLab(code: string): Observable<Lab> {
+    return this.http.get<Lab>(this.labsConfig.getLabEndpoint(code));
   }
 }

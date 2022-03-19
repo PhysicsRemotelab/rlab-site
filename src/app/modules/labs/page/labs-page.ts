@@ -1,6 +1,5 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { Observable } from 'rxjs';
 import { Lab } from '../model';
 import { LabsService } from '../state/labs.service';
 
@@ -28,21 +27,21 @@ export class LabsPageComponent implements OnInit, OnDestroy {
         console.log(labs);
         this.labs = labs;
         for (let i = 0; i < labs.length; i++) {
-          this.labsService.checklabBooking(labs[i].id).subscribe(booking => {
-            if (!booking) {
+          this.labsService.getlabBooking(labs[i].id).subscribe((booking: any) => {
+            console.log(booking);
+            if (Object.entries(booking).length === 0) {
               this.labs[i].status = 'Start';
+              return;
             }
 
-            if (booking) {
-              if (booking.user_id == this.currentUserId)
-                this.labs[i].status = 'Continue';
+            if (booking?.user?.id == this.currentUserId) {
+              this.labs[i].status = 'Continue';
+              return;
             }
 
-            if (booking) {
-              if (booking.user_id != this.currentUserId)
-                this.labs[i].status = 'Busy';
+            if (booking?.user?.id != this.currentUserId) {
+              this.labs[i].status = 'Busy';
             }
-
           });
         }
       });
@@ -50,15 +49,15 @@ export class LabsPageComponent implements OnInit, OnDestroy {
 
     startlab(lab: Lab): void {
       console.log(lab);
-      this.labsService.useLab(lab.id).subscribe(updatedLab => {
-        this.router.navigate([`/lab${lab.id}`], { state: { lab: updatedLab } });
+      this.labsService.useLab(lab.id).subscribe(booking => {
+        this.router.navigate([`/${lab.code}`], { state: { booking } });
       });
     }
 
     continuelab(lab: Lab): void {
       console.log(lab);
-      this.labsService.useLab(lab.id).subscribe(updatedLab => {
-        this.router.navigate([`/lab${lab.id}`], { state: { lab: updatedLab } });
+      this.labsService.useLab(lab.id).subscribe(booking => {
+        this.router.navigate([`/${lab.code}`], { state: { booking } });
       });
     }
 

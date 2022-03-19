@@ -10,7 +10,7 @@ import { LabsService } from 'src/app/modules/labs/state/labs.service';
 export class FreeLabButtonComponent {
 
   @Input()
-  labId: number;
+  bookingId: number;
 
   constructor(
     private labService: LabsService,
@@ -18,7 +18,7 @@ export class FreeLabButtonComponent {
   ) {}
 
   freeLab(): void {
-    this.labService.freeLab(this.labId).subscribe(result => {
+    this.labService.freeLab(this.bookingId).subscribe(() => {
       this.router.navigate([`/labs`]);
     });
   }

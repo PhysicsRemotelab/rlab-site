@@ -9,13 +9,10 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { NgChartsModule } from 'ng2-charts';
 import { Lab3PageComponent } from './page/lab3-page';
 import { SharedModule } from '../shared/shared.module';
-import { ResistancePlotComponent } from 'src/app/components/resistance-plot/resistance-plot.component';
-import { MatSelectModule } from '@angular/material/select';
 
 @NgModule({
     declarations: [
-        Lab3PageComponent,
-        ResistancePlotComponent
+        Lab3PageComponent
     ],
     imports: [
         CommonModule,
@@ -26,8 +23,7 @@ import { MatSelectModule } from '@angular/material/select';
         Lab3RoutingModule,
         MatSnackBarModule,
         NgChartsModule,
-        SharedModule,
-        MatSelectModule
+        SharedModule
     ]
 })
 export class Lab3Module { }
