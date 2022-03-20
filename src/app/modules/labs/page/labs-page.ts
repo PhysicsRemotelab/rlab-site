@@ -29,7 +29,7 @@ export class LabsPageComponent implements OnInit, OnDestroy {
         for (let i = 0; i < labs.length; i++) {
           this.labsService.getlabBooking(labs[i].id).subscribe((booking: any) => {
             console.log(booking);
-            if (Object.entries(booking).length === 0) {
+            if (!booking) {
               this.labs[i].status = 'Start';
               return;
             }
