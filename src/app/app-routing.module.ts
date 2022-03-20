@@ -47,6 +47,11 @@ const routes: Routes = [
         loadChildren: () => import('./modules/lab5/lab5.module').then((m) => m.Lab5Module)
     },
     {
+        path: ROUTES.lab6,
+        canActivate: [AuthGuard],
+        loadChildren: () => import('./modules/lab6/lab6.module').then((m) => m.Lab6Module)
+    },
+    {
         path: ROUTES.profile,
         canActivate: [AuthGuard],
         loadChildren: () => import('./modules/profile/module').then((m) => m.ProfilePageModule)

@@ -18,3 +18,4 @@ export const lab2Sensor = `${sensorUrl}/spectrometer`;
 export const lab3Sensor = `${sensorUrl}/gamma`;
 export const lab4Sensor = `${sensorUrl}/fluorescence`;
 export const lab5Sensor = `${sensorUrl}/resistance`;
+export const lab6Sensor = `${sensorUrl}/diffraction`;
