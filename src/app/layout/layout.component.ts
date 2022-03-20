@@ -5,25 +5,18 @@ import { map, shareReplay } from 'rxjs/operators';
 import { AuthService } from '@auth0/auth0-angular';
 
 @Component({
-  selector: 'app-layout',
-  templateUrl: './layout.component.html',
-  styleUrls: ['./layout.component.scss']
+    selector: 'app-layout',
+    templateUrl: './layout.component.html',
+    styleUrls: ['./layout.component.scss']
 })
 export class LayoutComponent {
+    @Input()
+    isAuthenticated: boolean = false;
 
-  @Input() 
-  isAuthenticated: boolean = false;
+    constructor(private breakpointObserver: BreakpointObserver, public auth: AuthService) {}
 
-  constructor(
-    private breakpointObserver: BreakpointObserver,
-    public auth: AuthService
-  ) {
-  }
-
-  isHandset$: Observable<boolean> = this.breakpointObserver.observe(Breakpoints.Handset)
-    .pipe(
-      map(result => result.matches),
-      shareReplay()
+    isHandset$: Observable<boolean> = this.breakpointObserver.observe(Breakpoints.Handset).pipe(
+        map((result) => result.matches),
+        shareReplay()
     );
-
 }

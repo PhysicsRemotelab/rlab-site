@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, ElementRef, EventEmitter, OnChanges, OnDestroy, OnInit, Output, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, EventEmitter, OnChanges, OnDestroy, Output, ViewChild } from '@angular/core';
 import { webSocket } from 'rxjs/webSocket';
 import { Chart } from 'chart.js';
 import { Subscription } from 'rxjs';
@@ -6,12 +6,11 @@ import { throttleTime } from 'rxjs/operators';
 import { Input } from '@angular/core';
 
 @Component({
-  selector: 'app-resistance-plot',
-  templateUrl: './resistance-plot.component.html',
-  styleUrls: ['./resistance-plot.component.scss']
+    selector: 'app-resistance-plot',
+    templateUrl: './resistance-plot.component.html',
+    styleUrls: ['./resistance-plot.component.scss']
 })
-export class ResistancePlotComponent implements OnInit, OnDestroy, AfterViewInit, OnChanges {
-
+export class ResistancePlotComponent implements OnDestroy, AfterViewInit, OnChanges {
     @ViewChild('chart')
     private chartRef: ElementRef;
 
@@ -38,56 +37,55 @@ export class ResistancePlotComponent implements OnInit, OnDestroy, AfterViewInit
     private dataSourceSubscription: Subscription = new Subscription();
     private subject = webSocket('');
 
-    constructor() { }
-
-    ngOnInit(): void {
-    }
+    constructor() {}
 
     ngAfterViewInit(): void {
-      this.chart = new Chart(this.chartRef.nativeElement, {
-        type: 'scatter',
-        data: {
-          datasets: [{
-            data: this.points,
-            fill: true,
-            pointRadius: 3
-          }]
-        },
-        options: {
-          responsive: true
-        }
-      });
+        this.chart = new Chart(this.chartRef.nativeElement, {
+            type: 'scatter',
+            data: {
+                datasets: [
+                    {
+                        data: this.points,
+                        fill: true,
+                        pointRadius: 3
+                    }
+                ]
+            },
+            options: {
+                responsive: true
+            }
+        });
     }
 
     ngOnChanges(): void {
-      if(this.measurementStarted) {
-        this.subject = webSocket(this.sensorUrl);
-        this.subject.next({ command: this.selectedSensor });
-        this.points = [];
+        if (this.measurementStarted) {
+            this.subject = webSocket(this.sensorUrl);
+            this.subject.next({ command: this.selectedSensor });
+            this.points = [];
 
-        this.dataSourceSubscription = this.subject.pipe(throttleTime(10)).subscribe((point: number[]) => {
-          console.log(point);
-          if (point[0] == 0 && point[1] == 0) {
-            this.stopEvent.emit();
-          } else {
-            this.points.push({ x: point[0], y: point[1] });
+            this.dataSourceSubscription = this.subject.pipe(throttleTime(10)).subscribe((point: number[]) => {
+                console.log(point);
+                if (point[0] == 0 && point[1] == 0) {
+                    this.stopEvent.emit();
+                } else {
+                    this.points.push({ x: point[0], y: point[1] });
 
-            const result = this.points.map((p: any) => [ p.x, p.y ]);
-            this.measurementDataEvent.emit(result);
+                    const result = this.points.map((p: any) => [p.x, p.y]);
+                    this.measurementDataEvent.emit(result);
 
-            this.chart.data.datasets[0].data = null;
-            this.chart.data.datasets[0].data = this.points;
-            this.chart.clear();
-            this.chart.update();
-          }
-        });
-        return;
-      }
-      this.subject.complete();
-      this.dataSourceSubscription.unsubscribe();
+                    this.chart.data.datasets[0].data = null;
+                    this.chart.data.datasets[0].data = this.points;
+                    this.chart.clear();
+                    this.chart.update();
+                }
+            });
+            return;
+        }
+        this.subject.complete();
+        this.dataSourceSubscription.unsubscribe();
     }
 
     ngOnDestroy(): void {
-      this.dataSourceSubscription.unsubscribe();
+        this.dataSourceSubscription.unsubscribe();
     }
 }

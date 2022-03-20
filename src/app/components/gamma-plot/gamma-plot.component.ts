@@ -4,12 +4,11 @@ import { Subscription } from 'rxjs';
 import { webSocket } from 'rxjs/webSocket';
 
 @Component({
-  selector: 'app-gamma-plot',
-  templateUrl: './gamma-plot.component.html',
-  styleUrls: ['./gamma-plot.component.scss']
+    selector: 'app-gamma-plot',
+    templateUrl: './gamma-plot.component.html',
+    styleUrls: ['./gamma-plot.component.scss']
 })
 export class GammaPlotComponent implements OnInit, OnDestroy, AfterViewInit, OnChanges {
-
     @ViewChild('chart')
     private chartRef: ElementRef;
 
@@ -27,60 +26,62 @@ export class GammaPlotComponent implements OnInit, OnDestroy, AfterViewInit, OnC
     private chartPoints = [];
     private dataSourceSubscription: Subscription = new Subscription();
     private subject = webSocket('');
-    
-    constructor() { }
+
+    constructor() {}
 
     ngOnInit(): void {
-      this.chartPoints = this.result.map((val, i) => {
-        const nr = { x: i, y: val };
-        return nr;
-      });
+        this.chartPoints = this.result.map((val, i) => {
+            const nr = { x: i, y: val };
+            return nr;
+        });
     }
 
     ngAfterViewInit(): void {
-      this.chart = new Chart(this.chartRef.nativeElement, {
-        type: 'scatter',
-        data: {
-          datasets: [{
-            data: this.chartPoints,
-            fill: true,
-            pointRadius: 2
-          }]
-        },
-        options: {
-          responsive: true
-        }
-      });
+        this.chart = new Chart(this.chartRef.nativeElement, {
+            type: 'scatter',
+            data: {
+                datasets: [
+                    {
+                        data: this.chartPoints,
+                        fill: true,
+                        pointRadius: 2
+                    }
+                ]
+            },
+            options: {
+                responsive: true
+            }
+        });
     }
 
     ngOnChanges(): void {
-      if (this.measurementStarted) {
-        this.subject = webSocket(this.sensorUrl);
+        if (this.measurementStarted) {
+            this.subject = webSocket(this.sensorUrl);
 
-        this.dataSourceSubscription = this.subject.pipe().subscribe((data: number[]) => {
-          this.transformData(data);
-          this.measurementDataEvent.emit(this.result);
-          this.chart.data.datasets[0].data = null;
-          this.chart.data.datasets[0].data = this.chartPoints;
-          this.chart.clear();
-          this.chart.update();
-        });
-      } else {
-        this.dataSourceSubscription.unsubscribe();
-      }
+            this.dataSourceSubscription = this.subject.pipe().subscribe((data: number[]) => {
+                this.transformData(data);
+                this.measurementDataEvent.emit(this.result);
+                this.chart.data.datasets[0].data = null;
+                this.chart.data.datasets[0].data = this.chartPoints;
+                this.chart.clear();
+                this.chart.update();
+            });
+        } else {
+            this.dataSourceSubscription.unsubscribe();
+        }
     }
 
     private transformData(data: number[]): void {
-      // Receive new measurement result and add to existing array
-      let updatedResult = data.map((p, index) => p + this.result[index]);
-      this.result = updatedResult;
-      this.chartPoints = this.result.map((val, i) => {
-        const nr = { x: i, y: val };
-        return nr;
-      });
+        // Receive new measurement result and add to existing array
+        let updatedResult = data.map((p, index) => p + this.result[index]);
+        this.result = updatedResult;
+        this.chartPoints = this.result.map((val, i) => {
+            const nr = { x: i, y: val };
+            return nr;
+        });
     }
 
     ngOnDestroy(): void {
-      this.dataSourceSubscription.unsubscribe();
+        this.dataSourceSubscription.unsubscribe();
     }
 }

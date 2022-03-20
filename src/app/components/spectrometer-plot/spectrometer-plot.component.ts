@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, ElementRef, EventEmitter, OnChanges, OnDestroy, OnInit, Output, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, EventEmitter, OnChanges, OnDestroy, Output, ViewChild } from '@angular/core';
 import { webSocket } from 'rxjs/webSocket';
 import { Chart } from 'chart.js';
 import { Subscription } from 'rxjs';
@@ -6,12 +6,11 @@ import { throttleTime } from 'rxjs/operators';
 import { Input } from '@angular/core';
 
 @Component({
-  selector: 'app-spectrometer-plot',
-  templateUrl: './spectrometer-plot.component.html',
-  styleUrls: ['./spectrometer-plot.component.scss']
+    selector: 'app-spectrometer-plot',
+    templateUrl: './spectrometer-plot.component.html',
+    styleUrls: ['./spectrometer-plot.component.scss']
 })
-export class SpectrometerPlotComponent implements OnInit, OnDestroy, AfterViewInit, OnChanges {
-
+export class SpectrometerPlotComponent implements OnDestroy, AfterViewInit, OnChanges {
     @ViewChild('chart')
     private chartRef: ElementRef;
 
@@ -29,53 +28,52 @@ export class SpectrometerPlotComponent implements OnInit, OnDestroy, AfterViewIn
     private dataSourceSubscription: Subscription = new Subscription();
     private subject = webSocket('');
 
-    constructor() { }
-
-    ngOnInit(): void {
-    }
+    constructor() {}
 
     ngAfterViewInit(): void {
-      this.chart = new Chart(this.chartRef.nativeElement, {
-        type: 'scatter',
-        data: {
-          datasets: [{
-            data: this.chartPoints,
-            fill: true,
-            pointRadius: 1
-          }]
-        },
-        options: {
-          responsive: true
-        }
-      });
+        this.chart = new Chart(this.chartRef.nativeElement, {
+            type: 'scatter',
+            data: {
+                datasets: [
+                    {
+                        data: this.chartPoints,
+                        fill: true,
+                        pointRadius: 1
+                    }
+                ]
+            },
+            options: {
+                responsive: true
+            }
+        });
     }
 
     ngOnChanges(): void {
-      if (this.measurementStarted) {
-        this.subject = webSocket(this.sensorUrl);
+        if (this.measurementStarted) {
+            this.subject = webSocket(this.sensorUrl);
 
-        this.dataSourceSubscription = this.subject.pipe(throttleTime(100)).subscribe((data: string) => {
-          this.transformData(data);
-          this.measurementDataEvent.emit(data);
-          this.chart.data.datasets[0].data = null;
-          this.chart.data.datasets[0].data = this.chartPoints;
-          this.chart.clear();
-          this.chart.update();
-        });
-      } else {
-        this.dataSourceSubscription.unsubscribe();
-      }
+            this.dataSourceSubscription = this.subject.pipe(throttleTime(100)).subscribe((data: string) => {
+                this.transformData(data);
+                this.measurementDataEvent.emit(data);
+                this.chart.data.datasets[0].data = null;
+                this.chart.data.datasets[0].data = this.chartPoints;
+                this.chart.clear();
+                this.chart.update();
+            });
+        } else {
+            this.dataSourceSubscription.unsubscribe();
+        }
     }
 
     private transformData(data: string) {
-      let numbers = data.split(',');
-      this.chartPoints = numbers.map((val, i) => {
-        const nr = { x: i, y: Number(val) };
-        return nr;
-      });
+        let numbers = data.split(',');
+        this.chartPoints = numbers.map((val, i) => {
+            const nr = { x: i, y: Number(val) };
+            return nr;
+        });
     }
 
     ngOnDestroy(): void {
-      this.dataSourceSubscription.unsubscribe();
+        this.dataSourceSubscription.unsubscribe();
     }
 }

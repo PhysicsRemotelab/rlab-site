@@ -19,60 +19,58 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatListModule } from '@angular/material/list';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AuthHttpInterceptor } from '@auth0/auth0-angular';
-import { domain, clientId, audience, serverUrl } from '../../src/environments/environment';
+import { audience, clientId, domain, serverUrl } from '../../src/environments/environment';
 import { LayoutComponent } from './layout/layout.component';
 import { StoreModule } from '@ngrx/store';
 import { FormsModule } from '@angular/forms';
-import { reducers, metaReducers } from './app.state';
+import { metaReducers, reducers } from './app.state';
 import { MatCardModule } from '@angular/material/card';
 import { StoreRouterConnectingModule } from '@ngrx/router-store';
 
 @NgModule({
-  declarations: [
-    AppComponent,
-    FooterComponent,
-    LoginButtonComponent,
-    SignupButtonComponent,
-    LogoutButtonComponent,
-    AuthenticationButtonComponent,
-    LayoutComponent
-  ],
-  imports: [
-    AuthModule.forRoot({
-      domain,
-      clientId,
-      audience,
-      httpInterceptor: {
-        allowedList: [
-          `${serverUrl}/booking`,
-          `${serverUrl}/booking/*`,
-          `${serverUrl}/booking/*/*`,
-          `${serverUrl}/measurements`,
-          `${serverUrl}/measurements/*`,
-          `${serverUrl}/users`
-        ]
-      }
-    }),
-    CommonModule,
-    BrowserModule,
-    FormsModule,
-    AppRoutingModule,
-    HttpClientModule,
-    BrowserAnimationsModule,
-    LayoutModule,
-    MatToolbarModule,
-    MatButtonModule,
-    MatSidenavModule,
-    MatIconModule,
-    MatListModule,
-    MatCardModule,
-    StoreModule.forRoot(reducers, { metaReducers }),
-    StoreRouterConnectingModule.forRoot()
-  ],
-  providers: [
-    { provide: HTTP_INTERCEPTORS, useClass: AuthHttpInterceptor, multi: true }
-  ],
-  bootstrap: [AppComponent],
-  exports: []
+    declarations: [
+        AppComponent,
+        FooterComponent,
+        LoginButtonComponent,
+        SignupButtonComponent,
+        LogoutButtonComponent,
+        AuthenticationButtonComponent,
+        LayoutComponent
+    ],
+    imports: [
+        AuthModule.forRoot({
+            domain,
+            clientId,
+            audience,
+            httpInterceptor: {
+                allowedList: [
+                    `${serverUrl}/booking`,
+                    `${serverUrl}/booking/*`,
+                    `${serverUrl}/booking/*/*`,
+                    `${serverUrl}/measurements`,
+                    `${serverUrl}/measurements/*`,
+                    `${serverUrl}/users`
+                ]
+            }
+        }),
+        CommonModule,
+        BrowserModule,
+        FormsModule,
+        AppRoutingModule,
+        HttpClientModule,
+        BrowserAnimationsModule,
+        LayoutModule,
+        MatToolbarModule,
+        MatButtonModule,
+        MatSidenavModule,
+        MatIconModule,
+        MatListModule,
+        MatCardModule,
+        StoreModule.forRoot(reducers, { metaReducers }),
+        StoreRouterConnectingModule.forRoot()
+    ],
+    providers: [{ provide: HTTP_INTERCEPTORS, useClass: AuthHttpInterceptor, multi: true }],
+    bootstrap: [AppComponent],
+    exports: []
 })
-export class AppModule { }
+export class AppModule {}

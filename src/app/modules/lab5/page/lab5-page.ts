@@ -5,63 +5,59 @@ import { LabsService } from '../../labs/state/labs.service';
 import { lab5Camera, lab5Sensor } from 'src/environments/environment';
 
 @Component({
-  selector: 'app-lab5-page',
-  templateUrl: './lab5-page.html',
-  styleUrls: ['./lab5-page.scss']
+    selector: 'app-lab5-page',
+    templateUrl: './lab5-page.html',
+    styleUrls: ['./lab5-page.scss']
 })
 export class Lab5PageComponent {
+    labCode = 'temperature_resistance_1';
+    selectedSensor = 'sensor1';
+    sensors = [
+        { value: 'sensor1', viewValue: 'Sensor 1' },
+        { value: 'sensor2', viewValue: 'Sensor 2' },
+        { value: 'sensor3', viewValue: 'Sensor 3' },
+        { value: 'sensor4', viewValue: 'Sensor 4' },
+        { value: 'sensor5', viewValue: 'Sensor 5' },
+        { value: 'sensor6', viewValue: 'Sensor 6' }
+    ];
+    lab: Lab;
+    booking: any;
+    takenUntil = null;
+    measurementStarted = false;
+    measurementSaved = false;
+    measurementResult = [];
+    cameraUrl = lab5Camera;
+    sensorUrl = lab5Sensor;
 
-  labCode = 'temperature_resistance_1';
-  selectedSensor = 'sensor1';
-  sensors = [
-    { value: 'sensor1', viewValue: 'Sensor 1'},
-    { value: 'sensor2', viewValue: 'Sensor 2'},
-    { value: 'sensor3', viewValue: 'Sensor 3'},
-    { value: 'sensor4', viewValue: 'Sensor 4'},
-    { value: 'sensor5', viewValue: 'Sensor 5'},
-    { value: 'sensor6', viewValue: 'Sensor 6'}
-  ];
-  lab: Lab;
-  booking: any;
-  takenUntil = null;
-  measurementStarted = false;
-  measurementSaved = false;
-  measurementResult = [];
-  cameraUrl = lab5Camera;
-  sensorUrl = lab5Sensor;
-
-  constructor(
-    private labService: LabsService,
-    private router: Router
-  ) {
-    if (this.router.getCurrentNavigation().extras.state) {
-      this.booking = this.router.getCurrentNavigation().extras.state.booking;
-      this.lab = this.booking.lab;
-      this.takenUntil = this.booking.takenUntil;
-    } else if (!this.booking) {
-      this.labService.getlabBooking(5).subscribe(booking => {
-        console.log(booking);
-        this.booking = booking;
-        this.lab = this.booking.lab;
-        this.takenUntil = this.booking.takenUntil;
-      });
+    constructor(private labService: LabsService, private router: Router) {
+        if (this.router.getCurrentNavigation().extras.state) {
+            this.booking = this.router.getCurrentNavigation().extras.state.booking;
+            this.lab = this.booking.lab;
+            this.takenUntil = this.booking.takenUntil;
+        } else if (!this.booking) {
+            this.labService.getlabBooking(5).subscribe((booking) => {
+                console.log(booking);
+                this.booking = booking;
+                this.lab = this.booking.lab;
+                this.takenUntil = this.booking.takenUntil;
+            });
+        }
     }
-  }
 
-  getData($event: any): void {
-    this.measurementResult = $event;
-  }
+    getData($event: any): void {
+        this.measurementResult = $event;
+    }
 
-  stopEvent(): void {
-    this.measurementStarted = false;
-  }
+    stopEvent(): void {
+        this.measurementStarted = false;
+    }
 
-  startEvent(): void {
-    this.measurementStarted = true;
-    this.measurementResult = [];
-  }
+    startEvent(): void {
+        this.measurementStarted = true;
+        this.measurementResult = [];
+    }
 
-  getMeasurementStarted($event: boolean): void {
-    this.measurementStarted = $event;
-  }
+    getMeasurementStarted($event: boolean): void {
+        this.measurementStarted = $event;
+    }
 }

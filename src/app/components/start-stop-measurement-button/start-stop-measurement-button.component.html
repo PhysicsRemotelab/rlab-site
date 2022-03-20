@@ -1,8 +1,6 @@
+<div>To start measurements, please press button.</div>
+<br />
 <div>
-    To start measurements, please press button.
-</div>
-<br>
-<div>
-    <button *ngIf="!measurementStarted" class="start-button" mat-raised-button  (click)="startMeasuremenet()">Start</button>
-    <button *ngIf="measurementStarted" class="stop-button" mat-raised-button  (click)="stopMeasuremenet()">Stop</button>
+    <button *ngIf="!measurementStarted" class="start-button" mat-raised-button (click)="startMeasuremenet()">Start</button>
+    <button *ngIf="measurementStarted" class="stop-button" mat-raised-button (click)="stopMeasuremenet()">Stop</button>
 </div>

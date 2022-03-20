@@ -2,22 +2,19 @@ import { Component, Input, OnInit } from '@angular/core';
 import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 
 @Component({
-  selector: 'app-camera',
-  templateUrl: './camera.component.html',
-  styleUrls: ['./camera.component.scss']
+    selector: 'app-camera',
+    templateUrl: './camera.component.html',
+    styleUrls: ['./camera.component.scss']
 })
 export class CameraComponent implements OnInit {
+    @Input()
+    cameraUrl: string;
 
-  @Input()
-  cameraUrl: string;
+    safeCameraUrl: SafeResourceUrl;
 
-  safeCameraUrl: SafeResourceUrl;
+    constructor(private sanitizer: DomSanitizer) {}
 
-  constructor(
-    private sanitizer: DomSanitizer
-  ) { }
-
-  ngOnInit(): void {
-    this.safeCameraUrl = this.sanitizer.bypassSecurityTrustResourceUrl(this.cameraUrl);
-  }
+    ngOnInit(): void {
+        this.safeCameraUrl = this.sanitizer.bypassSecurityTrustResourceUrl(this.cameraUrl);
+    }
 }

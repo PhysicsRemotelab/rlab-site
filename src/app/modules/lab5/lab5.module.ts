@@ -13,10 +13,7 @@ import { ResistancePlotComponent } from 'src/app/components/resistance-plot/resi
 import { MatSelectModule } from '@angular/material/select';
 
 @NgModule({
-    declarations: [
-        Lab5PageComponent,
-        ResistancePlotComponent
-    ],
+    declarations: [Lab5PageComponent, ResistancePlotComponent],
     imports: [
         CommonModule,
         RouterModule,
@@ -30,4 +27,4 @@ import { MatSelectModule } from '@angular/material/select';
         MatSelectModule
     ]
 })
-export class Lab5Module { }
+export class Lab5Module {}

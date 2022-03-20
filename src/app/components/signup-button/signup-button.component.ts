@@ -1,20 +1,15 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { AuthService } from '@auth0/auth0-angular';
 
 @Component({
-  selector: 'app-signup-button',
-  templateUrl: './signup-button.component.html',
-  styleUrls: ['./signup-button.component.scss']
+    selector: 'app-signup-button',
+    templateUrl: './signup-button.component.html',
+    styleUrls: ['./signup-button.component.scss']
 })
-export class SignupButtonComponent implements OnInit {
+export class SignupButtonComponent {
+    constructor(public auth: AuthService) {}
 
-  constructor(public auth: AuthService) {}
-
-  ngOnInit(): void {
-  }
-
-  loginWithRedirect(): void {
-    this.auth.loginWithRedirect({ screen_hint: 'signup' });
-  }
-
+    loginWithRedirect(): void {
+        this.auth.loginWithRedirect({ screen_hint: 'signup' });
+    }
 }

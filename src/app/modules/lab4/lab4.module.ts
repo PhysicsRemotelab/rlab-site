@@ -12,9 +12,7 @@ import { SharedModule } from '../shared/shared.module';
 import { MatSelectModule } from '@angular/material/select';
 
 @NgModule({
-    declarations: [
-        Lab4PageComponent
-    ],
+    declarations: [Lab4PageComponent],
     imports: [
         CommonModule,
         RouterModule,
@@ -28,4 +26,4 @@ import { MatSelectModule } from '@angular/material/select';
         MatSelectModule
     ]
 })
-export class Lab4Module { }
+export class Lab4Module {}

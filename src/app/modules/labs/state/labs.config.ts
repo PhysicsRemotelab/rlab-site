@@ -2,10 +2,9 @@ import { Injectable } from '@angular/core';
 import { serverUrl } from 'src/environments/environment';
 
 @Injectable({
-    providedIn: 'root',
+    providedIn: 'root'
 })
 export class LabsConfig {
-
     getLabEndpoint(code: string): string {
         return `${serverUrl}/labs/${code}`;
     }

@@ -11,9 +11,7 @@ import { Lab3PageComponent } from './page/lab3-page';
 import { SharedModule } from '../shared/shared.module';
 
 @NgModule({
-    declarations: [
-        Lab3PageComponent
-    ],
+    declarations: [Lab3PageComponent],
     imports: [
         CommonModule,
         RouterModule,
@@ -26,4 +24,4 @@ import { SharedModule } from '../shared/shared.module';
         SharedModule
     ]
 })
-export class Lab3Module { }
+export class Lab3Module {}

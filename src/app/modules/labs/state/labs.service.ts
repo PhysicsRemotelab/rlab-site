@@ -8,29 +8,25 @@ import { Observable } from 'rxjs/internal/Observable';
     providedIn: 'root'
 })
 export class LabsService {
+    constructor(private http: HttpClient, private labsConfig: LabsConfig) {}
 
-  constructor(
-    private http: HttpClient,
-    private labsConfig: LabsConfig
-  ) { }
+    getLabs(): Observable<Lab[]> {
+        return this.http.get<Lab[]>(this.labsConfig.getLabsEndpoint());
+    }
 
-  getLabs(): Observable<Lab[]> {
-    return this.http.get<Lab[]>(this.labsConfig.getLabsEndpoint());
-  }
+    getlabBooking(labId: number): Observable<any> {
+        return this.http.get<any>(this.labsConfig.getLabBookingEndpoint(labId));
+    }
 
-  getlabBooking(labId: number): Observable<any> {
-    return this.http.get<any>(this.labsConfig.getLabBookingEndpoint(labId));
-  }
+    useLab(id: number): Observable<any> {
+        return this.http.post(this.labsConfig.getUseLabsEndpoint(), { lab_id: id });
+    }
 
-  useLab(id: number): Observable<any> {
-    return this.http.post(this.labsConfig.getUseLabsEndpoint(), { lab_id: id });
-  }
+    freeLab(labId: number): Observable<any> {
+        return this.http.get(this.labsConfig.getFreeLabEndpoint(labId));
+    }
 
-  freeLab(labId: number): Observable<any> {
-    return this.http.get(this.labsConfig.getFreeLabEndpoint(labId));
-  }
-
-  getLab(code: string): Observable<Lab> {
-    return this.http.get<Lab>(this.labsConfig.getLabEndpoint(code));
-  }
+    getLab(code: string): Observable<Lab> {
+        return this.http.get<Lab>(this.labsConfig.getLabEndpoint(code));
+    }
 }

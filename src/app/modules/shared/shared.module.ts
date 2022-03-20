@@ -6,18 +6,13 @@ import { SpectrometerPlotComponent } from 'src/app/components/spectrometer-plot/
 import { GammaPlotComponent } from 'src/app/components/gamma-plot/gamma-plot.component';
 import { SaveMeasurementComponent } from 'src/app/components/save-measurement/save-measurement.component';
 import { MatButtonModule } from '@angular/material/button';
-import {MatInputModule} from '@angular/material/input';
+import { MatInputModule } from '@angular/material/input';
 import { ReactiveFormsModule } from '@angular/forms';
 import { FreeLabButtonComponent } from 'src/app/components/free-lab-button/free-lab-button.component';
 import { StartStopMeasurementButtonComponent } from 'src/app/components/start-stop-measurement-button/start-stop-measurement-button.component';
 
 @NgModule({
-    imports: [
-        CommonModule,
-        ReactiveFormsModule,
-        MatButtonModule,
-        MatInputModule
-    ],
+    imports: [CommonModule, ReactiveFormsModule, MatButtonModule, MatInputModule],
     declarations: [
         CountdownComponent,
         CameraComponent,
@@ -37,4 +32,4 @@ import { StartStopMeasurementButtonComponent } from 'src/app/components/start-st
         StartStopMeasurementButtonComponent
     ]
 })
-export class SharedModule { }
+export class SharedModule {}
