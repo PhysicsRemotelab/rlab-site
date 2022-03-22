@@ -27,6 +27,11 @@ const routes: Routes = [
         loadChildren: () => import('./modules/labs/module').then((m) => m.LabsPageModule)
     },
     {
+        path: ROUTES.lab1,
+        canActivate: [AuthGuard],
+        loadChildren: () => import('./modules/lab1/lab1.module').then((m) => m.Lab1Module)
+    },
+    {
         path: ROUTES.lab2,
         canActivate: [AuthGuard],
         loadChildren: () => import('./modules/lab2/lab2.module').then((m) => m.Lab2Module)
