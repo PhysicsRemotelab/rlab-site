@@ -2,7 +2,6 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { AuthService } from '@auth0/auth0-angular';
 import { Subscription } from 'rxjs';
 import { User } from './modules/users/model';
-import { roles } from '../../src/environments/environment';
 import { UsersService } from './modules/users/state/users.services';
 
 @Component({
@@ -12,7 +11,7 @@ import { UsersService } from './modules/users/state/users.services';
 })
 export class AppComponent implements OnInit, OnDestroy {
     authUser$$: Subscription;
-    isAuthenticated = !!sessionStorage.getItem('email');
+    isAuthenticated = false;
 
     constructor(private auth: AuthService, private usersService: UsersService) {}
 
@@ -24,13 +23,11 @@ export class AppComponent implements OnInit, OnDestroy {
                 console.log(result);
                 this.isAuthenticated = true;
                 sessionStorage.setItem('email', result.email);
-                sessionStorage.setItem('role', result[roles]);
 
                 const user = {
                     email: result.email,
                     name: result.name,
                     sub: result.sub,
-                    roles: result[roles].join(),
                     nickname: result.nickname,
                     picture: result.picture
                 } as User;
