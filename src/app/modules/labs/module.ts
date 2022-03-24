@@ -6,9 +6,10 @@ import { LabsPageComponent } from './page/labs-page';
 import { LabsRoutingModule } from './routes';
 import { MatCardModule } from '@angular/material/card';
 import { MatButtonModule } from '@angular/material/button';
+import { SharedModule } from '../shared/shared.module';
 
 @NgModule({
     declarations: [LabsPageComponent],
-    imports: [CommonModule, RouterModule, HttpClientModule, LabsRoutingModule, MatCardModule, MatButtonModule]
+    imports: [CommonModule, RouterModule, HttpClientModule, LabsRoutingModule, MatCardModule, MatButtonModule, SharedModule]
 })
 export class LabsPageModule {}

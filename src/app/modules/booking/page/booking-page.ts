@@ -9,7 +9,6 @@ import { BookingService } from '../state/booking.service';
     styleUrls: ['./booking-page.scss']
 })
 export class BookingPageComponent implements OnInit {
-
     constructor(private router: Router, private bookingService: BookingService) {}
 
     ngOnInit(): void {

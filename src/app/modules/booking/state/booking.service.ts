@@ -7,5 +7,4 @@ import { BookingConfig } from './booking.config';
 })
 export class BookingService {
     constructor(private http: HttpClient, private bookingConfig: BookingConfig) {}
-
 }

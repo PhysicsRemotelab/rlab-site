@@ -26,6 +26,7 @@ import { FormsModule } from '@angular/forms';
 import { metaReducers, reducers } from './app.state';
 import { MatCardModule } from '@angular/material/card';
 import { StoreRouterConnectingModule } from '@ngrx/router-store';
+import { ParticlesComponent } from './components/particles/particles.component';
 
 @NgModule({
     declarations: [
@@ -35,6 +36,7 @@ import { StoreRouterConnectingModule } from '@ngrx/router-store';
         SignupButtonComponent,
         LogoutButtonComponent,
         AuthenticationButtonComponent,
+        ParticlesComponent,
         LayoutComponent
     ],
     imports: [

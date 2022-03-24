@@ -6,6 +6,7 @@ import { BookingPageComponent } from './page/booking-page';
 import { BookingRoutingModule } from './booking.routes';
 import { MatCardModule } from '@angular/material/card';
 import { MatButtonModule } from '@angular/material/button';
+import { SharedModule } from '../shared/shared.module';
 
 @NgModule({
     declarations: [BookingPageComponent],

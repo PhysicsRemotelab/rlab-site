@@ -4,5 +4,4 @@ import { serverUrl } from 'src/environments/environment';
 @Injectable({
     providedIn: 'root'
 })
-export class BookingConfig {
-}
+export class BookingConfig {}
