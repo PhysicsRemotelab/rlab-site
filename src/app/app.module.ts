@@ -46,12 +46,12 @@ import { ParticlesComponent } from './components/particles/particles.component';
             audience,
             httpInterceptor: {
                 allowedList: [
-                    `${serverUrl}/booking`,
-                    `${serverUrl}/booking/*`,
-                    `${serverUrl}/booking/*/*`,
-                    `${serverUrl}/measurements`,
-                    `${serverUrl}/measurements/*`,
-                    `${serverUrl}/users`
+                    `${serverUrl}/api/booking`,
+                    `${serverUrl}/api/booking/*`,
+                    `${serverUrl}/api/booking/*/*`,
+                    `${serverUrl}/api/measurements`,
+                    `${serverUrl}/api/measurements/*`,
+                    `${serverUrl}/api/users`
                 ]
             }
         }),
