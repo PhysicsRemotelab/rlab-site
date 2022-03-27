@@ -19,7 +19,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatListModule } from '@angular/material/list';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AuthHttpInterceptor } from '@auth0/auth0-angular';
-import { audience, clientId, domain, serverUrl } from '../../src/environments/environment';
+import { audience, clientId, domain, apiUrl } from '../../src/environments/environment';
 import { LayoutComponent } from './layout/layout.component';
 import { StoreModule } from '@ngrx/store';
 import { FormsModule } from '@angular/forms';
@@ -46,12 +46,12 @@ import { ParticlesComponent } from './components/particles/particles.component';
             audience,
             httpInterceptor: {
                 allowedList: [
-                    `${serverUrl}/api/booking`,
-                    `${serverUrl}/api/booking/*`,
-                    `${serverUrl}/api/booking/*/*`,
-                    `${serverUrl}/api/measurements`,
-                    `${serverUrl}/api/measurements/*`,
-                    `${serverUrl}/api/users`
+                    `${apiUrl}/booking`,
+                    `${apiUrl}/booking/*`,
+                    `${apiUrl}/booking/*/*`,
+                    `${apiUrl}/measurements`,
+                    `${apiUrl}/measurements/*`,
+                    `${apiUrl}/users`
                 ]
             }
         }),

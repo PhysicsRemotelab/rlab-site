@@ -4,7 +4,7 @@ import { Chart } from 'chart.js';
 import { Subscription } from 'rxjs';
 import { throttleTime } from 'rxjs/operators';
 import { Input } from '@angular/core';
-import { serverUrl } from 'src/environments/environment';
+import { lab1Camera } from 'src/environments/environment';
 
 @Component({
     selector: 'app-temperature-plot',
@@ -39,7 +39,7 @@ export class TemperaturePlotComponent implements OnDestroy, AfterViewInit, OnCha
     private redPoints = [];
     private dataSourceSubscription: Subscription = new Subscription();
     private subject = webSocket('');
-    cameraUrlForPixels = `${serverUrl}/camera/0`;
+    cameraUrlForPixels = lab1Camera;
 
     constructor() {}
 

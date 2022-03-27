@@ -1,11 +1,11 @@
 import { Injectable } from '@angular/core';
-import { serverUrl } from 'src/environments/environment';
+import { apiUrl } from 'src/environments/environment';
 
 @Injectable({
     providedIn: 'root'
 })
 export class UsersConfig {
     getUsersEndpoint(): string {
-        return `${serverUrl}/users`;
+        return `${apiUrl}/users`;
     }
 }

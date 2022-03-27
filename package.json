@@ -6,7 +6,7 @@
   "license": "GPLV3",
   "private": true,
   "engines": {
-    "node": "14.x"
+    "node": "16.x"
   },
   "scripts": {
     "ng": "ng ",

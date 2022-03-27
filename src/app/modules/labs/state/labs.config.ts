@@ -1,27 +1,27 @@
 import { Injectable } from '@angular/core';
-import { serverUrl } from 'src/environments/environment';
+import { apiUrl } from 'src/environments/environment';
 
 @Injectable({
     providedIn: 'root'
 })
 export class LabsConfig {
     getLabEndpoint(code: string): string {
-        return `${serverUrl}/labs/${code}`;
+        return `${apiUrl}/labs/${code}`;
     }
 
     getLabsEndpoint(): string {
-        return `${serverUrl}/labs`;
+        return `${apiUrl}/labs`;
     }
 
     getLabBookingEndpoint(labId: number): any {
-        return `${serverUrl}/booking/${labId}`;
+        return `${apiUrl}/booking/${labId}`;
     }
 
     getUseLabsEndpoint(): string {
-        return `${serverUrl}/booking`;
+        return `${apiUrl}/booking`;
     }
 
     getFreeLabEndpoint(labId: number): string {
-        return `${serverUrl}/booking/cancel/${labId}`;
+        return `${apiUrl}/booking/cancel/${labId}`;
     }
 }
