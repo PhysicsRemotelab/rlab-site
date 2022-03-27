@@ -23,7 +23,7 @@ export class LabsPageComponent implements OnInit {
             console.log(labs);
             this.labs = labs;
             for (let i = 0; i < labs.length; i++) {
-                this.labsService.getlabBooking(labs[i].id).subscribe((booking: any) => {
+                this.labsService.checkBooking(labs[i].id).subscribe((booking: any) => {
                     console.log(booking);
                     if (!booking) {
                         this.labs[i].status = 'Start';
@@ -45,14 +45,14 @@ export class LabsPageComponent implements OnInit {
 
     startlab(lab: Lab): void {
         console.log(lab);
-        this.labsService.useLab(lab.id).subscribe((booking) => {
+        this.labsService.createBooking(lab.id).subscribe((booking) => {
             this.router.navigate([`/${lab.code}`], { state: { booking } });
         });
     }
 
     continuelab(lab: Lab): void {
         console.log(lab);
-        this.labsService.useLab(lab.id).subscribe((booking) => {
+        this.labsService.createBooking(lab.id).subscribe((booking) => {
             this.router.navigate([`/${lab.code}`], { state: { booking } });
         });
     }

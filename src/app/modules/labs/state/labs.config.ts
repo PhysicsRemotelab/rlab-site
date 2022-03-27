@@ -13,15 +13,15 @@ export class LabsConfig {
         return `${apiUrl}/labs`;
     }
 
-    getLabBookingEndpoint(labId: number): any {
+    checkBookingEndpoint(labId: number): any {
         return `${apiUrl}/booking/${labId}`;
     }
 
-    getUseLabsEndpoint(): string {
+    createBookingEndpoint(): string {
         return `${apiUrl}/booking`;
     }
 
-    getFreeLabEndpoint(labId: number): string {
+    cancelBookingEndpoint(labId: number): string {
         return `${apiUrl}/booking/cancel/${labId}`;
     }
 }

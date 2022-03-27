@@ -13,8 +13,8 @@ export class FreeLabButtonComponent {
 
     constructor(private labService: LabsService, private router: Router) {}
 
-    freeLab(): void {
-        this.labService.freeLab(this.bookingId).subscribe(() => {
+    cancelBooking(): void {
+        this.labService.cancelBooking(this.bookingId).subscribe(() => {
             this.router.navigate([`/labs`]);
         });
     }

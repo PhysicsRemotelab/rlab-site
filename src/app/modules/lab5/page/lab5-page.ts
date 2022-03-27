@@ -35,7 +35,7 @@ export class Lab5PageComponent {
             this.lab = this.booking.lab;
             this.takenUntil = this.booking.takenUntil;
         } else if (!this.booking) {
-            this.labService.getlabBooking(5).subscribe((booking) => {
+            this.labService.checkBooking(5).subscribe((booking) => {
                 console.log(booking);
                 this.booking = booking;
                 this.lab = this.booking.lab;
