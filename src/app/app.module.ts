@@ -27,6 +27,7 @@ import { metaReducers, reducers } from './app.state';
 import { MatCardModule } from '@angular/material/card';
 import { StoreRouterConnectingModule } from '@ngrx/router-store';
 import { ParticlesComponent } from './components/particles/particles.component';
+import { IdleModule } from './services/idle-service/idle-module';
 
 @NgModule({
     declarations: [
@@ -68,6 +69,7 @@ import { ParticlesComponent } from './components/particles/particles.component';
         MatIconModule,
         MatListModule,
         MatCardModule,
+        IdleModule,
         StoreModule.forRoot(reducers, { metaReducers }),
         StoreRouterConnectingModule.forRoot()
     ],

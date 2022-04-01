@@ -35,6 +35,7 @@
     "@ngrx/store-devtools": "^13.1.0",
     "angular-jwt": "^0.1.11",
     "chart.js": "^3.7.1",
+    "compass-mixins": "^0.12.11",
     "minimist": "^1.2.6",
     "ng2-charts": "^3.0.8",
     "ngx-csv": "^0.3.2",

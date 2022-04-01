@@ -10,11 +10,13 @@ import { MatInputModule } from '@angular/material/input';
 import { ReactiveFormsModule } from '@angular/forms';
 import { FreeLabButtonComponent } from 'src/app/components/free-lab-button/free-lab-button.component';
 import { StartStopMeasurementButtonComponent } from 'src/app/components/start-stop-measurement-button/start-stop-measurement-button.component';
+import { BunnyComponent } from 'src/app/components/bunny/bunny.component';
 
 @NgModule({
     imports: [CommonModule, ReactiveFormsModule, MatButtonModule, MatInputModule],
     declarations: [
         CountdownComponent,
+        BunnyComponent,
         CameraComponent,
         SpectrometerPlotComponent,
         GammaPlotComponent,
@@ -24,6 +26,7 @@ import { StartStopMeasurementButtonComponent } from 'src/app/components/start-st
     ],
     exports: [
         CountdownComponent,
+        BunnyComponent,
         CameraComponent,
         SpectrometerPlotComponent,
         GammaPlotComponent,
