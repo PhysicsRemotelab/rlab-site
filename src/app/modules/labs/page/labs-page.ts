@@ -30,7 +30,7 @@ export class LabsPageComponent implements OnInit {
                         return;
                     }
 
-                    if (booking?.user?.id == this.currentUserId) {
+                    if (booking?.user?.id == this.currentUserId && !booking?.isCancelled) {
                         this.labs[i].status = 'Continue';
                         return;
                     }
