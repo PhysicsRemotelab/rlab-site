@@ -1,10 +1,8 @@
 import { AfterViewInit, Component, ElementRef, EventEmitter, OnChanges, OnDestroy, Output, ViewChild } from '@angular/core';
-import { webSocket } from 'rxjs/webSocket';
 import { Chart } from 'chart.js';
-import { Subscription } from 'rxjs';
-import { throttleTime } from 'rxjs/operators';
+import { interval, Subscription } from 'rxjs';
 import { Input } from '@angular/core';
-import { lab1Camera } from 'src/environments/environment';
+import { cameraUrl } from 'src/environments/environment';
 
 @Component({
     selector: 'app-temperature-plot',
@@ -16,13 +14,7 @@ export class TemperaturePlotComponent implements OnDestroy, AfterViewInit, OnCha
     private chartRef: ElementRef;
 
     @Input()
-    private selectedSensor: string;
-
-    @Input()
-    private sensorUrl: string;
-
-    @Input()
-    private measurementStarted: string;
+    private measurementStarted: boolean = false;
 
     @Output()
     measurementDataEvent = new EventEmitter<any>();
@@ -35,11 +27,7 @@ export class TemperaturePlotComponent implements OnDestroy, AfterViewInit, OnCha
 
     private chart: Chart;
     private points = [];
-    private greenPoints = [];
-    private redPoints = [];
     private dataSourceSubscription: Subscription = new Subscription();
-    private subject = webSocket('');
-    cameraUrlForPixels = lab1Camera;
 
     constructor() {}
 
@@ -50,114 +38,65 @@ export class TemperaturePlotComponent implements OnDestroy, AfterViewInit, OnCha
                 datasets: [
                     {
                         data: this.points,
-                        fill: true,
-                        pointRadius: 2,
-                        borderColor: 'black',
-                        label: 'Sensor value'
-                    },
-                    {
-                        data: this.redPoints,
-                        fill: true,
-                        pointRadius: 2,
-                        borderColor: 'red',
-                        label: 'Red dot pixel value'
-                    },
-                    {
-                        data: this.greenPoints,
-                        fill: true,
-                        pointRadius: 2,
-                        borderColor: 'green',
-                        label: 'Green dot pixel value'
+                        fill: false,
+                        pointRadius: 1,
+                        label: 'Pixel values'
                     }
                 ]
             },
             options: {
-                responsive: true
+                responsive: true,
+                scales: {
+                    x: {
+                        min: 0,
+                        max: 320
+                    },
+                    y: {
+                        min: 0,
+                        max: 255,
+                    }
+                }
             }
         });
     }
 
     ngOnChanges() {
-        if (this.measurementStarted) {
-            this.subject = webSocket(this.sensorUrl);
-            this.subject.next({ command: this.selectedSensor });
-            this.points = [];
-            let i = 0;
+        console.log('ngOnChanges');
+        const source = interval(5000);
 
-            this.dataSourceSubscription = this.subject.pipe(throttleTime(10)).subscribe((point: number) => {
-                console.log(point);
-                if (point[0] == 0 && point[1] == 0) {
-                    this.stopEvent.emit();
-                } else {
-                    let self = this;
-                    this.getPixelValues(function (cameraPoints: any) {
-                        let redPoint = cameraPoints[0][0];
-                        let greenPoint = cameraPoints[1][0];
-                        let sensorPoint = point[0];
-                        i++;
-
-                        self.points.push({
-                            x: i,
-                            y: sensorPoint
-                        });
-                        self.chart.data.datasets[0].data = null;
-                        self.chart.data.datasets[0].data = self.points;
-                        self.chart.data.datasets[0].borderColor = 'black';
-
-                        self.redPoints.push({
-                            x: i,
-                            y: redPoint
-                        });
-                        self.chart.data.datasets[1].data = null;
-                        self.chart.data.datasets[1].data = self.redPoints;
-                        self.chart.data.datasets[1].borderColor = 'red';
-
-                        self.greenPoints.push({
-                            x: i,
-                            y: greenPoint
-                        });
-                        self.chart.data.datasets[2].data = null;
-                        self.chart.data.datasets[2].data = self.greenPoints;
-                        self.chart.data.datasets[2].borderColor = 'green';
-
-                        self.measurementDataEvent.emit([i, sensorPoint, redPoint, greenPoint]);
-                        self.chart.clear();
-                        self.chart.update();
-                    });
-                }
-            });
+        if (!this.measurementStarted) {
+            this.dataSourceSubscription.unsubscribe();
             return;
         }
-        this.subject.complete();
-        this.dataSourceSubscription.unsubscribe();
-    }
 
-    async getPixelValues(callback) {
-        var img = new Image();
-        img.crossOrigin = 'Anonymous';
-        img.src = this.cameraUrlForPixels;
-        const canvas = <HTMLCanvasElement>document.getElementById('canvas');
-        canvas.width = 320;
-        canvas.height = 240;
-        const context = canvas.getContext('2d');
-
-        img.onload = function () {
+        this.dataSourceSubscription = source.subscribe((point: number) => {
+            console.log(point);
+            let self = this;
+            var img = new Image();
+            img.crossOrigin = 'Anonymous';
+            img.src = `${cameraUrl}/camera/0`;
+            const canvas = <HTMLCanvasElement>document.createElement('canvas');
+            canvas.width = 320;
+            canvas.height = 240;
+            const context = canvas.getContext('2d');
             context.drawImage(img, 0, 0);
 
-            const redPoint = context.getImageData(160, 120, 1, 1).data;
-            context.fillStyle = '#FF0000';
-            context.beginPath();
-            context.arc(160, 120, 3, 0, Math.PI * 2, true);
-            context.fill();
-
-            const greenPoint = context.getImageData(160, 160, 1, 1).data;
-            context.fillStyle = '#00FF00';
-            context.beginPath();
-            context.arc(160, 160, 3, 0, Math.PI * 2, true);
-            context.fill();
-
-            callback([redPoint, greenPoint]);
-        };
+            img.onload = function () {
+                console.log('onload');
+                const points = [];
+                for (let i = 0; i < 320; i++) {
+                    const point = context.getImageData(i, 120, 1, 1).data[0];
+                    const nr = { x: i, y: Number(point) };
+                    points.push(nr);
+                }
+                self.points = points;
+                self.chart.data.datasets[0].data = null;
+                self.chart.data.datasets[0].data = points;
+                self.chart.clear();
+                self.chart.update();
+                console.log(self.points);
+            };
+        });
     }
 
     ngOnDestroy(): void {

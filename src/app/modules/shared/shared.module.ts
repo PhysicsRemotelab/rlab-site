@@ -11,6 +11,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { FreeLabButtonComponent } from 'src/app/components/free-lab-button/free-lab-button.component';
 import { StartStopMeasurementButtonComponent } from 'src/app/components/start-stop-measurement-button/start-stop-measurement-button.component';
 import { BunnyComponent } from 'src/app/components/bunny/bunny.component';
+import { TemperaturePlotComponent } from 'src/app/components/temperature-plot/temperature-plot.component';
 
 @NgModule({
     imports: [CommonModule, ReactiveFormsModule, MatButtonModule, MatInputModule],
@@ -22,6 +23,7 @@ import { BunnyComponent } from 'src/app/components/bunny/bunny.component';
         GammaPlotComponent,
         SaveMeasurementComponent,
         FreeLabButtonComponent,
+        TemperaturePlotComponent,
         StartStopMeasurementButtonComponent
     ],
     exports: [
@@ -32,6 +34,7 @@ import { BunnyComponent } from 'src/app/components/bunny/bunny.component';
         GammaPlotComponent,
         SaveMeasurementComponent,
         FreeLabButtonComponent,
+        TemperaturePlotComponent,
         StartStopMeasurementButtonComponent
     ]
 })
