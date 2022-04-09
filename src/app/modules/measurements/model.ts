@@ -8,7 +8,7 @@ export interface Measurement {
     user: User;
     userId: number;
     result: string;
-    name: string;
+    displayName: string;
     createdAt: Date;
     updatedAt: Date;
 }

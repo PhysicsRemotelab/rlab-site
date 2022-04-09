@@ -11,7 +11,7 @@ import { DatePipe } from '@angular/common';
 })
 export class MeasurementsPageComponent implements OnInit {
     measurements = [];
-    displayedColumns: string[] = ['id', 'lab', 'name', 'created', 'actions'];
+    displayedColumns: string[] = ['id', 'lab', 'displayName', 'created', 'actions'];
 
     constructor(private measurementsService: MeasurementsService, private datepipe: DatePipe) {}
 
@@ -47,7 +47,7 @@ export class MeasurementsPageComponent implements OnInit {
             return {
                 id: item.id,
                 lab: item.labId,
-                name: item.name,
+                displayName: item.displayName,
                 result: item.result,
                 createdAt: this.datepipe.transform(item.createdAt, 'dd.MM.yyyy HH:mm:ss')
             };
