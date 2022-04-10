@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { MeasurementsConfig } from './measurements.config';
 import { Measurement } from '../model';
 import { Observable } from 'rxjs/internal/Observable';
+import { apiUrl } from 'src/environments/environment';
 
 @Injectable({
     providedIn: 'root'
@@ -20,5 +21,9 @@ export class MeasurementsService {
 
     deleteMeasurement(id: number): Observable<number> {
         return this.http.delete<number>(this.measurementsConfig.getMeasurementsEndpoint() + '/' + id);
+    }
+
+    downloadFile(id: number): Observable<Blob> {
+        return this.http.get(`${this.measurementsConfig.getMeasurementsEndpoint()}/download/${id}`, { responseType: 'blob' });
     }
 }

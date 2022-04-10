@@ -3,6 +3,7 @@ import { MeasurementsService } from '../state/measurements.services';
 import { ngxCsv } from 'ngx-csv/ngx-csv';
 import { Measurement } from '../model';
 import { DatePipe } from '@angular/common';
+import { HttpClient } from '@angular/common/http';
 
 @Component({
     selector: 'app-measurements-page',
@@ -13,7 +14,7 @@ export class MeasurementsPageComponent implements OnInit {
     measurements = [];
     displayedColumns: string[] = ['id', 'lab', 'displayName', 'created', 'actions'];
 
-    constructor(private measurementsService: MeasurementsService, private datepipe: DatePipe) {}
+    constructor(private measurementsService: MeasurementsService, private datepipe: DatePipe, private http: HttpClient) {}
 
     ngOnInit(): void {
         console.log('Measurements page');
@@ -38,17 +39,26 @@ export class MeasurementsPageComponent implements OnInit {
         this.download(output);
     }
 
-    downloadAll(): void {
-        this.download(this.measurements);
+    downloadFile(id: number, displayName: string): void {
+        console.log(id);
+        this.measurementsService
+            .downloadFile(id)
+            .subscribe(blob => {
+                const a = document.createElement('a')
+                const objectUrl = URL.createObjectURL(blob)
+                a.href = objectUrl
+                a.download = displayName;
+                a.click();
+                URL.revokeObjectURL(objectUrl);
+            });
     }
 
     download(output: any): void {
         output = output.map((item: Measurement) => {
             return {
                 id: item.id,
-                lab: item.labId,
+                lab: item.lab.name,
                 displayName: item.displayName,
-                result: item.result,
                 createdAt: this.datepipe.transform(item.createdAt, 'dd.MM.yyyy HH:mm:ss')
             };
         });
@@ -57,10 +67,14 @@ export class MeasurementsPageComponent implements OnInit {
             fieldSeparator: ',',
             quoteStrings: '"',
             title: 'Results',
-            headers: ['Measurement ID', 'Lab name', 'Measurement name', 'Result', 'Created at'],
+            headers: ['Measurement ID', 'Lab name', 'File name', 'Created at'],
             eol: '\n'
         };
 
         new ngxCsv(output, 'Measurements', csvOptions);
+    }
+
+    downloadAll(): void {
+        this.download(this.measurements);
     }
 }

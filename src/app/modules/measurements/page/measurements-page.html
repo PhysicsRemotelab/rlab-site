@@ -26,7 +26,7 @@
                 <button (click)="deleteMeasurement(element.id)" mat-icon-button color="warn">
                     <mat-icon>delete</mat-icon>
                 </button>
-                <button (click)="downloadSingle(element.id)" mat-icon-button color="primary">
+                <button (click)="downloadFile(element.id, element.displayName)" mat-icon-button color="primary">
                     <mat-icon>download</mat-icon>
                 </button>
             </td>
@@ -37,6 +37,6 @@
     </table>
     <br />
     <div>
-        <button mat-raised-button (click)="downloadAll()">Download all</button>
+        <button mat-raised-button (click)="downloadAll()">Export</button>
     </div>
 </div>
