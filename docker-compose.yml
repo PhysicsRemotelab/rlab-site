@@ -1,0 +1,20 @@
+version: '3.7'
+
+services:
+  rlab-site-admin:
+      container_name: rlab-site
+      build:
+        context: .
+        dockerfile: Dockerfile
+        target: development
+        args:
+          NPM_TOKEN: ${NPM_TOKEN}
+      volumes:
+        - .:/home/node/
+        - rlab_site_node_modules:/home/node/node_modules
+      command: npm run start:prod
+      env_file: .env
+      ports:
+        - 4200:4200
+volumes:
+  rlab_site_node_modules:
