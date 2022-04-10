@@ -41,16 +41,14 @@ export class MeasurementsPageComponent implements OnInit {
 
     downloadFile(id: number, displayName: string): void {
         console.log(id);
-        this.measurementsService
-            .downloadFile(id)
-            .subscribe(blob => {
-                const a = document.createElement('a')
-                const objectUrl = URL.createObjectURL(blob)
-                a.href = objectUrl
-                a.download = displayName;
-                a.click();
-                URL.revokeObjectURL(objectUrl);
-            });
+        this.measurementsService.downloadFile(id).subscribe((blob) => {
+            const a = document.createElement('a');
+            const objectUrl = URL.createObjectURL(blob);
+            a.href = objectUrl;
+            a.download = displayName;
+            a.click();
+            URL.revokeObjectURL(objectUrl);
+        });
     }
 
     download(output: any): void {
