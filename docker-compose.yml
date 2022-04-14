@@ -1,7 +1,7 @@
 version: '3.7'
 
 services:
-  rlab-site-admin:
+  rlab-site:
       container_name: rlab-site
       build:
         context: .
@@ -12,7 +12,7 @@ services:
       volumes:
         - .:/home/node/
         - rlab_site_node_modules:/home/node/node_modules
-      command: npm run start:prod
+      command: npm start
       env_file: .env
       ports:
         - 4200:4200
