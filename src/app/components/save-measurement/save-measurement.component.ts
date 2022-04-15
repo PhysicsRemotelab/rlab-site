@@ -13,7 +13,7 @@ export class SaveMeasurementComponent {
     labId: number;
 
     @Input()
-    measurementResult: string;
+    measurementResult: any[];
 
     nameFormControl = new FormControl('', [Validators.required]);
 
@@ -28,9 +28,10 @@ export class SaveMeasurementComponent {
         }
         console.log(this.measurementResult);
 
-        this.measurementsService.saveMeasurements(this.labId, this.measurementResult.toString(), name).subscribe((res) => {
-            console.log(res);
-        });
+        this.measurementsService.saveMeasurements(this.labId, this.measurementResult.toString(), name)
+            .subscribe((res) => {
+                console.log(res);
+            });
 
         this.snackBarRef.open('Saved!', 'Hide', {
             duration: 5000,

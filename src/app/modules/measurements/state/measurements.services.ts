@@ -3,7 +3,6 @@ import { HttpClient } from '@angular/common/http';
 import { MeasurementsConfig } from './measurements.config';
 import { Measurement } from '../model';
 import { Observable } from 'rxjs/internal/Observable';
-import { apiUrl } from 'src/environments/environment';
 
 @Injectable({
     providedIn: 'root'
@@ -15,7 +14,7 @@ export class MeasurementsService {
         return this.http.get<Measurement[]>(this.measurementsConfig.getMeasurementsEndpoint());
     }
 
-    saveMeasurements(labId: number, result: string, displayName?: string): Observable<Measurement> {
+    saveMeasurements(labId: number, result: string, displayName: string): Observable<Measurement> {
         return this.http.post<Measurement>(this.measurementsConfig.getMeasurementsEndpoint(), { labId, result, displayName });
     }
 
