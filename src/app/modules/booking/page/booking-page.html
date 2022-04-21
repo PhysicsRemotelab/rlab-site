@@ -1,1 +1,40 @@
-<div class="booking-component"></div>
+<div class="bookings">
+    <table mat-table [dataSource]="bookings" class="mat-elevation-z8">
+        <ng-container matColumnDef="id">
+            <th mat-header-cell *matHeaderCellDef>ID</th>
+            <td mat-cell *matCellDef="let element">{{element.id}}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="lab">
+            <th mat-header-cell *matHeaderCellDef>Lab</th>
+            <td mat-cell *matCellDef="let element">{{element.lab.name}}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="takenFrom">
+            <th mat-header-cell *matHeaderCellDef>Taken From</th>
+            <td mat-cell *matCellDef="let element">{{element.takenFrom | date:"dd.MM.yyyy HH:mm:ss"}}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="takenUntil">
+            <th mat-header-cell *matHeaderCellDef>Taken Until</th>
+            <td mat-cell *matCellDef="let element">{{element.takenUntil | date:"dd.MM.yyyy HH:mm:ss"}}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="isCancelled">
+            <th mat-header-cell *matHeaderCellDef>Is Cancelled</th>
+            <td mat-cell *matCellDef="let element">{{element.isCancelled}}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="actions">
+            <th mat-header-cell *matHeaderCellDef>Actions</th>
+            <td mat-cell *matCellDef="let element">
+                <button (click)="deleteBooking(element.id)" mat-icon-button color="warn">
+                    <mat-icon>delete</mat-icon>
+                </button>
+            </td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    </table>
+</div>

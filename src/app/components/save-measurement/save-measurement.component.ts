@@ -28,10 +28,9 @@ export class SaveMeasurementComponent {
         }
         console.log(this.measurementResult);
 
-        this.measurementsService.saveMeasurements(this.labId, this.measurementResult.toString(), name)
-            .subscribe((res) => {
-                console.log(res);
-            });
+        this.measurementsService.saveMeasurements(this.labId, this.measurementResult.toString(), name).subscribe((res) => {
+            console.log(res);
+        });
 
         this.snackBarRef.open('Saved!', 'Hide', {
             duration: 5000,

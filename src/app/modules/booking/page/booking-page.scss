@@ -1,6 +1,15 @@
-.booking-component {
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    flex-wrap: wrap;
+table {
+    width: 100%;
+}
+
+.bookings {
+    width: 90%;
+    margin: 10px auto;
+}
+
+td,
+th {
+    white-space: normal;
+    word-wrap: break-word;
+    max-width: 200px;
 }
