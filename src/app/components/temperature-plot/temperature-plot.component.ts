@@ -73,7 +73,7 @@ export class TemperaturePlotComponent implements OnDestroy, OnInit, AfterViewIni
         let self = this;
         var img = new Image();
         img.crossOrigin = 'Anonymous';
-        img.src = `${cameraUrl}/camera/0`;
+        img.src = `${cameraUrl}/camera/1`;
         const canvas = <HTMLCanvasElement>document.createElement('canvas');
         canvas.width = 320;
         canvas.height = 240;

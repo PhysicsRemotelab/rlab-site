@@ -7,3 +7,13 @@
     min-height: 100vh;
     padding: 20px;
 }
+
+.control-buttons {
+    display: flex;
+    flex-direction: column;
+
+    button {
+        margin: 10px;
+    }
+}
+

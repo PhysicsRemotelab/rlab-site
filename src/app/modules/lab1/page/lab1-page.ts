@@ -2,7 +2,7 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { LabsService } from '../../labs/state/labs.service';
 import { Lab } from '../../labs/model';
-import { lab1Camera, lab1Sensor } from 'src/environments/environment';
+import { lab2Camera, lab1Sensor } from 'src/environments/environment';
 import { webSocket } from 'rxjs/webSocket';
 
 @Component({
@@ -17,7 +17,7 @@ export class Lab1PageComponent implements OnInit, OnDestroy {
     takenUntil = null;
     measurementStarted = false;
     measurementResult = [];
-    cameraUrl = lab1Camera;
+    cameraUrl = lab2Camera;
     sensorUrl = lab1Sensor;
     subject = webSocket('');
     turnedOn = false;

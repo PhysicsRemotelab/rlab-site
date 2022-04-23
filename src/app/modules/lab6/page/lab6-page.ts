@@ -57,11 +57,31 @@ export class Lab6PageComponent implements OnInit, OnDestroy {
 
     rotateClockwise(): void {
         console.log('rotateClockwise');
-        this.subject.next(1);
+        this.subject.next('s');
     }
 
     rotateCounterClockwise(): void {
         console.log('rotateCounterClockwise');
-        this.subject.next(2);
+        this.subject.next('b');
+    }
+
+    laserOn(): void {
+        console.log('laserOn');
+        this.subject.next('i');
+    }
+
+    laserOff(): void {
+        console.log('laserOff');
+        this.subject.next('o');
+    }
+
+    driverOn(): void {
+        console.log('driverOn');
+        this.subject.next('d');
+    }
+
+    driverOff(): void {
+        console.log('driverOff');
+        this.subject.next('f');
     }
 }
