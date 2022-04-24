@@ -1,6 +1,5 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { LabsService } from '../../labs/state/labs.service';
 import { Lab } from '../../labs/model';
 import { lab2Camera, lab1Sensor } from 'src/environments/environment';
 import { webSocket } from 'rxjs/webSocket';
@@ -22,18 +21,13 @@ export class Lab1PageComponent implements OnInit, OnDestroy {
     subject = webSocket('');
     turnedOn = false;
 
-    constructor(private labService: LabsService, private router: Router) {
+    constructor(private router: Router) {
         if (this.router.getCurrentNavigation().extras.state) {
             this.booking = this.router.getCurrentNavigation().extras.state.booking;
             this.lab = this.booking.lab;
             this.takenUntil = this.booking.takenUntil;
-        } else if (!this.lab) {
-            this.labService.checkBooking(1).subscribe((booking) => {
-                console.log(booking);
-                this.booking = booking;
-                this.lab = this.booking.lab;
-                this.takenUntil = this.booking.takenUntil;
-            });
+        } else {
+            this.router.navigate(['/labs']);
         }
     }
 

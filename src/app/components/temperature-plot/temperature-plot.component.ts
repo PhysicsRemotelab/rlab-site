@@ -99,6 +99,8 @@ export class TemperaturePlotComponent implements OnDestroy, OnInit, AfterViewIni
     }
 
     ngOnDestroy(): void {
-        this.dataSourceSubscription.unsubscribe();
+        if (this.dataSourceSubscription) {
+            this.dataSourceSubscription.unsubscribe();
+        }
     }
 }
