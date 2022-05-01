@@ -1,8 +1,8 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { AuthService } from '@auth0/auth0-angular';
 import { Subscription } from 'rxjs';
-import { User } from './modules/users/model';
-import { UsersService } from './modules/users/state/users.services';
+import { User } from './modules/profile/model';
+import { ProfileService } from './modules/profile/state/profile.service';
 
 @Component({
     selector: 'app-root',
@@ -13,7 +13,7 @@ export class AppComponent implements OnInit, OnDestroy {
     authUser$$: Subscription;
     isAuthenticated = false;
 
-    constructor(private auth: AuthService, private usersService: UsersService) {}
+    constructor(private auth: AuthService, private profileService: ProfileService) {}
 
     ngOnInit(): void {
         console.log('App Component');
@@ -32,7 +32,7 @@ export class AppComponent implements OnInit, OnDestroy {
                     picture: result.picture
                 } as User;
 
-                this.usersService.postUser(user).subscribe((res: User) => {
+                this.profileService.createUser(user).subscribe((res: User) => {
                     sessionStorage.setItem('user_id', res.id);
                 });
             }

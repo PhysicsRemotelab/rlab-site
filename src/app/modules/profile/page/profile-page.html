@@ -1,9 +1,24 @@
-<div class="profile-page" *ngIf="auth.user$ | async as user">
-    <mat-card class="example-card">
-        <mat-card-header>
-            <img mat-card-sm-image mat-card-avatar src="{{user.picture}}" />
-            <mat-card-title>{{ user.name }}</mat-card-title>
-            <mat-card-subtitle>{{ user.email }}</mat-card-subtitle>
-        </mat-card-header>
+<div class="profile-page" *ngIf="user">
+    <mat-card>
+        <h2 class="title">Profile information</h2>
+        <form [formGroup]="profileForm" class="profile-form">
+            <mat-form-field>
+                <mat-label>Email:</mat-label>
+                <input matInput placeholder="Email" formControlName="email" />
+            </mat-form-field>
+            <mat-form-field>
+                <mat-label>Student code:</mat-label>
+                <input matInput placeholder="Student code" formControlName="code" />
+            </mat-form-field>
+            <mat-form-field>
+                <mat-label>First name:</mat-label>
+                <input matInput placeholder="First name" formControlName="firstName" />
+            </mat-form-field>
+            <mat-form-field>
+                <mat-label>Last name:</mat-label>
+                <input matInput placeholder="Last name" formControlName="lastName" />
+            </mat-form-field>
+            <button [disabled]="!profileForm.valid" (click)="onSubmit()" class="save-button" type="button" mat-raised-button>Save</button>
+        </form>
     </mat-card>
 </div>

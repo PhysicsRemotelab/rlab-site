@@ -4,8 +4,8 @@ import { apiUrl } from 'src/environments/environment';
 @Injectable({
     providedIn: 'root'
 })
-export class UsersConfig {
-    getUsersEndpoint(): string {
+export class ProfileConfig {
+    getProfileEndpoint(): string {
         return `${apiUrl}/users`;
     }
 }

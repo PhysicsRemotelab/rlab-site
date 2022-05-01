@@ -6,9 +6,22 @@ import { ProfilePageComponent } from './page/profile-page';
 import { ProfileRoutingModule } from './routes';
 import { MatCardModule } from '@angular/material/card';
 import { MatButtonModule } from '@angular/material/button';
+import { ReactiveFormsModule } from '@angular/forms';
+import { MatInputModule } from '@angular/material/input';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
 
 @NgModule({
     declarations: [ProfilePageComponent],
-    imports: [CommonModule, RouterModule, MatCardModule, MatButtonModule, HttpClientModule, ProfileRoutingModule]
+    imports: [
+        ReactiveFormsModule,
+        MatSnackBarModule,
+        MatInputModule,
+        CommonModule,
+        RouterModule,
+        MatCardModule,
+        MatButtonModule,
+        HttpClientModule,
+        ProfileRoutingModule
+    ]
 })
 export class ProfilePageModule {}

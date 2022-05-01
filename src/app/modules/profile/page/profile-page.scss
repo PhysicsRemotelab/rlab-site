@@ -3,3 +3,16 @@
     padding-top: 20px;
     margin: 0 auto;
 }
+
+.profile-form {
+    display: flex;
+    flex-direction: column;
+    margin: 0 auto;
+    justify-content: center;
+    width: 80%;
+}
+
+.title {
+    display: flex;
+    justify-content: center;
+}
