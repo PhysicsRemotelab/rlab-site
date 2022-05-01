@@ -1,7 +1,7 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Lab } from '../../labs/model';
-import { lab1CameraPixels, lab6Camera, lab6Sensor } from 'src/environments/environment';
+import { lab6CameraPixels, lab6Camera, lab6Sensor } from 'src/environments/environment';
 import { webSocket } from 'rxjs/webSocket';
 
 @Component({
@@ -18,7 +18,7 @@ export class Lab6PageComponent implements OnInit, OnDestroy {
     measurementStarted = false;
     measurementSaved = false;
     cameraUrl = lab6Camera;
-    cameraUrlPixels = lab1CameraPixels;
+    cameraUrlPixels = lab6CameraPixels;
     sensorUrl = lab6Sensor;
     subject = webSocket('');
 
