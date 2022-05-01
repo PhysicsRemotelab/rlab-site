@@ -2,7 +2,6 @@ import { AfterViewInit, Component, ElementRef, EventEmitter, OnDestroy, OnInit, 
 import { Chart } from 'chart.js';
 import { interval, Subscription } from 'rxjs';
 import { Input } from '@angular/core';
-import { cameraUrl } from 'src/environments/environment';
 
 @Component({
     selector: 'app-temperature-plot',
@@ -15,6 +14,9 @@ export class TemperaturePlotComponent implements OnDestroy, OnInit, AfterViewIni
 
     @Input()
     private measurementStarted: boolean = false;
+
+    @Input()
+    private cameraUrlPixels: string = '';
 
     @Output()
     measurementDataEvent = new EventEmitter<any>();
@@ -73,7 +75,7 @@ export class TemperaturePlotComponent implements OnDestroy, OnInit, AfterViewIni
         let self = this;
         var img = new Image();
         img.crossOrigin = 'Anonymous';
-        img.src = `${cameraUrl}/camera/1`;
+        img.src = this.cameraUrlPixels;
         const canvas = <HTMLCanvasElement>document.createElement('canvas');
         canvas.width = 320;
         canvas.height = 240;

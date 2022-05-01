@@ -35,7 +35,12 @@
             <mat-card-content>
                 <div>Here you can see results that have been measured.</div>
                 <br />
-                <app-temperature-plot [measurementStarted]="measurementStarted" (measurementDataEvent)="getData($event)"> </app-temperature-plot>
+                <app-temperature-plot
+                    [cameraUrlPixels]="cameraUrlPixels"
+                    [measurementStarted]="measurementStarted"
+                    (measurementDataEvent)="getData($event)"
+                >
+                </app-temperature-plot>
             </mat-card-content>
         </mat-card>
         <mat-card class="lab-save-results">
