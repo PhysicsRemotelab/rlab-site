@@ -47,12 +47,23 @@ export class ResistancePlotComponent implements OnDestroy, AfterViewInit, OnChan
                     {
                         data: this.points,
                         fill: true,
-                        pointRadius: 3
+                        pointRadius: 1,
+                        pointBackgroundColor: 'black',
+                        pointBorderColor: 'black',
+                        pointHoverBackgroundColor: 'black',
+                        pointHoverBorderColor: 'black',
+                        label: 'Pixel values'
                     }
                 ]
             },
             options: {
-                responsive: true
+                responsive: true,
+                scales: {
+                    x: {
+                        min: 20,
+                        max: 75
+                    }
+                }
             }
         });
     }

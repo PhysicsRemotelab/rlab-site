@@ -38,7 +38,12 @@ export class SpectrometerPlotComponent implements OnDestroy, AfterViewInit, OnCh
                     {
                         data: this.chartPoints,
                         fill: true,
-                        pointRadius: 1
+                        pointRadius: 1,
+                        pointBackgroundColor: 'black',
+                        pointBorderColor: 'black',
+                        pointHoverBackgroundColor: 'black',
+                        pointHoverBorderColor: 'black',
+                        label: 'Pixel values'
                     }
                 ]
             },
