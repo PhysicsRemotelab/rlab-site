@@ -37,7 +37,7 @@ export class SpectrometerPlotComponent implements OnDestroy, AfterViewInit, OnCh
                 datasets: [
                     {
                         data: this.chartPoints,
-                        fill: true,
+                        fill: false,
                         pointRadius: 1,
                         pointBackgroundColor: 'black',
                         pointBorderColor: 'black',
