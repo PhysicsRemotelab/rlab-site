@@ -48,7 +48,17 @@ export class SpectrometerPlotComponent implements OnDestroy, AfterViewInit, OnCh
                 ]
             },
             options: {
-                responsive: true
+                responsive: true,
+                scales: {
+                    x: {
+                        min: 0,
+                        max: 300
+                    },
+                    y: {
+                        min: 0,
+                        max: 1000
+                    }
+                }
             }
         });
     }
