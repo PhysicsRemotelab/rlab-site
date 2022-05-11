@@ -1,4 +1,22 @@
 <div class="bookings">
+    <form [formGroup]="bookingForm" class="booking-form">
+        <mat-form-field appearance="fill">
+            <mat-label>Select lab to book</mat-label>
+            <mat-select formControlName="labId" (selectionChange)="onSelect($event.value)" [(value)]="selectedLab">
+                <mat-option *ngFor="let lab of labs" [value]="lab.id"> {{lab.name}} </mat-option>
+            </mat-select>
+        </mat-form-field>
+        <mat-form-field appearance="fill">
+            <mat-label>Choose a date</mat-label>
+            <input formControlName="bookDate" [disabled]="isDisabled" [matDatepickerFilter]="dateFilter" matInput [matDatepicker]="picker" />
+            <mat-hint>MM/DD/YYYY</mat-hint>
+            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+            <mat-datepicker #picker></mat-datepicker>
+        </mat-form-field>
+
+        <button [disabled]="!bookingForm.valid" (click)="onSubmit()" class="book-button" type="button" mat-raised-button>Book</button>
+    </form>
+
     <table mat-table [dataSource]="bookings" class="mat-elevation-z8">
         <ng-container matColumnDef="id">
             <th mat-header-cell *matHeaderCellDef>ID</th>

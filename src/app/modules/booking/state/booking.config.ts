@@ -8,4 +8,8 @@ export class BookingConfig {
     getBookingEndpoint(): string {
         return `${apiUrl}/booking`;
     }
+
+    getTakenDaysEndpoint(labId: number): string {
+        return `${apiUrl}/booking/taken_days/${labId}`;
+    }
 }

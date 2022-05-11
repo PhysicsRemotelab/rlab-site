@@ -13,3 +13,14 @@ th {
     word-wrap: break-word;
     max-width: 200px;
 }
+
+.booking-form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 10px;
+
+    mat-form-field {
+        width: 50%;
+    }
+}
