@@ -8,6 +8,7 @@ const ROUTES = {
     booking: 'booking',
     measurements: 'measurements',
     profile: 'profile',
+    materials: 'materials',
     diode_efficiency_1: 'diode_efficiency_1',
     light_spectroscopy_1: 'light_spectroscopy_1',
     gamma_spectroscopy_1: 'gamma_spectroscopy_1',
@@ -26,6 +27,11 @@ const routes: Routes = [
         path: ROUTES.labs,
         canActivate: [],
         loadChildren: () => import('./modules/labs/module').then((m) => m.LabsPageModule)
+    },
+    {
+        path: ROUTES.materials,
+        canActivate: [],
+        loadChildren: () => import('./modules/materials/materials.module').then((m) => m.MaterialsPageModule)
     },
     {
         path: ROUTES.booking,
