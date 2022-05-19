@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { LabsService } from '../../labs/state/labs.service';
 import { BookingService } from '../state/booking.service';
+import * as moment from 'moment';
 
 @Component({
     selector: 'app-booking-page',
@@ -12,7 +13,7 @@ export class BookingPageComponent implements OnInit {
     constructor(private bookingService: BookingService, private labService: LabsService) {
         const currentYear = new Date().getFullYear();
         const currentMonth = new Date().getMonth();
-        const currentDay = new Date().getDay();
+        const currentDay = new Date().getDate();
         this.minDate = new Date(currentYear, currentMonth, currentDay);
         this.maxDate = new Date(currentYear, 11, 31);
     }
@@ -37,9 +38,7 @@ export class BookingPageComponent implements OnInit {
 
     ngOnInit(): void {
         console.log('Booking page');
-        this.bookingService.getBookings().subscribe((bookings) => {
-            this.bookings = bookings;
-        });
+        this.bookingService.getBookings().subscribe((bookings) => (this.bookings = bookings));
         this.labService.getLabs().subscribe((labs) => (this.labs = labs));
     }
 
@@ -53,21 +52,30 @@ export class BookingPageComponent implements OnInit {
 
     onSubmit() {
         console.log(this.bookingForm);
-        this.bookingService.createBooking(this.bookingForm.value.labId, this.bookingForm.value.bookDate).subscribe((booking) => {
+        const labId = this.bookingForm.value.labId;
+        let bookDate = this.bookingForm.value.bookDate;
+        bookDate = moment(bookDate).toDate();
+        bookDate = moment(bookDate).format('YYYY-MM-DDTHH:mm');
+        this.bookingService.createBooking(labId, bookDate).subscribe((booking) => {
             this.bookingService.getBookings().subscribe((bookings) => {
                 this.bookings = bookings;
+                this.bookingForm.reset();
+                this.isDisabled = true;
             });
         });
     }
 
     onSelect(value: number) {
         this.bookingService.getTakenDays(value).subscribe((result) => {
-            const takenDates = result.map((item) => new Date(item.takenUntil));
+            const takenDates = result.map((item) => moment(item.takenUntil).format('YYYY-MM-DD'));
             this.isDisabled = false;
-            console.log(takenDates);
 
             this.dateFilter = (date: Date): boolean => {
-                return takenDates.findIndex((taken_date) => date?.toDateString() === taken_date?.toDateString()) !== 0;
+                if (!date) return false;
+
+                const testDate = moment(date).format('YYYY-MM-DD');
+                const isTaken = takenDates.includes(testDate);
+                return !isTaken;
             };
         });
     }

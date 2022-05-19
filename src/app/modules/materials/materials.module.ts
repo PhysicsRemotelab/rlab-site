@@ -11,16 +11,7 @@ import { MaterialsPageComponent } from './page/materials-page';
 
 @NgModule({
     declarations: [MaterialsPageComponent],
-    imports: [
-        CommonModule,
-        RouterModule,
-        HttpClientModule,
-        MaterialsRoutingModule,
-        MatCardModule,
-        MatTableModule,
-        MatIconModule,
-        MatButtonModule
-    ],
+    imports: [CommonModule, RouterModule, HttpClientModule, MaterialsRoutingModule, MatCardModule, MatTableModule, MatIconModule, MatButtonModule],
     providers: []
 })
 export class MaterialsPageModule {}
