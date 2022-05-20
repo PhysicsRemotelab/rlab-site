@@ -87,7 +87,7 @@ export class TemperaturePlotComponent implements OnDestroy, OnInit, AfterViewIni
             for (let i = 0; i < 320; i++) {
                 const red = context.getImageData(i, 120, 1, 1).data[0];
                 const green = context.getImageData(i, 120, 1, 1).data[1];
-                const blue = context.getImageData(i, 120, 1, 1).data[2]
+                const blue = context.getImageData(i, 120, 1, 1).data[2];
                 const gray = 0.299 * red + 0.587 * green + 0.114 * blue;
                 const nr = { x: i, y: Number(gray) };
                 points.push(nr);

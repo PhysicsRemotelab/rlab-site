@@ -23,25 +23,22 @@ export class LabsPageComponent implements OnInit {
         console.log('Labs page');
         this.labsService.getLabs().subscribe((labs) => {
             console.log(labs);
-            this.labs = labs;
             for (let i = 0; i < labs.length; i++) {
-                this.bookingService.checkBooking(labs[i].id).subscribe((booking: any) => {
-                    console.log(booking);
-                    if (!booking) {
-                        this.labs[i].status = 'Start';
-                        return;
-                    }
-
-                    if (booking?.user?.id == this.currentUserId && !booking?.isCancelled) {
-                        this.labs[i].status = 'Continue';
-                        return;
-                    }
-
-                    if (booking?.user?.id != this.currentUserId) {
-                        this.labs[i].status = 'Busy';
-                    }
-                });
+                if (!labs[i].bookings) {
+                    labs[i].status = 'Start';
+                    continue;
+                }
+                const booking = labs[i].bookings[0];
+                if (booking.userId === Number(this.currentUserId)) {
+                    labs[i].status = 'Continue';
+                    continue;
+                }
+                if (booking.userId !== Number(this.currentUserId)) {
+                    labs[i].status = 'Busy';
+                    continue;
+                }
             }
+            this.labs = labs;
         });
     }
 

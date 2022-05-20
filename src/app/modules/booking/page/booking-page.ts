@@ -86,7 +86,7 @@ export class BookingPageComponent implements OnInit {
             this.dateClass = (date, view) => {
                 if (view === 'month') {
                     const testDate = moment(date);
-                    const now = moment().subtract(1, "days");
+                    const now = moment().subtract(1, 'days');
                     if (now > testDate) {
                         return '';
                     }

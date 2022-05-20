@@ -1,3 +1,5 @@
+import { Booking } from '../booking/booking.model';
+
 export interface Lab {
     id: number;
     code: string;
@@ -8,4 +10,5 @@ export interface Lab {
     createdAt: Date;
     isDisabled: boolean;
     status: string;
+    bookings: Booking[];
 }
