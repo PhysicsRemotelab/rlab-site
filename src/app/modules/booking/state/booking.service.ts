@@ -22,7 +22,15 @@ export class BookingService {
         return this.http.get<Booking[]>(this.bookingConfig.getTakenDaysEndpoint(labId));
     }
 
-    createBooking(lab_id: number, book_date: Date): Observable<any> {
+    createBooking(lab_id: number, book_date: string): Observable<any> {
         return this.http.post(this.bookingConfig.getBookingEndpoint(), { lab_id, book_date });
+    }
+
+    cancelBooking(labId: number): Observable<any> {
+        return this.http.get(this.bookingConfig.cancelBookingEndpoint(labId));
+    }
+
+    checkBooking(labId: number): Observable<any> {
+        return this.http.get<any>(this.bookingConfig.checkBookingEndpoint(labId));
     }
 }

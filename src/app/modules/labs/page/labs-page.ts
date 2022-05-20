@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import * as moment from 'moment';
+import { BookingService } from '../../booking/state/booking.service';
 import { Lab } from '../model';
 import { LabsService } from '../state/labs.service';
 
@@ -15,7 +17,7 @@ export class LabsPageComponent implements OnInit {
     userEmail = sessionStorage.getItem('email');
     isUsingCurrentLab = false;
 
-    constructor(private router: Router, private labsService: LabsService) {}
+    constructor(private router: Router, private labsService: LabsService, private bookingService: BookingService) {}
 
     ngOnInit(): void {
         console.log('Labs page');
@@ -23,7 +25,7 @@ export class LabsPageComponent implements OnInit {
             console.log(labs);
             this.labs = labs;
             for (let i = 0; i < labs.length; i++) {
-                this.labsService.checkBooking(labs[i].id).subscribe((booking: any) => {
+                this.bookingService.checkBooking(labs[i].id).subscribe((booking: any) => {
                     console.log(booking);
                     if (!booking) {
                         this.labs[i].status = 'Start';
@@ -45,14 +47,16 @@ export class LabsPageComponent implements OnInit {
 
     startlab(lab: Lab): void {
         console.log(lab);
-        this.labsService.createBooking(lab.id).subscribe((booking) => {
+        let bookDate = moment(new Date()).format('YYYY-MM-DDTHH:mm');
+        this.bookingService.createBooking(lab.id, bookDate).subscribe((booking) => {
             this.router.navigate([`/${lab.code}`], { state: { booking } });
         });
     }
 
     continuelab(lab: Lab): void {
         console.log(lab);
-        this.labsService.createBooking(lab.id).subscribe((booking) => {
+        let bookDate = moment(new Date()).format('YYYY-MM-DDTHH:mm');
+        this.bookingService.createBooking(lab.id, bookDate).subscribe((booking) => {
             this.router.navigate([`/${lab.code}`], { state: { booking } });
         });
     }

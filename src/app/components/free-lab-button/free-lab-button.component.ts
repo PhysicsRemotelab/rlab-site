@@ -1,6 +1,6 @@
 import { Component, Input } from '@angular/core';
 import { Router } from '@angular/router';
-import { LabsService } from 'src/app/modules/labs/state/labs.service';
+import { BookingService } from 'src/app/modules/booking/state/booking.service';
 
 @Component({
     selector: 'app-free-lab-button',
@@ -11,10 +11,10 @@ export class FreeLabButtonComponent {
     @Input()
     bookingId: number;
 
-    constructor(private labService: LabsService, private router: Router) {}
+    constructor(private bookingService: BookingService, private router: Router) {}
 
     cancelBooking(): void {
-        this.labService.cancelBooking(this.bookingId).subscribe(() => {
+        this.bookingService.cancelBooking(this.bookingId).subscribe(() => {
             this.router.navigate([`/labs`]);
         });
     }

@@ -12,4 +12,12 @@ export class BookingConfig {
     getTakenDaysEndpoint(labId: number): string {
         return `${apiUrl}/booking/taken_days/${labId}`;
     }
+
+    cancelBookingEndpoint(labId: number): string {
+        return `${apiUrl}/booking/cancel/${labId}`;
+    }
+
+    checkBookingEndpoint(labId: number): any {
+        return `${apiUrl}/booking/${labId}`;
+    }
 }
