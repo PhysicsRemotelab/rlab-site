@@ -21,16 +21,8 @@ export class BookingPageComponent implements OnInit {
     }
 
     dateClass: MatCalendarCellClassFunction<Date> = (cellDate, view) => {
-        // Only highligh dates inside the month view.
-        if (view === 'month') {
-          const date = cellDate.getDate();
-    
-          // Highlight the 1st and 20th day of each month.
-          return date === 1 || date === 20 ? 'free-date' : 'taken-date';
-        }
-    
         return '';
-      };
+    };
 
     dateFilter = (date: Date): boolean => {
         return true;
