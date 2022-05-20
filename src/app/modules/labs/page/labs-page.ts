@@ -47,7 +47,7 @@ export class LabsPageComponent implements OnInit {
 
     startlab(lab: Lab): void {
         console.log(lab);
-        let bookDate = moment(new Date()).format('YYYY-MM-DDTHH:mm');
+        let bookDate = moment(new Date()).format('YYYY-MM-DD');
         this.bookingService.createBooking(lab.id, bookDate).subscribe((booking) => {
             this.router.navigate([`/${lab.code}`], { state: { booking } });
         });
@@ -55,7 +55,7 @@ export class LabsPageComponent implements OnInit {
 
     continuelab(lab: Lab): void {
         console.log(lab);
-        let bookDate = moment(new Date()).format('YYYY-MM-DDTHH:mm');
+        let bookDate = moment(new Date()).format('YYYY-MM-DD');
         this.bookingService.createBooking(lab.id, bookDate).subscribe((booking) => {
             this.router.navigate([`/${lab.code}`], { state: { booking } });
         });
