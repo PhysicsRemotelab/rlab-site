@@ -8,7 +8,7 @@ import { MatTableModule } from '@angular/material/table';
 import { MatIconModule } from '@angular/material/icon';
 import { BookingPageComponent } from './page/booking-page';
 import { BookingRoutingModule } from './booking.routes';
-import { ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatInputModule } from '@angular/material/input';
 import { MatNativeDateModule } from '@angular/material/core';
 import { MatDatepickerModule } from '@angular/material/datepicker';
@@ -17,6 +17,8 @@ import { MatSelectModule } from '@angular/material/select';
 @NgModule({
     declarations: [BookingPageComponent],
     imports: [
+        FormsModule,
+        MatNativeDateModule,
         ReactiveFormsModule,
         MatNativeDateModule,
         MatDatepickerModule,

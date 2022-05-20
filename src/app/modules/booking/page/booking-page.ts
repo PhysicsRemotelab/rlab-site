@@ -1,13 +1,15 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { LabsService } from '../../labs/state/labs.service';
 import { BookingService } from '../state/booking.service';
 import * as moment from 'moment';
+import { MatCalendarCellClassFunction } from '@angular/material/datepicker';
 
 @Component({
     selector: 'app-booking-page',
     templateUrl: './booking-page.html',
-    styleUrls: ['./booking-page.scss']
+    styleUrls: ['./booking-page.scss'],
+    encapsulation: ViewEncapsulation.None
 })
 export class BookingPageComponent implements OnInit {
     constructor(private bookingService: BookingService, private labService: LabsService) {
@@ -17,6 +19,18 @@ export class BookingPageComponent implements OnInit {
         this.minDate = new Date(currentYear, currentMonth, currentDay);
         this.maxDate = new Date(currentYear, 11, 31);
     }
+
+    dateClass: MatCalendarCellClassFunction<Date> = (cellDate, view) => {
+        // Only highligh dates inside the month view.
+        if (view === 'month') {
+          const date = cellDate.getDate();
+    
+          // Highlight the 1st and 20th day of each month.
+          return date === 1 || date === 20 ? 'free-date' : 'taken-date';
+        }
+    
+        return '';
+      };
 
     dateFilter = (date: Date): boolean => {
         return true;
@@ -75,6 +89,15 @@ export class BookingPageComponent implements OnInit {
                 const testDate = moment(date).format('YYYY-MM-DD');
                 const isTaken = takenDates.includes(testDate);
                 return !isTaken;
+            };
+
+            this.dateClass = (date, view) => {
+                if (view === 'month') {
+                    const testDate = moment(date).format('YYYY-MM-DD');
+                    const isTaken = takenDates.includes(testDate);
+                    return !isTaken ? 'free-date' : 'taken-date';
+                }
+                return '';
             };
         });
     }
