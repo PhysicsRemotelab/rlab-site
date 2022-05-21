@@ -1,7 +1,7 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Lab } from '../../labs/model';
-import { lab4Camera, lab4Sensor } from 'src/environments/environment';
+import { lab4Camera, lab4Sensor, lab4Commands } from 'src/environments/environment';
 import { webSocket } from 'rxjs/webSocket';
 
 @Component({
@@ -19,6 +19,7 @@ export class Lab4PageComponent implements OnInit, OnDestroy {
     measurementSaved = false;
     cameraUrl = lab4Camera;
     sensorUrl = lab4Sensor;
+    commandsUrl = lab4Commands;
     subject = webSocket('');
 
     constructor(private router: Router) {
@@ -33,7 +34,7 @@ export class Lab4PageComponent implements OnInit, OnDestroy {
 
     ngOnInit(): void {
         console.log('ngOnInit');
-        this.subject = webSocket(this.sensorUrl);
+        this.subject = webSocket(this.commandsUrl);
         this.subject.subscribe();
     }
 
