@@ -61,7 +61,13 @@ export class ResistancePlotComponent implements OnDestroy, AfterViewInit, OnChan
                 scales: {
                     x: {
                         min: 20,
-                        max: 75
+                        max: 75,
+                        ticks: {
+                            stepSize: 5
+                        }
+                    },
+                    y: {
+                        min: 0
                     }
                 }
             }
