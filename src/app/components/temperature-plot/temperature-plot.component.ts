@@ -2,6 +2,7 @@ import { AfterViewInit, Component, ElementRef, EventEmitter, OnDestroy, OnInit, 
 import { Chart } from 'chart.js';
 import { interval, Subscription } from 'rxjs';
 import { Input } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
 
 @Component({
     selector: 'app-temperature-plot',
@@ -9,6 +10,8 @@ import { Input } from '@angular/core';
     styleUrls: ['./temperature-plot.component.scss']
 })
 export class TemperaturePlotComponent implements OnDestroy, OnInit, AfterViewInit {
+    constructor(private http: HttpClient) {}
+
     @ViewChild('chart')
     private chartRef: ElementRef;
 
@@ -53,11 +56,17 @@ export class TemperaturePlotComponent implements OnDestroy, OnInit, AfterViewIni
                 scales: {
                     x: {
                         min: 0,
-                        max: 320
+                        max: 640,
+                        ticks: {
+                            stepSize: 20
+                        }
                     },
                     y: {
                         min: 0,
-                        max: 255
+                        max: 255,
+                        ticks: {
+                            stepSize: 5
+                        }
                     }
                 }
             }
@@ -67,11 +76,29 @@ export class TemperaturePlotComponent implements OnDestroy, OnInit, AfterViewIni
     ngOnInit() {
         // prevent multiple subscriptions
         if (!this.dataSourceSubscription) {
-            this.dataSourceSubscription = interval(5000).subscribe(() => this.updateData());
+            this.dataSourceSubscription = interval(2000).subscribe(() => this.updateData());
         }
     }
 
     private async updateData() {
+        let self = this;
+        this.http.get(`${this.cameraUrlPixels}/160`).subscribe((data: any) => {
+            console.log(data);
+            const points = [];
+            for (let i = 0; i < data.length; i++) {
+                const nr = { x: i, y: Number(data[i]) };
+                points.push(nr);
+            }
+            self.points = points;
+
+            self.chart.data.datasets[0].data = null;
+            self.chart.data.datasets[0].data = this.points;
+            self.chart.clear();
+            self.chart.update();
+        });
+    }
+
+    private async updateDataLegacy() {
         let self = this;
         var img = new Image();
         img.crossOrigin = 'Anonymous';

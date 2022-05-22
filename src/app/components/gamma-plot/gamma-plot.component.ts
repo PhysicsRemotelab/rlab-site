@@ -58,7 +58,14 @@ export class GammaPlotComponent implements OnInit, OnDestroy, AfterViewInit, OnC
                 scales: {
                     x: {
                         min: 0,
-                        max: 4100
+                        max: 4100,
+                        ticks: {
+                            stepSize: 50
+                        }
+                    },
+                    y: {
+                        min: 0,
+                        suggestedMax: 100
                     }
                 }
             }
