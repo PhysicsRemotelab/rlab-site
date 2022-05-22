@@ -56,7 +56,7 @@ export class TemperaturePlotComponent implements OnDestroy, OnInit, AfterViewIni
                 scales: {
                     x: {
                         min: 0,
-                        max: 640,
+                        suggestedMax: 320,
                         ticks: {
                             stepSize: 20
                         }
