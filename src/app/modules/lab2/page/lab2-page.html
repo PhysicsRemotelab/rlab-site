@@ -15,8 +15,7 @@
             <mat-card-title>1. Start spectrometer</mat-card-title>
         </mat-card-header>
         <mat-card-content>
-            <app-start-stop-measurement-button (measurementStartedEvent)="getMeasurementStarted($event)">
-            </app-start-stop-measurement-button>
+            <app-start-stop-measurement-button (measurementStartedEvent)="getMeasurementStarted($event)"> </app-start-stop-measurement-button>
         </mat-card-content>
     </mat-card>
     <mat-card class="lab-control-panel">
@@ -38,8 +37,7 @@
         <mat-card-content>
             <div>Here you can see results that have been measured.</div>
             <br />
-            <app-spectrometer-plot [sensorUrl]="sensorUrl" [measurementStarted]="measurementStarted"
-                (measurementDataEvent)="getData($event)">
+            <app-spectrometer-plot [sensorUrl]="sensorUrl" [measurementStarted]="measurementStarted" (measurementDataEvent)="getData($event)">
             </app-spectrometer-plot>
         </mat-card-content>
     </mat-card>
