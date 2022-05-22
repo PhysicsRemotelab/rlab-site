@@ -10,47 +10,53 @@
             <app-camera [cameraUrl]="cameraUrl"></app-camera>
         </mat-card-content>
     </mat-card>
-    <mat-card class="lab-introduction">
-        <mat-card class="lab-control-item">
-            <mat-card-header>
-                <mat-card-title>1. Introduction</mat-card-title>
-            </mat-card-header>
-            <mat-card-content> Please start measurement, monitor result and stop measurements when finished. </mat-card-content>
-        </mat-card>
-        <mat-card class="lab-start-measurement">
-            <mat-card-header>
-                <mat-card-title>2. Start measurement</mat-card-title>
-            </mat-card-header>
-            <mat-card-content>
-                <app-start-stop-measurement-button (measurementStartedEvent)="getMeasurementStarted($event)"> </app-start-stop-measurement-button>
-            </mat-card-content>
-        </mat-card>
-        <mat-card class="lab-monitor-results">
-            <mat-card-header>
-                <mat-card-title>3. Monitor results</mat-card-title>
-            </mat-card-header>
-            <mat-card-content>
-                <div>Here you can see results that have been measured.</div>
-                <br />
-                <app-spectrometer-plot [sensorUrl]="sensorUrl" [measurementStarted]="measurementStarted" (measurementDataEvent)="getData($event)">
-                </app-spectrometer-plot>
-            </mat-card-content>
-        </mat-card>
-        <mat-card class="lab-save-results">
-            <mat-card-header>
-                <mat-card-title>4. Save results</mat-card-title>
-            </mat-card-header>
-            <mat-card-content>
-                <app-save-measurement [labId]="lab?.id" [measurementResult]="measurementResult"> </app-save-measurement>
-            </mat-card-content>
-        </mat-card>
-        <mat-card class="lab-stop-measurements">
-            <mat-card-header>
-                <mat-card-title>5. Stop measurement</mat-card-title>
-            </mat-card-header>
-            <mat-card-content>
-                <app-free-lab-button [bookingId]="booking?.id"></app-free-lab-button>
-            </mat-card-content>
-        </mat-card>
+    <mat-card class="lab-start-measurement">
+        <mat-card-header>
+            <mat-card-title>1. Start spectrometer</mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+            <app-start-stop-measurement-button (measurementStartedEvent)="getMeasurementStarted($event)">
+            </app-start-stop-measurement-button>
+        </mat-card-content>
+    </mat-card>
+    <mat-card class="lab-control-panel">
+        <mat-card-header>
+            <mat-card-title>2. Control panel</mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+            <button class="button" mat-raised-button (click)="writeCommand('R')">Red</button>
+            <button class="button" mat-raised-button (click)="writeCommand('G')">Green</button>
+            <button class="button" mat-raised-button (click)="writeCommand('B')">Blue</button>
+            <button class="button" mat-raised-button (click)="writeCommand('W')">White</button>
+            <button class="button" mat-raised-button (click)="writeCommand('O')">Off</button>
+        </mat-card-content>
+    </mat-card>
+    <mat-card class="lab-monitor-results">
+        <mat-card-header>
+            <mat-card-title>3. Monitor results</mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+            <div>Here you can see results that have been measured.</div>
+            <br />
+            <app-spectrometer-plot [sensorUrl]="sensorUrl" [measurementStarted]="measurementStarted"
+                (measurementDataEvent)="getData($event)">
+            </app-spectrometer-plot>
+        </mat-card-content>
+    </mat-card>
+    <mat-card class="lab-save-results">
+        <mat-card-header>
+            <mat-card-title>4. Save results</mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+            <app-save-measurement [labId]="lab?.id" [measurementResult]="measurementResult"> </app-save-measurement>
+        </mat-card-content>
+    </mat-card>
+    <mat-card class="lab-stop-measurements">
+        <mat-card-header>
+            <mat-card-title>5. Stop measurement</mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+            <app-free-lab-button [bookingId]="booking?.id"></app-free-lab-button>
+        </mat-card-content>
     </mat-card>
 </div>

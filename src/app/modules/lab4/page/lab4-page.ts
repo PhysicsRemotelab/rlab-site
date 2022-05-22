@@ -20,7 +20,7 @@ export class Lab4PageComponent implements OnInit, OnDestroy {
     cameraUrl = lab4Camera;
     sensorUrl = lab4Sensor;
     commandsUrl = lab4Commands;
-    subject = webSocket('');
+    commandServiceSubject = webSocket('');
 
     constructor(private router: Router) {
         if (this.router.getCurrentNavigation().extras.state) {
@@ -33,13 +33,8 @@ export class Lab4PageComponent implements OnInit, OnDestroy {
     }
 
     ngOnInit(): void {
-        console.log('ngOnInit');
-        this.subject = webSocket(this.commandsUrl);
-        this.subject.subscribe();
-    }
-
-    ngOnDestroy(): void {
-        this.subject.unsubscribe();
+        this.commandServiceSubject = webSocket(this.commandsUrl);
+        this.commandServiceSubject.subscribe();
     }
 
     getData($event: any): void {
@@ -52,11 +47,15 @@ export class Lab4PageComponent implements OnInit, OnDestroy {
 
     rotateClockwise(): void {
         console.log('rotateClockwise');
-        this.subject.next(1);
+        this.commandServiceSubject.next(1);
     }
 
     rotateCounterClockwise(): void {
         console.log('rotateCounterClockwise');
-        this.subject.next(2);
+        this.commandServiceSubject.next(2);
+    }
+
+    ngOnDestroy(): void {
+        this.commandServiceSubject.unsubscribe();
     }
 }
