@@ -1,6 +1,6 @@
 import { AfterViewInit, Component, ElementRef, EventEmitter, Input, OnChanges, OnDestroy, OnInit, Output, ViewChild } from '@angular/core';
 import { Chart } from 'chart.js';
-import { Subscription } from 'rxjs';
+import { Subscription, throttleTime } from 'rxjs';
 import { webSocket } from 'rxjs/webSocket';
 
 @Component({
@@ -69,7 +69,7 @@ export class GammaPlotComponent implements OnInit, OnDestroy, AfterViewInit, OnC
         if (this.measurementStarted) {
             this.subject = webSocket(this.sensorUrl);
 
-            this.dataSourceSubscription = this.subject.pipe().subscribe((data: number[]) => {
+            this.dataSourceSubscription = this.subject.pipe(throttleTime(100)).subscribe((data: number[]) => {
                 this.transformData(data);
                 this.measurementDataEvent.emit(this.result);
                 this.chart.data.datasets[0].data = null;
