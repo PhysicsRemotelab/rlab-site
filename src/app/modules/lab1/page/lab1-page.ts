@@ -21,6 +21,7 @@ export class Lab1PageComponent implements OnInit, OnDestroy {
     sensorUrl = lab1Sensor;
     subject = webSocket('');
     turnedOn = false;
+    lineNumber = 320;
 
     constructor(private router: Router) {
         if (this.router.getCurrentNavigation().extras.state) {

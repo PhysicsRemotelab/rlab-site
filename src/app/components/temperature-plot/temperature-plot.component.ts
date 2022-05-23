@@ -2,7 +2,7 @@ import { AfterViewInit, Component, ElementRef, EventEmitter, OnDestroy, OnInit, 
 import { Chart } from 'chart.js';
 import { interval, Subscription } from 'rxjs';
 import { Input } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { CameraPixelService } from './temperature.service';
 
 @Component({
     selector: 'app-temperature-plot',
@@ -10,13 +10,16 @@ import { HttpClient } from '@angular/common/http';
     styleUrls: ['./temperature-plot.component.scss']
 })
 export class TemperaturePlotComponent implements OnDestroy, OnInit, AfterViewInit {
-    constructor(private http: HttpClient) {}
+    constructor(private cameraPixelService: CameraPixelService) {}
 
     @ViewChild('chart')
     private chartRef: ElementRef;
 
     @Input()
     private measurementStarted: boolean = false;
+
+    @Input()
+    private lineNumber: number = 0;
 
     @Input()
     private cameraUrlPixels: string = '';
@@ -82,7 +85,7 @@ export class TemperaturePlotComponent implements OnDestroy, OnInit, AfterViewIni
 
     private async updateData() {
         let self = this;
-        this.http.get(`${this.cameraUrlPixels}/160`).subscribe((data: any) => {
+        this.cameraPixelService.getCameraPixels(this.cameraUrlPixels, this.lineNumber).subscribe((data: any) => {
             console.log(data);
             const points = [];
             for (let i = 0; i < data.length; i++) {
@@ -96,38 +99,6 @@ export class TemperaturePlotComponent implements OnDestroy, OnInit, AfterViewIni
             self.chart.clear();
             self.chart.update();
         });
-    }
-
-    private async updateDataLegacy() {
-        let self = this;
-        var img = new Image();
-        img.crossOrigin = 'Anonymous';
-        img.src = this.cameraUrlPixels;
-        const canvas = <HTMLCanvasElement>document.createElement('canvas');
-        canvas.width = 320;
-        canvas.height = 240;
-        const context = canvas.getContext('2d');
-        context.drawImage(img, 0, 0);
-
-        img.onload = function () {
-            const points = [];
-            for (let i = 0; i < 320; i++) {
-                const red = context.getImageData(i, 120, 1, 1).data[0];
-                const green = context.getImageData(i, 120, 1, 1).data[1];
-                const blue = context.getImageData(i, 120, 1, 1).data[2];
-                const gray = 0.299 * red + 0.587 * green + 0.114 * blue;
-                const nr = { x: i, y: Number(gray) };
-                points.push(nr);
-            }
-            self.points = points;
-            // prevent multiple subscriptions
-            img.onload = function () {};
-        };
-        self.chart.data.datasets[0].data = null;
-        self.chart.data.datasets[0].data = this.points;
-        self.chart.clear();
-        self.chart.update();
-        console.log(self.points);
     }
 
     ngOnDestroy(): void {
