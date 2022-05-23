@@ -7,14 +7,14 @@ export const apiUrl = 'https://remotelab.ee/api/v1';
 export const cameraUrl = 'https://remotelab.ee';
 export const sensorUrl = 'wss://remotelab.ee';
 
-export const lab1Camera = `${cameraUrl}/cam/0`;
-export const lab1CameraPixels = `${cameraUrl}/pixels/0`;
-export const lab2Camera = `${cameraUrl}/cam/2`;
-export const lab3Camera = `${cameraUrl}/cam/2`;
-export const lab4Camera = `${cameraUrl}/cam/2`;
-export const lab5Camera = `${cameraUrl}/cam/2`;
-export const lab6Camera = `${cameraUrl}/cam/1`;
-export const lab6CameraPixels = `${cameraUrl}/pixels/1`;
+export const lab1Camera = `${cameraUrl}/cam/2`;
+export const lab1CameraPixels = `${cameraUrl}/pixels/2`;
+export const lab2Camera = `${cameraUrl}/cam/1`;
+export const lab3Camera = `${cameraUrl}/cam/1`;
+export const lab4Camera = `${cameraUrl}/cam/1`;
+export const lab5Camera = `${cameraUrl}/cam/1`;
+export const lab6Camera = `${cameraUrl}/cam/0`;
+export const lab6CameraPixels = `${cameraUrl}/pixels/0`;
 
 export const lab1Sensor = `${sensorUrl}/diode`;
 export const lab2Sensor = `${sensorUrl}/spectrometer-sensor`;
