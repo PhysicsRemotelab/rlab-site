@@ -1,9 +1,14 @@
-import { Component, OnInit, ViewEncapsulation } from '@angular/core';
+import { Component, OnInit, ViewChild, ViewEncapsulation } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { LabsService } from '../../labs/state/labs.service';
 import { BookingService } from '../state/booking.service';
 import * as moment from 'moment';
 import { MatCalendarCellClassFunction } from '@angular/material/datepicker';
+import { MatPaginator } from '@angular/material/paginator';
+import { MatTableDataSource } from '@angular/material/table';
+import { Booking } from '../booking.model';
+import { MatSort } from '@angular/material/sort';
+import { Lab } from '../../labs/model';
 
 @Component({
     selector: 'app-booking-page',
@@ -20,6 +25,15 @@ export class BookingPageComponent implements OnInit {
         this.maxDate = new Date(currentYear, 11, 31);
     }
 
+    displayedColumns: string[] = ['id', 'labName', 'takenFrom', 'takenUntil', 'isCancelled', 'actions'];
+    dataSource: MatTableDataSource<Booking>;
+
+    @ViewChild(MatPaginator)
+    paginator: MatPaginator;
+
+    @ViewChild(MatSort)
+    sort: MatSort;
+
     dateClass: MatCalendarCellClassFunction<Date> = (cellDate, view) => {
         return '';
     };
@@ -30,29 +44,24 @@ export class BookingPageComponent implements OnInit {
 
     minDate: Date;
     maxDate: Date;
-    bookings = [];
     labs = [];
     selectedLab = '';
-    displayedColumns: string[] = ['id', 'lab', 'takenFrom', 'takenUntil', 'isCancelled', 'actions'];
+    isDisabled: boolean = true;
 
     bookingForm = new FormGroup({
         labId: new FormControl('', Validators.required),
         bookDate: new FormControl('', Validators.required)
     });
 
-    isDisabled: boolean = true;
-
     ngOnInit(): void {
         console.log('Booking page');
-        this.bookingService.getBookings().subscribe((bookings) => (this.bookings = bookings));
-        this.labService.getLabs().subscribe((labs) => (this.labs = labs));
+        this.bookingService.getBookings().subscribe((bookings: Booking[]) => this.setDataSource(bookings));
+        this.labService.getLabs().subscribe((labs: Lab[]) => (this.labs = labs));
     }
 
     deleteBooking(id: number) {
         this.bookingService.deleteBooking(id).subscribe((res) => {
-            this.bookingService.getBookings().subscribe((result) => {
-                this.bookings = result;
-            });
+            this.bookingService.getBookings().subscribe((bookings: Booking[]) => this.setDataSource(bookings));
         });
     }
 
@@ -62,12 +71,19 @@ export class BookingPageComponent implements OnInit {
         let bookDate = this.bookingForm.value.bookDate;
         bookDate = moment(bookDate).format('YYYY-MM-DDTHH:mm');
         this.bookingService.createBooking(labId, bookDate).subscribe((booking) => {
-            this.bookingService.getBookings().subscribe((bookings) => {
-                this.bookings = bookings;
+            this.bookingService.getBookings().subscribe((bookings: Booking[]) => {
+                this.setDataSource(bookings);
                 this.bookingForm.reset();
                 this.isDisabled = true;
             });
         });
+    }
+
+    private setDataSource(bookings: Booking[]): void {
+        bookings = bookings.map((booking: Booking) => Object.assign(booking, (booking.labName = booking.lab.name)));
+        this.dataSource = new MatTableDataSource(bookings);
+        this.dataSource.sort = this.sort;
+        this.dataSource.paginator = this.paginator;
     }
 
     onSelect(value: number) {

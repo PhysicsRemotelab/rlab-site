@@ -8,10 +8,23 @@ import { MeasurementsRoutingModule } from './routes';
 import { MeasurementsPageComponent } from './page/measurements-page';
 import { MatTableModule } from '@angular/material/table';
 import { MatIconModule } from '@angular/material/icon';
+import { MatSortModule } from '@angular/material/sort';
+import { MatPaginatorModule } from '@angular/material/paginator';
 
 @NgModule({
     declarations: [MeasurementsPageComponent],
-    imports: [CommonModule, RouterModule, HttpClientModule, MeasurementsRoutingModule, MatCardModule, MatTableModule, MatIconModule, MatButtonModule],
+    imports: [
+        CommonModule,
+        RouterModule,
+        MatPaginatorModule,
+        MatSortModule,
+        HttpClientModule,
+        MeasurementsRoutingModule,
+        MatCardModule,
+        MatTableModule,
+        MatIconModule,
+        MatButtonModule
+    ],
     providers: [DatePipe]
 })
 export class MeasurementsPageModule {}

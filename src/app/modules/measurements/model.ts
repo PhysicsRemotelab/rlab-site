@@ -11,4 +11,5 @@ export interface Measurement {
     displayName: string;
     createdAt: Date;
     updatedAt: Date;
+    labName: string;
 }

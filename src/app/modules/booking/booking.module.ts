@@ -13,6 +13,8 @@ import { MatInputModule } from '@angular/material/input';
 import { MatNativeDateModule } from '@angular/material/core';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatSelectModule } from '@angular/material/select';
+import { MatPaginatorModule } from '@angular/material/paginator';
+import { MatSortModule } from '@angular/material/sort';
 
 @NgModule({
     declarations: [BookingPageComponent],
@@ -31,7 +33,9 @@ import { MatSelectModule } from '@angular/material/select';
         MatCardModule,
         MatTableModule,
         MatIconModule,
-        MatButtonModule
+        MatButtonModule,
+        MatPaginatorModule,
+        MatSortModule
     ],
     providers: [DatePipe]
 })

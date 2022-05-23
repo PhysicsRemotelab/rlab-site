@@ -6,4 +6,5 @@ export interface Booking {
     takenFrom: any;
     takenUntil: any;
     isCancelled: boolean;
+    labName: string;
 }
