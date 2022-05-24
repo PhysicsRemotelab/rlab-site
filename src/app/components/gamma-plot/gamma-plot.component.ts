@@ -26,6 +26,8 @@ export class GammaPlotComponent implements OnInit, OnDestroy, AfterViewInit, OnC
     private chartPoints = [];
     private dataSourceSubscription: Subscription = new Subscription();
     private subject = webSocket('');
+    public lastUpdated = new Date();
+    public totalCounts = 0;
 
     constructor() {}
 
@@ -50,7 +52,7 @@ export class GammaPlotComponent implements OnInit, OnDestroy, AfterViewInit, OnC
                         pointBorderColor: 'black',
                         pointHoverBackgroundColor: 'black',
                         pointHoverBorderColor: 'black',
-                        label: 'Energy distribution of sample material'
+                        label: 'Energy distribution of counted photons'
                     }
                 ]
             },
@@ -104,8 +106,9 @@ export class GammaPlotComponent implements OnInit, OnDestroy, AfterViewInit, OnC
 
     private transformData(data: number[]): void {
         // Receive new measurement result and add to existing array
-        let updatedResult = data.map((p, index) => p + this.result[index]);
-        this.result = updatedResult;
+        this.result = data;
+        this.lastUpdated = new Date();
+        this.totalCounts = data.reduce((a, b) => a + b, 0);
         this.chartPoints = this.result.map((val, i) => {
             const nr = { x: i, y: val };
             return nr;
