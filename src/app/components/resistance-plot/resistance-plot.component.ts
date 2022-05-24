@@ -53,7 +53,7 @@ export class ResistancePlotComponent implements OnDestroy, AfterViewInit, OnChan
                         pointBorderColor: 'black',
                         pointHoverBackgroundColor: 'black',
                         pointHoverBorderColor: 'black',
-                        label: 'Pixel values'
+                        label: 'Relationship between temperature and resistance'
                     }
                 ]
             },
@@ -65,10 +65,22 @@ export class ResistancePlotComponent implements OnDestroy, AfterViewInit, OnChan
                         max: 75,
                         ticks: {
                             stepSize: 5
+                        },
+                        title: {
+                            display: true,
+                            align: 'center',
+                            color: 'black',
+                            text: 'Temperature (Celsius)'
                         }
                     },
                     y: {
-                        min: 0
+                        min: 0,
+                        title: {
+                            display: true,
+                            align: 'center',
+                            color: 'black',
+                            text: 'Resistance (Ohm)'
+                        }
                     }
                 }
             }

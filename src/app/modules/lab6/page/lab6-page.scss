@@ -8,11 +8,7 @@
     padding: 20px;
 }
 
-.control-buttons {
-    display: flex;
-    flex-direction: column;
-
-    button {
-        margin: 10px;
-    }
+.mat-card {
+    margin: 5px;
+    background-color: rgba(255, 255, 255, 0.8);
 }

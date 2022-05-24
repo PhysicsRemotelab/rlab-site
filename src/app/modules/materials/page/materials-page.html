@@ -14,10 +14,10 @@
             <th mat-header-cell *matHeaderCellDef>Downloads</th>
             <td mat-cell *matCellDef="let element">
                 <button (click)="downloadFile(element.pdfLocation)" mat-icon-button color="primary">
-                    <span>.pdf </span>
+                    <i class="fa-regular fa-file-pdf fa-xl"></i>
                 </button>
                 <button (click)="downloadFile(element.docLocation)" mat-icon-button color="primary">
-                    <span>.docx</span>
+                    <i class="fa-regular fa-file-word fa-xl"></i>
                 </button>
             </td>
         </ng-container>

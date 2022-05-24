@@ -22,6 +22,8 @@ export class Lab1PageComponent implements OnInit, OnDestroy {
     subject = webSocket('');
     turnedOn = false;
     lineNumber = 320;
+    startText = 'Turn heater on';
+    stopText = 'Turn heater off';
 
     constructor(private router: Router) {
         if (this.router.getCurrentNavigation().extras.state) {
@@ -34,7 +36,6 @@ export class Lab1PageComponent implements OnInit, OnDestroy {
     }
 
     ngOnInit(): void {
-        console.log('ngOnInit');
         this.subject = webSocket(this.sensorUrl);
         this.subject.subscribe();
     }

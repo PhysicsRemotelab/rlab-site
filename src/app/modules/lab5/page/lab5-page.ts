@@ -12,12 +12,12 @@ export class Lab5PageComponent {
     labCode = 'temperature_resistance_1';
     selectedSensor = 'sensor1';
     sensors = [
-        { value: 'sensor1', viewValue: 'Sensor 1' },
-        { value: 'sensor2', viewValue: 'Sensor 2' },
-        { value: 'sensor3', viewValue: 'Sensor 3' },
-        { value: 'sensor4', viewValue: 'Sensor 4' },
-        { value: 'sensor5', viewValue: 'Sensor 5' },
-        { value: 'sensor6', viewValue: 'Sensor 6' }
+        { value: 'sensor1', viewValue: 'Sample 1' },
+        { value: 'sensor2', viewValue: 'Sample 2' },
+        { value: 'sensor3', viewValue: 'Sample 3' },
+        { value: 'sensor4', viewValue: 'Sample 4' },
+        { value: 'sensor5', viewValue: 'Sample 5' },
+        { value: 'sensor6', viewValue: 'Sample 6' }
     ];
     lab: Lab;
     booking: any;

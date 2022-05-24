@@ -51,7 +51,7 @@ export class TemperaturePlotComponent implements OnDestroy, OnInit, AfterViewIni
                         pointBorderColor: 'black',
                         pointHoverBackgroundColor: 'black',
                         pointHoverBorderColor: 'black',
-                        label: 'Pixel values'
+                        label: 'Grayscale pixel values at horizontal line of image'
                     }
                 ]
             },
@@ -63,6 +63,12 @@ export class TemperaturePlotComponent implements OnDestroy, OnInit, AfterViewIni
                         suggestedMax: 320,
                         ticks: {
                             stepSize: 20
+                        },
+                        title: {
+                            display: true,
+                            align: 'center',
+                            color: 'black',
+                            text: 'Width (pixels)'
                         }
                     },
                     y: {
@@ -70,6 +76,12 @@ export class TemperaturePlotComponent implements OnDestroy, OnInit, AfterViewIni
                         max: 255,
                         ticks: {
                             stepSize: 5
+                        },
+                        title: {
+                            display: true,
+                            align: 'center',
+                            color: 'black',
+                            text: 'Intensity (pixels)'
                         }
                     }
                 }

@@ -2,7 +2,7 @@
     <div>
         <app-countdown *ngIf="lab" [endTime]="takenUntil"></app-countdown>
     </div>
-    <mat-card class="lab-camera">
+    <mat-card>
         <mat-card-header>
             <mat-card-title>Camera</mat-card-title>
         </mat-card-header>
@@ -10,45 +10,44 @@
             <app-camera [cameraUrl]="cameraUrl"></app-camera>
         </mat-card-content>
     </mat-card>
-    <mat-card class="lab-control-panel">
+    <mat-card>
         <mat-card-header>
             <mat-card-title>1. Control panel</mat-card-title>
         </mat-card-header>
         <mat-card-content>
-            <button class="button" mat-raised-button (click)="rotateClockwise()">Rotate clockwise</button>
-            <button class="button" mat-raised-button (click)="rotateCounterClockwise()">Rotate counter-clockwise</button>
-        </mat-card-content>
-    </mat-card>
-    <mat-card class="lab-start-measurement">
-        <mat-card-header>
-            <mat-card-title>2. Start measurement</mat-card-title>
-        </mat-card-header>
-        <mat-card-content>
-            <app-start-stop-measurement-button (measurementStartedEvent)="getMeasurementStarted($event)"> </app-start-stop-measurement-button>
-        </mat-card-content>
-    </mat-card>
-    <mat-card class="lab-monitor-results">
-        <mat-card-header>
-            <mat-card-title>3. Monitor results</mat-card-title>
-        </mat-card-header>
-        <mat-card-content>
-            <div>Here you can see results that have been measured.</div>
+            <div>Rotate platform to choose sample material.</div>
             <br />
+            <div>
+                <button class="button" mat-raised-button (click)="rotateClockwise()">Rotate clockwise</button>
+                <button class="button" mat-raised-button (click)="rotateCounterClockwise()">Rotate counter-clockwise</button>
+            </div>
+            <br />
+            <div>Turn X-Ray detector on or off.</div>
+            <br />
+            <app-start-stop-measurement-button (measurementStartedEvent)="getMeasurementStarted($event)"></app-start-stop-measurement-button>
+        </mat-card-content>
+    </mat-card>
+    <mat-card>
+        <mat-card-header>
+            <mat-card-title>2. Monitor results</mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+            <div>Results from X-Ray detector are plotted below.</div>
             <app-gamma-plot [sensorUrl]="sensorUrl" [measurementStarted]="measurementStarted" (measurementDataEvent)="getData($event)">
             </app-gamma-plot>
         </mat-card-content>
     </mat-card>
-    <mat-card class="lab-save-results">
+    <mat-card>
         <mat-card-header>
-            <mat-card-title>4. Save results</mat-card-title>
+            <mat-card-title>3. Save results</mat-card-title>
         </mat-card-header>
         <mat-card-content>
             <app-save-measurement [labId]="lab?.id" [measurementResult]="measurementResult"> </app-save-measurement>
         </mat-card-content>
     </mat-card>
-    <mat-card class="lab-stop-measurements">
+    <mat-card>
         <mat-card-header>
-            <mat-card-title>5. Stop measurement</mat-card-title>
+            <mat-card-title>4. Leave lab</mat-card-title>
         </mat-card-header>
         <mat-card-content>
             <app-free-lab-button [bookingId]="booking?.id"></app-free-lab-button>

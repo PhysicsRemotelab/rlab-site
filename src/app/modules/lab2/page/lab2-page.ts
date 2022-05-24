@@ -14,12 +14,12 @@ export class Lab2PageComponent implements OnInit, OnDestroy {
     lab: Lab;
     booking: any;
     takenUntil = null;
-    measurementStarted = false;
     measurementResult = [];
     cameraUrl = lab2Camera;
     sensorUrl = lab2Sensor;
     commandsUrl = lab2Commands;
     commandServiceSubject = webSocket('');
+    measurementStarted = false;
 
     constructor(private router: Router) {
         if (this.router.getCurrentNavigation().extras.state) {
@@ -31,6 +31,10 @@ export class Lab2PageComponent implements OnInit, OnDestroy {
         }
     }
 
+    getMeasurementStarted($event: boolean): void {
+        this.measurementStarted = $event;
+    }
+
     ngOnInit(): void {
         this.commandServiceSubject = webSocket(this.commandsUrl);
         this.commandServiceSubject.subscribe();
@@ -38,10 +42,6 @@ export class Lab2PageComponent implements OnInit, OnDestroy {
 
     getData($event: any): void {
         this.measurementResult = $event;
-    }
-
-    getMeasurementStarted($event: boolean): void {
-        this.measurementStarted = $event;
     }
 
     writeCommand(command: string): void {

@@ -50,7 +50,7 @@ export class GammaPlotComponent implements OnInit, OnDestroy, AfterViewInit, OnC
                         pointBorderColor: 'black',
                         pointHoverBackgroundColor: 'black',
                         pointHoverBorderColor: 'black',
-                        label: 'Pixel values'
+                        label: 'Energy distribution of sample material'
                     }
                 ]
             },
@@ -62,11 +62,23 @@ export class GammaPlotComponent implements OnInit, OnDestroy, AfterViewInit, OnC
                         max: 4100,
                         ticks: {
                             stepSize: 50
+                        },
+                        title: {
+                            display: true,
+                            align: 'center',
+                            color: 'black',
+                            text: 'Channel number'
                         }
                     },
                     y: {
                         min: 0,
-                        suggestedMax: 100
+                        suggestedMax: 100,
+                        title: {
+                            display: true,
+                            align: 'center',
+                            color: 'black',
+                            text: 'Counts'
+                        }
                     }
                 }
             }

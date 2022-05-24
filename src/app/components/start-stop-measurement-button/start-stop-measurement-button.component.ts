@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Output } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 
 @Component({
     selector: 'app-start-stop-measurement-button',
@@ -8,6 +8,12 @@ import { Component, EventEmitter, Output } from '@angular/core';
 export class StartStopMeasurementButtonComponent {
     @Output()
     measurementStartedEvent = new EventEmitter<boolean>();
+
+    @Input()
+    stopText: string = 'Stop';
+
+    @Input()
+    startText: string = 'Start';
 
     measurementStarted = false;
 

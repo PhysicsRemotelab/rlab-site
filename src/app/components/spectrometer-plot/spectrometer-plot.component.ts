@@ -56,6 +56,12 @@ export class SpectrometerPlotComponent implements OnDestroy, AfterViewInit, OnCh
                         max: 300,
                         ticks: {
                             stepSize: 20
+                        },
+                        title: {
+                            display: true,
+                            align: 'center',
+                            color: 'black',
+                            text: 'Channel number'
                         }
                     },
                     y: {
@@ -63,6 +69,12 @@ export class SpectrometerPlotComponent implements OnDestroy, AfterViewInit, OnCh
                         max: 1000,
                         ticks: {
                             stepSize: 10
+                        },
+                        title: {
+                            display: true,
+                            align: 'center',
+                            color: 'black',
+                            text: 'Intensity'
                         }
                     }
                 }
