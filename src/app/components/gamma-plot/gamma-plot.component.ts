@@ -43,8 +43,9 @@ export class GammaPlotComponent implements OnInit, OnDestroy, AfterViewInit, OnC
                 datasets: [
                     {
                         data: this.chartPoints,
-                        fill: false,
-                        pointRadius: 1,
+                        fill: true,
+                        backgroundColor: '#D3D3D3',
+                        pointRadius: 0.5,
                         pointBackgroundColor: 'black',
                         pointBorderColor: 'black',
                         pointHoverBackgroundColor: 'black',
