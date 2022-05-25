@@ -19,6 +19,7 @@
             <div class="heater-buttons">
                 <app-start-stop-measurement-button
                     (measurementStartedEvent)="getMeasurementStarted($event)"
+                    [measurementStarted]="measurementStarted"
                     [startText]="startText"
                     [stopText]="stopText"
                 ></app-start-stop-measurement-button>

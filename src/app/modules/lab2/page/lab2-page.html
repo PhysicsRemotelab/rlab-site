@@ -17,7 +17,11 @@
         <mat-card-content>
             <div>
                 <div>Start spectrometer data streaming here</div>
-                <app-start-stop-measurement-button (measurementStartedEvent)="getMeasurementStarted($event)"> </app-start-stop-measurement-button>
+                <app-start-stop-measurement-button
+                    [measurementStarted]="measurementStarted"
+                    (measurementStartedEvent)="getMeasurementStarted($event)"
+                >
+                </app-start-stop-measurement-button>
             </div>
             <br />
             <div>

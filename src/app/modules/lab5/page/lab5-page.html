@@ -23,7 +23,8 @@
                     <mat-option *ngFor="let sensor of sensors" [value]="sensor.value"> {{sensor.viewValue}} </mat-option>
                 </mat-select>
             </mat-form-field>
-            <app-start-stop-measurement-button (measurementStartedEvent)="getMeasurementStarted($event)"> </app-start-stop-measurement-button>
+            <app-start-stop-measurement-button [measurementStarted]="measurementStarted" (measurementStartedEvent)="getMeasurementStarted($event)">
+            </app-start-stop-measurement-button>
         </mat-card-content>
     </mat-card>
     <mat-card>

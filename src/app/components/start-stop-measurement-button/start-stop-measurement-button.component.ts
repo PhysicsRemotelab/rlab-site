@@ -15,6 +15,7 @@ export class StartStopMeasurementButtonComponent {
     @Input()
     startText: string = 'Start';
 
+    @Input()
     measurementStarted = false;
 
     startMeasuremenet(): void {

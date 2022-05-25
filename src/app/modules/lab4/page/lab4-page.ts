@@ -3,24 +3,29 @@ import { Router } from '@angular/router';
 import { Lab } from '../../labs/model';
 import { lab4Camera, lab4Sensor, lab4Commands } from 'src/environments/environment';
 import { webSocket } from 'rxjs/webSocket';
+import { Subscription, throttleTime } from 'rxjs';
+import { Booking } from '../../booking/booking.model';
 
 @Component({
     selector: 'app-lab4-page',
     templateUrl: './lab4-page.html',
     styleUrls: ['./lab4-page.scss']
 })
-export class Lab4PageComponent implements OnInit, OnDestroy {
+export class Lab4PageComponent implements OnDestroy, OnInit {
     labCode = 'fluorescence_spectroscopy_1';
     lab: Lab;
-    booking: any;
+    booking: Booking;
     takenUntil = null;
     measurementResult = [];
-    measurementStarted = false;
-    measurementSaved = false;
-    cameraUrl = lab4Camera;
-    sensorUrl = lab4Sensor;
-    commandsUrl = lab4Commands;
+    measurementStarted: boolean = false;
+    measurementSaved: boolean = false;
+    cameraUrl: string = lab4Camera;
+    sensorUrl: string = lab4Sensor;
+    commandsUrl: string = lab4Commands;
     commandServiceSubject = webSocket('');
+    gammaSensorSubject = webSocket('');
+    dataSourceSubscription: Subscription = new Subscription();
+    result: number[] = Array(4095).fill(0);
 
     constructor(private router: Router) {
         if (this.router.getCurrentNavigation().extras.state) {
@@ -43,6 +48,17 @@ export class Lab4PageComponent implements OnInit, OnDestroy {
 
     getMeasurementStarted($event: boolean): void {
         this.measurementStarted = $event;
+
+        if (this.measurementStarted) {
+            console.log(this.measurementStarted);
+            this.gammaSensorSubject = webSocket(this.sensorUrl);
+
+            this.dataSourceSubscription = this.gammaSensorSubject.pipe(throttleTime(100)).subscribe((result: number[]) => {
+                this.result = result;
+            });
+        } else {
+            this.dataSourceSubscription.unsubscribe();
+        }
     }
 
     rotateClockwise(): void {
@@ -55,7 +71,17 @@ export class Lab4PageComponent implements OnInit, OnDestroy {
         this.commandServiceSubject.next(2);
     }
 
+    writeCommand(command: string): void {
+        console.log(command);
+        this.gammaSensorSubject.next(command);
+        this.measurementStarted = false;
+        this.result = Array(4095).fill(0);
+        this.dataSourceSubscription.unsubscribe();
+    }
+
     ngOnDestroy(): void {
+        this.dataSourceSubscription.unsubscribe();
         this.commandServiceSubject.unsubscribe();
+        this.gammaSensorSubject.unsubscribe();
     }
 }

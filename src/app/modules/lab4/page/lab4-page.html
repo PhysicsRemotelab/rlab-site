@@ -24,7 +24,14 @@
             <br />
             <div>Turn X-Ray detector on or off.</div>
             <br />
-            <app-start-stop-measurement-button (measurementStartedEvent)="getMeasurementStarted($event)"></app-start-stop-measurement-button>
+            <app-start-stop-measurement-button
+                [measurementStarted]="measurementStarted"
+                (measurementStartedEvent)="getMeasurementStarted($event)"
+            ></app-start-stop-measurement-button>
+            <br />
+            <div>Stop detector and reset results.</div>
+            <br />
+            <button mat-raised-button (click)="writeCommand('reset')">Reset results</button>
         </mat-card-content>
     </mat-card>
     <mat-card>
@@ -33,8 +40,7 @@
         </mat-card-header>
         <mat-card-content>
             <div>Results from X-Ray detector are plotted below.</div>
-            <app-gamma-plot [sensorUrl]="sensorUrl" [measurementStarted]="measurementStarted" (measurementDataEvent)="getData($event)">
-            </app-gamma-plot>
+            <app-gamma-plot [result]="result" [measurementStarted]="measurementStarted" (measurementDataEvent)="getData($event)"> </app-gamma-plot>
         </mat-card-content>
     </mat-card>
     <mat-card>
