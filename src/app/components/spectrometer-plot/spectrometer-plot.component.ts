@@ -44,7 +44,7 @@ export class SpectrometerPlotComponent implements OnDestroy, AfterViewInit, OnCh
                         pointBorderColor: 'black',
                         pointHoverBackgroundColor: 'black',
                         pointHoverBorderColor: 'black',
-                        label: 'Pixel values'
+                        label: 'Spectrum of light'
                     }
                 ]
             },
