@@ -48,6 +48,7 @@ export class Lab3PageComponent implements OnDestroy, OnInit {
 
         if (this.measurementStarted) {
             this.gammaSensorSubject = webSocket(this.sensorUrl);
+            this.gammaSensorSubject.next('resume');
 
             this.dataSourceSubscription = this.gammaSensorSubject.pipe(throttleTime(100)).subscribe((result: number[]) => {
                 console.log(result);
@@ -55,6 +56,7 @@ export class Lab3PageComponent implements OnDestroy, OnInit {
             });
         } else {
             this.dataSourceSubscription.unsubscribe();
+            this.gammaSensorSubject.next('pause');
         }
     }
 

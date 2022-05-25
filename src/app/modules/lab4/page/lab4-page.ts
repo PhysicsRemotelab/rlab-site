@@ -52,12 +52,14 @@ export class Lab4PageComponent implements OnDestroy, OnInit {
         if (this.measurementStarted) {
             console.log(this.measurementStarted);
             this.gammaSensorSubject = webSocket(this.sensorUrl);
+            this.gammaSensorSubject.next('resume');
 
             this.dataSourceSubscription = this.gammaSensorSubject.pipe(throttleTime(100)).subscribe((result: number[]) => {
                 this.result = result;
             });
         } else {
             this.dataSourceSubscription.unsubscribe();
+            this.gammaSensorSubject.next('pause');
         }
     }
 
