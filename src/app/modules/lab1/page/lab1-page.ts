@@ -21,7 +21,7 @@ export class Lab1PageComponent implements OnInit, OnDestroy {
     sensorUrl = lab1Sensor;
     subject = webSocket('');
     turnedOn = false;
-    lineNumber = 320;
+    lineNumber = 120;
     startText = 'Turn heater on';
     stopText = 'Turn heater off';
 

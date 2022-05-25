@@ -21,7 +21,7 @@ export class Lab6PageComponent implements OnInit, OnDestroy {
     cameraUrlPixels = lab6CameraPixels;
     sensorUrl = lab6Sensor;
     subject = webSocket('');
-    lineNumber = 320;
+    lineNumber = 240;
 
     constructor(private router: Router) {
         if (this.router.getCurrentNavigation().extras.state) {

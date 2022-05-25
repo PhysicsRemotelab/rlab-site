@@ -46,9 +46,9 @@ export class ResistancePlotComponent implements OnDestroy, AfterViewInit, OnChan
                 datasets: [
                     {
                         data: this.points,
-                        fill: true,
+                        fill: false,
                         backgroundColor: '#D3D3D3',
-                        pointRadius: 0.5,
+                        pointRadius: 1,
                         pointBackgroundColor: 'black',
                         pointBorderColor: 'black',
                         pointHoverBackgroundColor: 'black',
