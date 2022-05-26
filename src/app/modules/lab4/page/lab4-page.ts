@@ -50,7 +50,7 @@ export class Lab4PageComponent implements OnDestroy, OnInit {
         this.measurementStarted = $event;
 
         if (this.measurementStarted) {
-            console.log(this.measurementStarted);
+            console.log('resume');
             this.gammaSensorSubject = webSocket(this.sensorUrl);
             this.gammaSensorSubject.next('resume');
 
@@ -58,9 +58,17 @@ export class Lab4PageComponent implements OnDestroy, OnInit {
                 this.result = result;
             });
         } else {
-            this.dataSourceSubscription.unsubscribe();
+            console.log('pause');
             this.gammaSensorSubject.next('pause');
+            this.measurementStarted = false;
+            this.result = Array(4095).fill(0);
+            this.dataSourceSubscription.unsubscribe();
         }
+    }
+
+    writeCommand(command: string): void {
+        console.log(command);
+        this.gammaSensorSubject.next('reset');
     }
 
     rotateClockwise(): void {
@@ -71,14 +79,6 @@ export class Lab4PageComponent implements OnDestroy, OnInit {
     rotateCounterClockwise(): void {
         console.log('rotateCounterClockwise');
         this.commandServiceSubject.next(2);
-    }
-
-    writeCommand(command: string): void {
-        console.log(command);
-        this.gammaSensorSubject.next(command);
-        this.measurementStarted = false;
-        this.result = Array(4095).fill(0);
-        this.dataSourceSubscription.unsubscribe();
     }
 
     ngOnDestroy(): void {
