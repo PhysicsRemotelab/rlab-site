@@ -15,6 +15,7 @@ export const lab4Camera = `${cameraUrl}/cam/1`;
 export const lab5Camera = `${cameraUrl}/cam/1`;
 export const lab6Camera = `${cameraUrl}/cam/0`;
 export const lab6CameraPixels = `${cameraUrl}/pixels/0`;
+export const lab6CameraRegression = `${cameraUrl}/regression/0`;
 
 export const lab1Sensor = `${sensorUrl}/diode`;
 export const lab2Sensor = `${sensorUrl}/spectrometer-sensor`;
