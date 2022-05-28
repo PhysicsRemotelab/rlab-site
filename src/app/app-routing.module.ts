@@ -9,12 +9,12 @@ const ROUTES = {
     measurements: 'measurements',
     profile: 'profile',
     materials: 'materials',
-    diode_efficiency_1: 'diode_efficiency_1',
-    light_spectroscopy_1: 'light_spectroscopy_1',
-    gamma_spectroscopy_1: 'gamma_spectroscopy_1',
-    fluorescence_spectroscopy_1: 'fluorescence_spectroscopy_1',
-    temperature_resistance_1: 'temperature_resistance_1',
-    light_diffraction_1: 'light_diffraction_1'
+    diode_efficiency_1: 'lab/diode_efficiency_1',
+    light_spectroscopy_1: 'lab/light_spectroscopy_1',
+    gamma_spectroscopy_1: 'lab/gamma_spectroscopy_1',
+    fluorescence_spectroscopy_1: 'lab/fluorescence_spectroscopy_1',
+    temperature_resistance_1: 'lab/temperature_resistance_1',
+    light_diffraction_1: 'lab/light_diffraction_1'
 };
 
 const routes: Routes = [
