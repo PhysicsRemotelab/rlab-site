@@ -100,6 +100,7 @@ export class TemperaturePlotComponent implements OnDestroy, OnInit, AfterViewIni
         let self = this;
         this.cameraPixelService.getCameraPixels(this.cameraUrlPixels, this.lineNumber).subscribe((data: any) => {
             console.log(data);
+            this.measurementDataEvent.emit(data);
             const points = [];
             for (let i = 0; i < data.length; i++) {
                 const nr = { x: i, y: Number(data[i]) };
