@@ -2,52 +2,51 @@
     <div>
         <app-countdown *ngIf="lab" [endTime]="takenUntil"></app-countdown>
     </div>
-    <mat-card>
-        <mat-card-header>
-            <mat-card-title>Camera</mat-card-title>
-        </mat-card-header>
-        <mat-card-content>
-            <app-camera [cameraUrl]="cameraUrl"></app-camera>
-        </mat-card-content>
-    </mat-card>
-    <mat-card>
-        <mat-card-header>
-            <mat-card-title>1. Control panel</mat-card-title>
-        </mat-card-header>
-        <mat-card-content>
-            <div>Turn laser on or off.</div>
-            <br />
-            <div>
-                <button class="button" mat-raised-button (click)="laserOn()">Turn laser on</button>
-                <button class="button" mat-raised-button (click)="laserOff()">Turn laser off</button>
-            </div>
-            <br />
-            <div>Turn motor driver on or off.</div>
-            <br />
-            <div>
-                <button class="button" mat-raised-button (click)="driverOn()">Turn driver on</button>
-                <button class="button" mat-raised-button (click)="driverOff()">Turn driver off</button>
-            </div>
-            <br />
-            <div>Rotate grating disk.</div>
-            <br />
-            <div>
-                <button class="button" mat-raised-button (click)="rotateClockwise()">Rotate clockwise</button>
-                <button class="button" mat-raised-button (click)="rotateCounterClockwise()">Rotate counter-clockwise</button>
-            </div>
-        </mat-card-content>
-    </mat-card>
+    <div class="responsive-cards">
+        <mat-card class="camera-card">
+            <mat-card-header>
+                <mat-card-title>Camera</mat-card-title>
+            </mat-card-header>
+            <mat-card-content>
+                <app-camera [cameraUrl]="cameraUrl"></app-camera>
+            </mat-card-content>
+        </mat-card>
+        <mat-card class="control-panel-card">
+            <mat-card-header>
+                <mat-card-title>1. Control panel</mat-card-title>
+            </mat-card-header>
+            <mat-card-content>
+                <div>Turn laser on or off.</div>
+                <br />
+                <div>
+                    <button class="button" mat-raised-button (click)="laserOn()">Turn laser on</button>
+                    <button class="button" mat-raised-button (click)="laserOff()">Turn laser off</button>
+                </div>
+                <br />
+                <div>Turn motor driver on or off.</div>
+                <br />
+                <div>
+                    <button class="button" mat-raised-button (click)="driverOn()">Turn driver on</button>
+                    <button class="button" mat-raised-button (click)="driverOff()">Turn driver off</button>
+                </div>
+                <br />
+                <div>Rotate grating disk.</div>
+                <br />
+                <div>
+                    <button class="button" mat-raised-button (click)="rotateClockwise()">Clockwise</button>
+                    <button class="button" mat-raised-button (click)="rotateCounterClockwise()">Counter-clockwise</button>
+                </div>
+            </mat-card-content>
+        </mat-card>
+    </div>
     <mat-card>
         <mat-card-header>
             <mat-card-title>2. Monitor results</mat-card-title>
         </mat-card-header>
         <mat-card-content>
-            Here are camera pixel values using linear regression.
-            Linear regression tries to fit line on a most intensive pixel values.
-            Then it reads grayscale pixel values on fitted line and plots graph.
-            Meaningful measurement results can be achieved once laser is
-            turned on and grating disk rotated into position.
-            If results are not good enough from linear regression fitting, then image can be saved for offline analysis.
+            Here are camera pixel values using linear regression. Linear regression tries to fit line on a most intensive pixel values. Then it reads
+            grayscale pixel values on fitted line and plots graph. Meaningful measurement results can be achieved once laser is turned on and grating
+            disk rotated into position. If results are not good enough from linear regression fitting, then image can be saved for offline analysis.
             <app-temperature-plot
                 [cameraUrlPixels]="lab6CameraRegression"
                 [measurementStarted]="measurementStarted"
@@ -57,20 +56,22 @@
             </app-temperature-plot>
         </mat-card-content>
     </mat-card>
-    <mat-card>
-        <mat-card-header>
-            <mat-card-title>3. Save results</mat-card-title>
-        </mat-card-header>
-        <mat-card-content>
-            <app-save-measurement [labId]="lab?.id" [measurementResult]="measurementResult"> </app-save-measurement>
-        </mat-card-content>
-    </mat-card>
-    <mat-card>
-        <mat-card-header>
-            <mat-card-title>4. Leave lab</mat-card-title>
-        </mat-card-header>
-        <mat-card-content>
-            <app-free-lab-button [bookingId]="booking?.id"></app-free-lab-button>
-        </mat-card-content>
-    </mat-card>
+    <div class="responsive-cards">
+        <mat-card class="save-card">
+            <mat-card-header>
+                <mat-card-title>3. Save results</mat-card-title>
+            </mat-card-header>
+            <mat-card-content>
+                <app-save-measurement [labId]="lab?.id" [measurementResult]="measurementResult"> </app-save-measurement>
+            </mat-card-content>
+        </mat-card>
+        <mat-card class="leave-card">
+            <mat-card-header>
+                <mat-card-title>4. Leave lab</mat-card-title>
+            </mat-card-header>
+            <mat-card-content>
+                <app-free-lab-button [bookingId]="booking?.id"></app-free-lab-button>
+            </mat-card-content>
+        </mat-card>
+    </div>
 </div>

@@ -2,38 +2,40 @@
     <div>
         <app-countdown *ngIf="lab" [endTime]="takenUntil"></app-countdown>
     </div>
-    <mat-card>
-        <mat-card-header>
-            <mat-card-title>Camera</mat-card-title>
-        </mat-card-header>
-        <mat-card-content>
-            <app-camera [cameraUrl]="cameraUrl"></app-camera>
-        </mat-card-content>
-    </mat-card>
-    <mat-card>
-        <mat-card-header>
-            <mat-card-title>1. Control Panel</mat-card-title>
-        </mat-card-header>
-        <mat-card-content>
-            <div>
-                <div>Start spectrometer data streaming here</div>
-                <app-start-stop-measurement-button
-                    [measurementStarted]="measurementStarted"
-                    (measurementStartedEvent)="getMeasurementStarted($event)"
-                >
-                </app-start-stop-measurement-button>
-            </div>
-            <br />
-            <div>
-                <div>Turn LEDs on or off here</div>
-                <button mat-raised-button (click)="writeCommand('R')">LED 1</button>
-                <button mat-raised-button (click)="writeCommand('G')">LED 2</button>
-                <button mat-raised-button (click)="writeCommand('B')">LED 3</button>
-                <button mat-raised-button (click)="writeCommand('W')">LED 4</button>
-                <button class="black-button" mat-raised-button (click)="writeCommand('O')">Off</button>
-            </div>
-        </mat-card-content>
-    </mat-card>
+    <div class="responsive-cards">
+        <mat-card class="camera-card">
+            <mat-card-header>
+                <mat-card-title>Camera</mat-card-title>
+            </mat-card-header>
+            <mat-card-content>
+                <app-camera [cameraUrl]="cameraUrl"></app-camera>
+            </mat-card-content>
+        </mat-card>
+        <mat-card class="control-panel-card">
+            <mat-card-header>
+                <mat-card-title>1. Control Panel</mat-card-title>
+            </mat-card-header>
+            <mat-card-content>
+                <div>
+                    <div>Start spectrometer data streaming here</div>
+                    <app-start-stop-measurement-button
+                        [measurementStarted]="measurementStarted"
+                        (measurementStartedEvent)="getMeasurementStarted($event)"
+                    >
+                    </app-start-stop-measurement-button>
+                </div>
+                <br />
+                <div>
+                    <div>Turn LEDs on or off here</div>
+                    <button mat-raised-button (click)="writeCommand('R')">LED 1</button>
+                    <button mat-raised-button (click)="writeCommand('G')">LED 2</button>
+                    <button mat-raised-button (click)="writeCommand('B')">LED 3</button>
+                    <button mat-raised-button (click)="writeCommand('W')">LED 4</button>
+                    <button class="black-button" mat-raised-button (click)="writeCommand('O')">Off</button>
+                </div>
+            </mat-card-content>
+        </mat-card>
+    </div>
     <mat-card>
         <mat-card-header>
             <mat-card-title>2. Monitor results</mat-card-title>
@@ -44,20 +46,22 @@
             </app-spectrometer-plot>
         </mat-card-content>
     </mat-card>
-    <mat-card>
-        <mat-card-header>
-            <mat-card-title>3. Save results</mat-card-title>
-        </mat-card-header>
-        <mat-card-content>
-            <app-save-measurement [labId]="lab?.id" [measurementResult]="measurementResult"> </app-save-measurement>
-        </mat-card-content>
-    </mat-card>
-    <mat-card>
-        <mat-card-header>
-            <mat-card-title>4. Leave lab</mat-card-title>
-        </mat-card-header>
-        <mat-card-content>
-            <app-free-lab-button [bookingId]="booking?.id"></app-free-lab-button>
-        </mat-card-content>
-    </mat-card>
+    <div class="responsive-cards">
+        <mat-card class="save-card">
+            <mat-card-header>
+                <mat-card-title>3. Save results</mat-card-title>
+            </mat-card-header>
+            <mat-card-content>
+                <app-save-measurement [labId]="lab?.id" [measurementResult]="measurementResult"> </app-save-measurement>
+            </mat-card-content>
+        </mat-card>
+        <mat-card class="leave-card">
+            <mat-card-header>
+                <mat-card-title>4. Leave lab</mat-card-title>
+            </mat-card-header>
+            <mat-card-content>
+                <app-free-lab-button [bookingId]="booking?.id"></app-free-lab-button>
+            </mat-card-content>
+        </mat-card>
+    </div>
 </div>

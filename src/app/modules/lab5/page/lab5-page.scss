@@ -12,3 +12,31 @@
     margin: 5px;
     background-color: rgba(255, 255, 255, 0.8);
 }
+
+.responsive-cards {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+
+    .camera-card {
+        flex: 3 1 0;
+    }
+
+    .control-panel-card {
+        flex: 1 1 0;
+    }
+
+    .save-card {
+        flex: 1 1 0;
+    }
+
+    .leave-card {
+        flex: 1 1 0;
+    }
+}
+
+@media only screen and (max-width: 720px) {
+    .responsive-cards {
+        flex-direction: column;
+    }
+}
