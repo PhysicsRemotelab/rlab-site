@@ -37,7 +37,7 @@
     "chart.js": "^3.7.1",
     "compass-mixins": "^0.12.11",
     "minimist": "^1.2.6",
-    "moment": "^2.29.3",
+    "moment": "^2.29.4",
     "ng2-charts": "^3.0.11",
     "ngx-csv": "^0.3.2",
     "particles.js": "^2.0.0",
