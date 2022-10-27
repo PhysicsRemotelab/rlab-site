@@ -67,7 +67,7 @@ export class BookingPageComponent implements OnInit {
 
     onSubmit() {
         console.log(this.bookingForm);
-        const labId = this.bookingForm.value.labId;
+        const labId = Number(this.bookingForm.value.labId);
         let bookDate = this.bookingForm.value.bookDate;
         bookDate = moment(bookDate).format('YYYY-MM-DDTHH:mm');
         this.bookingService.createBooking(labId, bookDate).subscribe((booking) => {
